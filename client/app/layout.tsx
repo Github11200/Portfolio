@@ -1,24 +1,11 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
 import { Lexend } from "next/font/google";
-import { Sigmar_One } from "next/font/google";
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
 
-const fontSans = FontSans({
-	subsets: ["latin"],
-	variable: "--font-sans",
-});
-
-const sigmarOne = Sigmar_One({
-	variable: "--font-sigmar-one",
-	weight: "400",
-});
-
-const lexend = Lexend({
+export const lexend = Lexend({
 	variable: "--font-lexend",
-	weight: "900"
 });
 
 export const metadata: Metadata = {
@@ -34,10 +21,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={cn(
-					"min-h-screen font-lexend antialiased dark",
-					lexend.className
-				)}
+				className={cn("min-h-screen antialiased dark", lexend.variable)}
 			>
 				{children}
 			</body>
