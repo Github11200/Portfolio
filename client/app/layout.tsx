@@ -18,6 +18,7 @@ const sigmarOne = Sigmar_One({
 
 const lexend = Lexend({
 	variable: "--font-lexend",
+	weight: "900"
 });
 
 export const metadata: Metadata = {
@@ -34,8 +35,8 @@ export default function RootLayout({
 		<html lang="en">
 			<body
 				className={cn(
-					"min-h-screen bg-[#101321] font-sigmar-one antialiased",
-					sigmarOne.className
+					"min-h-screen font-lexend antialiased dark",
+					lexend.className
 				)}
 			>
 				{children}

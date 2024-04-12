@@ -12,7 +12,7 @@ const ThreeScene: React.FC = () => {
 	useEffect(() => {
 		if (typeof window !== "undefined" && !hasRenderedBefore.current) {
 			const scene = new THREE.Scene();
-			scene.background = new THREE.Color("#101321");
+			scene.background = new THREE.Color("#020817");
 			console.log(containerRef.current?.clientHeight);
 
 			const camera = new THREE.PerspectiveCamera(
@@ -24,7 +24,7 @@ const ThreeScene: React.FC = () => {
 			);
 			const renderer = new THREE.WebGLRenderer();
 			const controls = new OrbitControls(camera, renderer.domElement);
-			const light = new THREE.AmbientLight(0xffffff, 3); // soft white light
+			const light = new THREE.AmbientLight(0xffffff, 2.5); // soft white light
 			const axesHelper = new THREE.AxesHelper(100);
 			scene.add(axesHelper);
 			scene.add(light);
@@ -68,8 +68,13 @@ const ThreeScene: React.FC = () => {
 	}, []);
 
 	return (
-		<>
-			<div className="text-9xl flex min-h-screen items-center justify-center overflow-y-hidden gap-x-36">
+		<div className="grid grid-rows-[10%_auto] grid-cols-2 overflow-y-hidden justify-items-center">
+			<nav className="bg-[#1b2130] flex items-center justify-center gap-x-10 w-[50%] rounded-lg col-span-2 my-5">
+				<a>Home</a>
+				<a>Projects</a>
+				<a>Contact</a>
+			</nav>
+			<div className="text-9xl flex min-h-screen items-center justify-center overflow-y-hidden gap-x-36 col-span-2">
 				<div>
 					<h1>Learning</h1>
 					<h1>Building</h1>
@@ -77,7 +82,7 @@ const ThreeScene: React.FC = () => {
 				</div>
 				<div ref={containerRef} className="w-[40rem] h-[40rem]"></div>
 			</div>
-		</>
+		</div>
 	);
 };
 export default ThreeScene;
