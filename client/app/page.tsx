@@ -3,8 +3,9 @@
 import React, { useRef, useEffect } from "react";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { lexend, lexend900 } from "./layout";
 import * as THREE from "three";
+import Image from "next/image";
+import { CardWrapper } from "@/components/ui/cardWrapper";
 
 const ThreeScene: React.FC = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -32,7 +33,6 @@ const ThreeScene: React.FC = () => {
 			const renderScene = () => {
 				renderer.render(scene, camera);
 				requestAnimationFrame(renderScene);
-				console.log(scene);
 			};
 
 			const loader = new GLTFLoader();
@@ -66,6 +66,18 @@ const ThreeScene: React.FC = () => {
 		}
 	}, []);
 
+	const svgNames = [
+		"css.svg",
+		"git.svg",
+		"html.svg",
+		"javascript.svg",
+		"nodejs.svg",
+		"python.svg",
+		"react.svg",
+		"rust.svg",
+		"tailwindcss.svg",
+	];
+
 	return (
 		<>
 			<div className="grid grid-rows-[10%_60%] grid-cols-2 overflow-y-hidden justify-items-center">
@@ -89,14 +101,96 @@ const ThreeScene: React.FC = () => {
 					</div>
 				</div>
 			</div>
-			<div>
-				<h1>About Me</h1>
-				<p>
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-					Quis odio officiis placeat doloribus, assumenda tenetur
-					maiores ea. Quam exercitationem, magni explicabo voluptate
-					est debitis doloribus aliquid sed ullam cum veniam?
-				</p>
+			<div className="grid gap-32">
+				<div className="w-[800px] mx-auto">
+					<h1 className="text-7xl font-lexend font-bold text-center mb-10">
+						About Me
+					</h1>
+					<p className="text-2xl font-lexend font-light leading-relaxed">
+						Hi 👋! I&apos;m a grade 10 student with a passion for
+						all things related to STEM. I mainly specialize in
+						full-stack web development, but have also started
+						delving a lot into machine learning with PyTorch.
+					</p>
+				</div>
+				<div className="w-[60%] mx-auto">
+					<h1 className="text-7xl font-lexend font-bold text-center mb-10">
+						Skills
+					</h1>
+					<div
+						className={
+							"grid w-9/12 mx-auto gap-y-5 justify-items-center " +
+							`grid-cols-${Math.round(svgNames.length / 2)}`
+						}
+					>
+						{svgNames.map((object, index) => {
+							return (
+								<Image
+									src={"logos/" + object}
+									height={100}
+									width={100}
+									alt={object + "logo"}
+									key={index}
+									className="place-self-center"
+								/>
+							);
+						})}
+					</div>
+				</div>
+				<div className="w-[800px] mx-auto">
+					<h1 className="text-7xl font-lexend font-bold text-center mb-10">
+						Projects
+					</h1>
+					<div className="text-center grid grid-cols-2 justify-items-center gap-32 mt-20">
+						<CardWrapper
+							title="The Mental Leaf"
+							image="theMentalLeaf.svg"
+							description="This is a hackathon project I made with my friend related to mental health."
+						/>
+						<CardWrapper
+							title="The Mental Leaf"
+							image="theMentalLeaf.svg"
+							description="This is a hackathon project I made with my friend related to mental health."
+						/>
+						<CardWrapper
+							title="The Mental Leaf"
+							image="theMentalLeaf.svg"
+							description="This is a hackathon project I made with my friend related to mental health."
+						/>
+						<CardWrapper
+							title="The Mental Leaf"
+							image="theMentalLeaf.svg"
+							description="This is a hackathon project I made with my friend related to mental health."
+						/>
+					</div>
+				</div>
+
+				<div className="w-[800px] mx-auto">
+					<h1 className="text-7xl font-lexend font-bold text-center mb-10">
+						Contact
+					</h1>
+					<div className="flex justify-center gap-x-10">
+						<Image
+							src="logos/linkedin.svg"
+							width={200}
+							height={200}
+							alt="Linkedin logo"
+							className="logo-shadow"
+						/>
+						<Image
+							src="logos/discord.svg"
+							width={200}
+							height={200}
+							alt="Linkedin logo"
+						/>
+						<Image
+							src="logos/github.svg"
+							width={200}
+							height={200}
+							alt="Linkedin logo"
+						/>
+					</div>
+				</div>
 			</div>
 		</>
 	);
