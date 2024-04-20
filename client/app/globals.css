@@ -6,13 +6,38 @@ body {
   color: white;
 }
 
-.logo-shadow {
-  box-shadow: 0px 0px 500px 150px rgb(67, 176, 254);
+.linkedin-shadow {
+  box-shadow: 0px 0px 120px 30px #2BB0E7;
+  position: absolute;
+}
+
+.discord-shadow {
+  box-shadow: 0px 0px 120px 30px #6458D6;
+  position: absolute;
+}
+
+.github-shadow {
+  box-shadow: 0px 0px 120px 30px #E0E6E7;
+  position: absolute;
+}
+
+.mouse-blur {
+  box-shadow: 0px 0px 200px 200px #0f172a;  
 }
 
 .background-blur {
   background: rgb(67, 176, 254);
-  box-shadow: 0px 0px 500px 150px rgb(67, 176, 254);
+  box-shadow: 0px 0px 500px 200px rgb(67, 176, 254);
+}
+
+.button-hover:hover {
+    transition-duration: 300ms;
+    transform: scale(1.10);
+}
+
+.button-hover {
+    transition-duration: 300ms;
+    transform: scale(1);
 }
 
 @layer base {

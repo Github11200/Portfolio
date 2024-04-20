@@ -17,7 +17,7 @@ interface CardProps {
 
 export const CardWrapper = ({ title, image, description }: CardProps) => {
 	return (
-		<Card className="w-[350px] border-[#25274F] bg-gradient-to-br from-[#181d3445] to-[#3f3da62e]">
+		<Card className="w-[350px] border-l-border border-[1px] rounded-lg">
 			<CardHeader>
 				<CardTitle className="font-lexend">{title}</CardTitle>
 			</CardHeader>
