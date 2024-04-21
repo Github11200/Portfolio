@@ -9,6 +9,17 @@ import { CardWrapper } from "@/components/ui/cardWrapper";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+} from "@/components/ui/carousel";
+
+import { Card, CardContent } from "@/components/ui/card";
+
+import Autoplay from "embla-carousel-autoplay";
+import { ModelBox } from "@/components/ui/modelBox";
+
 interface ContactObject {
 	svgName: string;
 	link: string;
@@ -38,32 +49,48 @@ const ThreeScene: React.FC = () => {
 			const renderer = new THREE.WebGLRenderer({ alpha: true });
 			renderer.setClearColor(0x000000, 0);
 			const controls = new OrbitControls(camera, renderer.domElement);
+			controls.enablePan = false;
+			controls.enableZoom = false;
 			const light = new THREE.AmbientLight(0xffffff, 2); // soft white light
 			scene.add(light);
 
+			let model: THREE.Group<THREE.Object3DEventMap>;
+
 			// Add this function inside the useEffect hook
 			const renderScene = () => {
-				renderer.render(scene, camera);
 				requestAnimationFrame(renderScene);
+				renderer.render(scene, camera);
 			};
 
 			const loader = new GLTFLoader();
-			loader.load("book.gltf", (object) => {
-				let box = new THREE.Box3().setFromObject(object.scene);
-				let center = box.getCenter(new THREE.Vector3());
+			loader.load("book.gltf", (gltf) => {
+				model = gltf.scene;
 
-				object.scene.position.x += object.scene.position.x - center.x;
-				object.scene.position.y += object.scene.position.y - center.y;
-				object.scene.position.z += object.scene.position.z - center.z;
+				let box = new THREE.Box3().setFromObject(gltf.scene);
+				let parent = new THREE.Object3D();
+				scene.add(parent);
 
-				object.scene.castShadow = true;
-				object.scene.receiveShadow = true;
+				const c = box.getCenter(new THREE.Vector3());
+				const size = box.getSize(new THREE.Vector3());
+				gltf.scene.position.set(-c.x, size.y / 2 - c.y - 8.5, -c.z);
 
-				object.scene.customDepthMaterial =
-					new THREE.MeshDepthMaterial();
+				gltf.scene.castShadow = true;
+				gltf.scene.receiveShadow = true;
 
-				scene.add(object.scene);
+				gltf.scene.customDepthMaterial = new THREE.MeshStandardMaterial(
+					{
+						opacity: 0,
+						transparent: true,
+					}
+				);
+
+				parent.add(gltf.scene);
+				parent.rotation.x += 20;
+				parent.rotation.x += 0.2;
+
 				// Call the renderScene function to start the animation loop
+				controls.update();
+				renderer.render(scene, camera);
 				renderScene();
 			});
 
@@ -111,6 +138,14 @@ const ThreeScene: React.FC = () => {
 		mouseY: 0,
 	});
 
+	const [style, updateStyle] = useState<React.CSSProperties>({
+		boxShadow: "0px 0px 500px 200px rgb(67, 176, 254)",
+	});
+
+	setTimeout(() => {
+		updateStyle({ boxShadow: "0px 0px 500px 200px rgb(0, 0, 0)" });
+	}, 1000);
+
 	const updateShadowPosition = (
 		event: React.MouseEvent<HTMLDivElement, MouseEvent>
 	) => {
@@ -141,11 +176,40 @@ const ThreeScene: React.FC = () => {
 						<h1>Growing</h1>
 					</div>
 					<div className="flex items-center justify-center">
-						<div className="w-[10px] h-[10px] absolute background-blur rounded-full"></div>{" "}
 						<div
-							ref={containerRef}
-							className="w-[40rem] h-[40rem] z-10"
-						></div>
+							className="w-[10px] h-[10px] absolute rounded-full"
+							style={style}
+						></div>{" "}
+						<Carousel
+							opts={{
+								align: "start",
+								loop: true,
+							}}
+							className="w-[40rem]"
+							plugins={[
+								Autoplay({
+									delay: 2000,
+								}),
+							]}
+						>
+							<CarouselContent>
+								<CarouselItem>
+									<div className="p-1">
+										<ModelBox modelName="book.gltf" />
+									</div>
+								</CarouselItem>
+								<CarouselItem>
+									<div className="p-1">
+										<ModelBox modelName="book.gltf" />
+									</div>
+								</CarouselItem>
+								<CarouselItem>
+									<div className="p-1">
+										<ModelBox modelName="book.gltf" />
+									</div>
+								</CarouselItem>
+							</CarouselContent>
+						</Carousel>
 					</div>
 				</div>
 			</div>
@@ -161,10 +225,11 @@ const ThreeScene: React.FC = () => {
 						About Me
 					</h1>
 					<p className="text-2xl font-lexend font-light leading-relaxed">
-						Hi 👋! I&apos;m a grade 10 student with a passion for
-						all things related to STEM. I mainly specialize in
-						full-stack web development, but have also started
-						delving a lot into machine learning with PyTorch.
+						Hi 👋! I&apos;m Jinay Patel, a grade 10 student with a
+						passion for all things related to STEM. I mainly
+						specialize in full-stack web development, but have also
+						started delving a lot into machine learning with
+						PyTorch.
 					</p>
 				</div>
 				<div className="w-[60%] mx-auto">
@@ -213,8 +278,9 @@ const ThreeScene: React.FC = () => {
 							title="Pure Pursuit Simulator"
 							image="theMentalLeaf.svg"
 							description="This is a hackathon project I made with my friend related to mental health."
+							link="https://youtube.com"
 						/>
-						<CardWrapper
+						{/* <CardWrapper
 							title="The Mental Leaf"
 							image="theMentalLeaf.svg"
 							description="This is a hackathon project I made with my friend related to mental health."
@@ -228,7 +294,7 @@ const ThreeScene: React.FC = () => {
 							title="The Mental Leaf"
 							image="theMentalLeaf.svg"
 							description="This is a hackathon project I made with my friend related to mental health."
-						/>
+						/> */}
 					</div>
 				</div>
 
