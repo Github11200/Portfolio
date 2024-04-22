@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, lazy } from "react";
 import Image from "next/image";
 import { CardWrapper } from "@/components/ui/cardWrapper";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-import { ModelBox } from "@/components/ui/modelBox";
+// import { ModelBox } from "@/components/ui/modelBox";
+import MeshComponent from "@/components/ui/test";
 
 interface ContactObject {
 	svgName: string;
@@ -106,7 +107,7 @@ const Page: React.FC = () => {
 					<div className="flex items-center justify-center">
 						<div className="absolute rounded-full background-blur not-visible translate-x-[50%] blur"></div>{" "}
 						<div className=" not-visible blur">
-							<ModelBox  />
+							<MeshComponent />
 						</div>
 					</div>
 				</div>
