@@ -43,6 +43,7 @@ export const ModelBox = ({ modelName }: ModelParameters) => {
 			const loader = new GLTFLoader();
 			loader.load(modelName, (gltf) => {
 				model = gltf.scene;
+				console.log(model);
 
 				let box = new THREE.Box3().setFromObject(gltf.scene);
 
