@@ -1,23 +1,11 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import * as THREE from "three";
 import Image from "next/image";
 import { CardWrapper } from "@/components/ui/cardWrapper";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-} from "@/components/ui/carousel";
-
-import { Card, CardContent } from "@/components/ui/card";
-
-import Autoplay from "embla-carousel-autoplay";
 import { ModelBox } from "@/components/ui/modelBox";
 
 interface ContactObject {

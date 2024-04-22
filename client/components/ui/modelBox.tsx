@@ -9,7 +9,7 @@ interface ModelParameters {
 }
 
 export const ModelBox = ({ modelName }: ModelParameters) => {
-	const containerRef = useRef<HTMLDivElement>(null);
+	const containerRef = useRef<any>(null);
 	const hasRenderedBefore = useRef<boolean>(true);
 
 	useEffect(() => {

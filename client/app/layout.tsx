@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
-import { Lexend } from "next/font/google";
+import { lexend } from "./font";
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
-
-export const lexend = Lexend({
-	variable: "--font-lexend",
-});
 
 export const metadata: Metadata = {
 	title: "Create Next App",
