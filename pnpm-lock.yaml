@@ -9,10 +9,10 @@ dependencies:
     specifier: ^1.0.2
     version: 1.0.2(@types/react@18.2.79)(react@18.2.0)
   '@react-three/drei':
-    specifier: ^9.105.2
+    specifier: ^9.105.4
     version: 9.105.4(@react-three/fiber@8.16.2)(@types/react@18.2.79)(@types/three@0.163.0)(react-dom@18.2.0)(react@18.2.0)(three@0.163.0)
   '@react-three/fiber':
-    specifier: ^8.16.1
+    specifier: ^8.16.2
     version: 8.16.2(react-dom@18.2.0)(react@18.2.0)(three@0.163.0)
   class-variance-authority:
     specifier: ^0.7.0
