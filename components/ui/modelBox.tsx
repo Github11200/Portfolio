@@ -1,9 +1,9 @@
 import React from "react";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import * as THREE from "three";
 import { useEffect, useRef } from "react";
-
+``
 interface ModelParameters {
 	modelName: string;
 }
