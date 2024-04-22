@@ -13,18 +13,22 @@ interface CardProps {
 
 export const CardWrapper = ({ title, image, description, link }: CardProps) => {
 	return (
-		<Card className="w-[350px] border-l-border border-[1px] rounded-lg font-lexend">
-			<CardHeader>
-				<CardTitle>
-					<Link href={link} target="_blank">
-						{title}
-					</Link>
-				</CardTitle>
-			</CardHeader>
-			<CardContent className="font-light text-xl text-left">
-				<Image src={image} height={403} width={403} alt={description} />
-				<p>{description}</p>
-			</CardContent>
-		</Card>
+		<Link href={link} target="_blank">
+			<Card className="w-[350px] border-l-border border-[1px] rounded-lg font-lexend">
+				<CardHeader>
+					<CardTitle>{title}</CardTitle>
+				</CardHeader>
+				<CardContent className="font-light text-xl text-left">
+					<Image
+						src={image}
+						height={403}
+						width={403}
+						alt={description}
+						className="rounded-lg"
+					/>
+					<p className="pt-6">{description}</p>
+				</CardContent>
+			</Card>
+		</Link>
 	);
 };

@@ -45,8 +45,6 @@ export const ModelBox = ({ modelName }: ModelParameters) => {
 				model = gltf.scene;
 
 				let box = new THREE.Box3().setFromObject(gltf.scene);
-				let parent = new THREE.Object3D();
-				scene.add(parent);
 
 				const c = box.getCenter(new THREE.Vector3());
 				const size = box.getSize(new THREE.Vector3());
@@ -62,9 +60,7 @@ export const ModelBox = ({ modelName }: ModelParameters) => {
 					}
 				);
 
-				parent.add(gltf.scene);
-				parent.rotation.x += 20;
-				parent.rotation.x += 0.2;
+				scene.add(gltf.scene);
 
 				// Call the renderScene function to start the animation loop
 				controls.update();

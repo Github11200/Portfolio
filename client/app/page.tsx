@@ -30,81 +30,7 @@ interface GlowPosition {
 	mouseY: number;
 }
 
-const ThreeScene: React.FC = () => {
-	const containerRef = useRef<HTMLDivElement>(null);
-	const hasRenderedBefore = useRef<boolean>(true);
-
-	useEffect(() => {
-		if (typeof window !== "undefined" && !hasRenderedBefore.current) {
-			const scene = new THREE.Scene();
-			scene.background = null;
-
-			const camera = new THREE.PerspectiveCamera(
-				20,
-				containerRef.current?.clientHeight /
-					containerRef.current?.clientWidth,
-				0.1,
-				2000
-			);
-			const renderer = new THREE.WebGLRenderer({ alpha: true });
-			renderer.setClearColor(0x000000, 0);
-			const controls = new OrbitControls(camera, renderer.domElement);
-			controls.enablePan = false;
-			controls.enableZoom = false;
-			const light = new THREE.AmbientLight(0xffffff, 2); // soft white light
-			scene.add(light);
-
-			let model: THREE.Group<THREE.Object3DEventMap>;
-
-			// Add this function inside the useEffect hook
-			const renderScene = () => {
-				requestAnimationFrame(renderScene);
-				renderer.render(scene, camera);
-			};
-
-			const loader = new GLTFLoader();
-			loader.load("book.gltf", (gltf) => {
-				model = gltf.scene;
-
-				let box = new THREE.Box3().setFromObject(gltf.scene);
-				let parent = new THREE.Object3D();
-				scene.add(parent);
-
-				const c = box.getCenter(new THREE.Vector3());
-				const size = box.getSize(new THREE.Vector3());
-				gltf.scene.position.set(-c.x, size.y / 2 - c.y - 8.5, -c.z);
-
-				gltf.scene.castShadow = true;
-				gltf.scene.receiveShadow = true;
-
-				gltf.scene.customDepthMaterial = new THREE.MeshStandardMaterial(
-					{
-						opacity: 0,
-						transparent: true,
-					}
-				);
-
-				parent.add(gltf.scene);
-				parent.rotation.x += 20;
-				parent.rotation.x += 0.2;
-
-				// Call the renderScene function to start the animation loop
-				controls.update();
-				renderer.render(scene, camera);
-				renderScene();
-			});
-
-			renderer.setSize(
-				containerRef.current?.clientHeight,
-				containerRef.current?.clientWidth
-			);
-			containerRef.current?.appendChild(renderer.domElement);
-			camera.position.y -= 55;
-		} else {
-			hasRenderedBefore.current = false;
-		}
-	}, []);
-
+const Page: React.FC = () => {
 	const skillsIconsSvgNames = [
 		"css.svg",
 		"git.svg",
@@ -138,14 +64,6 @@ const ThreeScene: React.FC = () => {
 		mouseY: 0,
 	});
 
-	const [style, updateStyle] = useState<React.CSSProperties>({
-		boxShadow: "0px 0px 500px 200px rgb(67, 176, 254)",
-	});
-
-	setTimeout(() => {
-		updateStyle({ boxShadow: "0px 0px 500px 200px rgb(0, 0, 0)" });
-	}, 1000);
-
 	const updateShadowPosition = (
 		event: React.MouseEvent<HTMLDivElement, MouseEvent>
 	) => {
@@ -153,6 +71,17 @@ const ThreeScene: React.FC = () => {
 	};
 
 	const spaceBetweenItemsInsideSectionsInPixels = 80;
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add("show");
+			}
+		});
+	});
+
+	const hiddenElements = document.querySelectorAll(".not-visible");
+	hiddenElements.forEach((element) => observer.observe(element));
 
 	return (
 		<div onMouseMove={(event) => updateShadowPosition(event)}>
@@ -163,58 +92,37 @@ const ThreeScene: React.FC = () => {
 					left: glowPosition.mouseX,
 				}}
 			></div>
-			<div className="grid grid-cols-2 overflow-y-hidden justify-items-center">
-				<nav className="border-[1px] border-l-border flex items-center h-16 w-[40rem] justify-center gap-x-16 text-center rounded-lg col-span-2 my-5 font-lexend shadow-2xl shadow-slate-900 text-xl">
-					<a>Home</a>
-					<a>Projects</a>
-					<a>Contact</a>
+			<div
+				className="grid grid-cols-2 overflow-y-hidden justify-items-center"
+				id="home"
+			>
+				<nav className="border-[1px] fixed z-20 border-l-border flex items-center h-16 w-[40rem] justify-center gap-x-16 text-center rounded-lg col-span-2 my-5 font-lexend shadow-2xl shadow-slate-900 bg-[#030712] text-xl not-visible translate-y-[-10%] blur">
+					<Link href="#home" className="z-20">
+						Home
+					</Link>
+					<Link href="#projects" className="z-20">
+						Projects
+					</Link>
+					<Link href="#contact" className="z-20">
+						Contact
+					</Link>
 				</nav>
-				<div className="text-9xl flex min-h-screen items-center justify-center overflow-y-hidden gap-x-36 col-span-2 bottom-10">
-					<div className="font-lexend font-bold leading-snug">
+				<div className="text-9xl flex min-h-screen items-center justify-center overflow-y-hidden overflow-x-hidden gap-x-36 col-span-2 bottom-10">
+					<div className="font-lexend font-bold leading-snug not-visible translate-x-[50%] blur">
 						<h1>Learning</h1>
 						<h1>Building</h1>
 						<h1>Growing</h1>
 					</div>
 					<div className="flex items-center justify-center">
-						<div
-							className="w-[10px] h-[10px] absolute rounded-full"
-							style={style}
-						></div>{" "}
-						<Carousel
-							opts={{
-								align: "start",
-								loop: true,
-							}}
-							className="w-[40rem]"
-							plugins={[
-								Autoplay({
-									delay: 2000,
-								}),
-							]}
-						>
-							<CarouselContent>
-								<CarouselItem>
-									<div className="p-1">
-										<ModelBox modelName="book.gltf" />
-									</div>
-								</CarouselItem>
-								<CarouselItem>
-									<div className="p-1">
-										<ModelBox modelName="book.gltf" />
-									</div>
-								</CarouselItem>
-								<CarouselItem>
-									<div className="p-1">
-										<ModelBox modelName="book.gltf" />
-									</div>
-								</CarouselItem>
-							</CarouselContent>
-						</Carousel>
+						<div className="absolute rounded-full background-blur not-visible translate-x-[50%] blur"></div>{" "}
+						<div className=" not-visible blur">
+							<ModelBox modelName="book.gltf" />
+						</div>
 					</div>
 				</div>
 			</div>
-			<div className="grid gap-64 pb-24">
-				<div className="w-[800px] mx-auto">
+			<div className="grid gap-[40rem] pb-24 mt-[20rem]">
+				<div className="w-[800px] mx-auto not-visible translate-x-[-30%] blur">
 					<h1
 						className="text-7xl font-lexend font-bold text-center"
 						style={{
@@ -232,9 +140,9 @@ const ThreeScene: React.FC = () => {
 						PyTorch.
 					</p>
 				</div>
-				<div className="w-[60%] mx-auto">
+				<div className="w-[60%] mx-auto overflow-x-hidden">
 					<h1
-						className="text-7xl font-lexend font-bold text-center"
+						className="text-7xl font-lexend font-bold text-center not-visible translate-x-[30%] blur"
 						style={{
 							marginBottom:
 								spaceBetweenItemsInsideSectionsInPixels,
@@ -244,7 +152,7 @@ const ThreeScene: React.FC = () => {
 					</h1>
 					<div
 						className={cn(
-							`grid w-9/12 mx-auto gap-12 justify-items-center grid-cols-5 grid-cols-${Math.round(
+							`grid w-9/12 mx-auto gap-12 overflow-x-hidden overflow-y-hidden justify-items-center not-visible translate-x-[50%] blur grid-cols-5 grid-cols-${Math.round(
 								skillsIconsSvgNames.length / 2
 							)}`
 						)}
@@ -257,15 +165,15 @@ const ThreeScene: React.FC = () => {
 									width={120}
 									alt={object + "logo"}
 									key={index}
-									className="place-self-center button-hover"
+									className={`place-self-center not-visible blur button-hover`}
 								/>
 							);
 						})}
 					</div>
 				</div>
-				<div className="w-[800px] mx-auto">
+				<div className="w-[800px] mx-auto" id="projects">
 					<h1
-						className="text-7xl font-lexend font-bold text-center"
+						className="text-7xl font-lexend font-bold text-center not-visible translate-x-[-30%] blur"
 						style={{
 							marginBottom:
 								spaceBetweenItemsInsideSectionsInPixels,
@@ -273,34 +181,37 @@ const ThreeScene: React.FC = () => {
 					>
 						Projects
 					</h1>
-					<div className="text-center grid grid-cols-2 justify-items-center gap-32">
+					<div className="text-center grid grid-cols-2 justify-items-center gap-32 not-visible translate-x-[-50%] blur">
 						<CardWrapper
 							title="Pure Pursuit Simulator"
-							image="theMentalLeaf.svg"
-							description="This is a hackathon project I made with my friend related to mental health."
+							image="/purePursuitLogo.png"
+							description="This program simulates the Pure Pursuit algorithm which I use in Vex Robotics. It allows me to place points, see how the robot will move (to scale), and then export the code."
+							link="https://github.com/Github11200/Pure-Pursuit-Simulator"
+						/>
+						<CardWrapper
+							title="Quantum Trader"
+							image="/quantumTraderLogo.png"
+							description="This is a project I did with my friend that aims to predict stock prices using Python and PyTorch by using a type of neural network called a RNN (recurrent neural network)."
+							link="https://github.com/Github11200/QuantumTrader"
+						/>
+						<CardWrapper
+							title="The Mental Leaf"
+							image="/theMentalLeaf.png"
+							description="This is a hackathon project I made with my friend for Recess Hacks 3.0. It is a mental health dashboard with a chatbot, jokes section, journaling section, and a place for resources."
+							link="https://github.com/Github11200/The-Mental-Leaf"
+						/>
+						<CardWrapper
+							title="Jensei AI"
+							image="/jenseiAI.png"
+							description="This is another hackathon project I made at NwHacks 2024. It is a journaling app that aims to make it easier for people to get started with journaling using conversational AI."
 							link="https://youtube.com"
 						/>
-						{/* <CardWrapper
-							title="The Mental Leaf"
-							image="theMentalLeaf.svg"
-							description="This is a hackathon project I made with my friend related to mental health."
-						/>
-						<CardWrapper
-							title="The Mental Leaf"
-							image="theMentalLeaf.svg"
-							description="This is a hackathon project I made with my friend related to mental health."
-						/>
-						<CardWrapper
-							title="The Mental Leaf"
-							image="theMentalLeaf.svg"
-							description="This is a hackathon project I made with my friend related to mental health."
-						/> */}
 					</div>
 				</div>
 
-				<div className="w-[800px] mx-auto">
+				<div className="w-[800px] mx-auto" id="contact">
 					<h1
-						className="text-7xl font-lexend font-bold text-center"
+						className="text-7xl font-lexend font-bold text-center not-visible translate-y-[100%] blur"
 						style={{
 							marginBottom:
 								spaceBetweenItemsInsideSectionsInPixels,
@@ -308,13 +219,14 @@ const ThreeScene: React.FC = () => {
 					>
 						Contact
 					</h1>
-					<div className="flex justify-center gap-x-32 overflow-y-hidden">
+					<div className="flex justify-center gap-x-32 not-visible translate-y-[130%] blur">
 						{contactSvgNames.map((object, index) => {
 							return (
 								<Link
 									href={object.link}
 									className="flex justify-center items-center"
 									key={index}
+									target="_blank"
 								>
 									<div
 										className={`${object.svgName}-shadow`}
@@ -332,7 +244,53 @@ const ThreeScene: React.FC = () => {
 					</div>
 				</div>
 			</div>
+			<div className="mb-10 grid grid-cols-2 px-10 justify-center content-center mt-[10rem]">
+				<div className="flex items-center">
+					<span className="text-2xl font-lexend">Made with: </span>
+					<span className="ml-3 flex gap-3">
+						<Image
+							src="nextJSIcon.svg"
+							width={40}
+							height={40}
+							alt="next js icon"
+							className="inline"
+						/>
+						<Image
+							src="tailwindCSSIcon.svg"
+							width={40}
+							height={40}
+							alt="next js icon"
+							className="inline"
+						/>
+						<Image
+							src="shadcnIcon.svg"
+							width={40}
+							height={40}
+							alt="next js icon"
+							className="inline"
+						/>
+						<Image
+							src="threeJSIcon.svg"
+							width={40}
+							height={40}
+							alt="next js icon"
+							className="inline"
+						/>
+					</span>
+				</div>
+				<div className="justify-self-end">
+					<span className="font-lexend">
+						Icons made by{" "}
+						<Link
+							href="https://iconscout.com/contributors/tomsdesign"
+							className="underline inline"
+						>
+							Tom&apos;s Design
+						</Link>
+					</span>
+				</div>
+			</div>
 		</div>
 	);
 };
-export default ThreeScene;
+export default Page;
