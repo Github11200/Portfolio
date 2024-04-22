@@ -1,5 +1,5 @@
 import React from "react";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import * as THREE from "three";
 import { useEffect, useRef } from "react";
@@ -13,7 +13,7 @@ export const ModelBox = ({ modelName }: ModelParameters) => {
 	const hasRenderedBefore = useRef<boolean>(true);
 
 	useEffect(() => {
-		if (typeof window !== "undefined" && !hasRenderedBefore.current) {
+		if (!hasRenderedBefore.current) {
 			const scene = new THREE.Scene();
 			scene.background = null;
 
@@ -59,7 +59,7 @@ export const ModelBox = ({ modelName }: ModelParameters) => {
 						transparent: true,
 					}
 				);
-
+				
 				scene.add(gltf.scene);
 
 				// Call the renderScene function to start the animation loop
@@ -77,7 +77,7 @@ export const ModelBox = ({ modelName }: ModelParameters) => {
 		} else {
 			hasRenderedBefore.current = false;
 		}
-	}, [containerRef, modelName]);
+	}, []);
 
 	return <div ref={containerRef} className="w-[40rem] h-[40rem] z-10"></div>;
 };
