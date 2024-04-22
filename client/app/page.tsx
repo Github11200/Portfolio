@@ -60,16 +60,18 @@ const Page: React.FC = () => {
 
 	const spaceBetweenItemsInsideSectionsInPixels = 80;
 
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach((entry) => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add("show");
-			}
+	useEffect(() => {
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("show");
+				}
+			});
 		});
-	});
 
-	const hiddenElements = document.querySelectorAll(".not-visible");
-	hiddenElements.forEach((element) => observer.observe(element));
+		const hiddenElements = document.querySelectorAll(".not-visible");
+		hiddenElements.forEach((element) => observer.observe(element));
+	});
 
 	return (
 		<div onMouseMove={(event) => updateShadowPosition(event)}>
