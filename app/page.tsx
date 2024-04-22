@@ -6,7 +6,7 @@ import { CardWrapper } from "@/components/ui/cardWrapper";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-// import { ModelBox } from "@/components/ui/modelBox";
+import { ModelBox } from "@/components/ui/modelBox";
 import MeshComponent from "@/components/ui/test";
 
 interface ContactObject {
@@ -107,7 +107,7 @@ const Page: React.FC = () => {
 					<div className="flex items-center justify-center">
 						<div className="absolute rounded-full background-blur not-visible translate-x-[50%] blur"></div>{" "}
 						<div className=" not-visible blur">
-							<MeshComponent />
+							<ModelBox modelName="book.gltf" />
 						</div>
 					</div>
 				</div>
@@ -239,34 +239,42 @@ const Page: React.FC = () => {
 				<div className="flex items-center">
 					<span className="text-2xl font-lexend">Made with: </span>
 					<span className="ml-3 flex gap-3">
-						<Image
-							src="nextJSIcon.svg"
-							width={40}
-							height={40}
-							alt="next js icon"
-							className="inline"
-						/>
-						<Image
-							src="tailwindCSSIcon.svg"
-							width={40}
-							height={40}
-							alt="next js icon"
-							className="inline"
-						/>
-						<Image
-							src="shadcnIcon.svg"
-							width={40}
-							height={40}
-							alt="next js icon"
-							className="inline"
-						/>
-						<Image
-							src="threeJSIcon.svg"
-							width={40}
-							height={40}
-							alt="next js icon"
-							className="inline"
-						/>
+						<Link href="https://nextjs.org/">
+							<Image
+								src="nextJSIcon.svg"
+								width={40}
+								height={40}
+								alt="next js icon"
+								className="inline"
+							/>
+						</Link>
+						<Link href="https://tailwindcss.com/">
+							<Image
+								src="tailwindCSSIcon.svg"
+								width={40}
+								height={40}
+								alt="next js icon"
+								className="inline"
+							/>
+						</Link>
+						<Link href="https://ui.shadcn.com/">
+							<Image
+								src="shadcnIcon.svg"
+								width={40}
+								height={40}
+								alt="next js icon"
+								className="inline"
+							/>
+						</Link>
+						<Link href="https://threejs.org/">
+							<Image
+								src="threeJSIcon.svg"
+								width={40}
+								height={40}
+								alt="next js icon"
+								className="inline"
+							/>
+						</Link>
 					</span>
 				</div>
 				<div className="justify-self-end">
