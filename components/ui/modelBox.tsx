@@ -77,7 +77,7 @@ export const ModelBox = ({ modelName }: ModelParameters) => {
 		} else {
 			hasRenderedBefore.current = false;
 		}
-	}, []);
+	}, [containerRef, modelName]);
 
 	return <div ref={containerRef} className="w-[40rem] h-[40rem] z-10"></div>;
 };
