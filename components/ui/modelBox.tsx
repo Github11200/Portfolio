@@ -8,7 +8,7 @@ interface ModelParameters {
 	modelName: string;
 }
 
-export const ModelBox = ({ modelName }: ModelParameters) => {
+const ModelBox = ({ modelName }: ModelParameters) => {
 	const containerRef = useRef<any>(null);
 	const hasRenderedBefore = useRef<boolean>(true);
 
@@ -82,3 +82,5 @@ export const ModelBox = ({ modelName }: ModelParameters) => {
 
 	return <div ref={containerRef} className="w-[40rem] h-[40rem] z-10"></div>;
 };
+
+export default ModelBox;

@@ -6,8 +6,12 @@ import { CardWrapper } from "@/components/ui/cardWrapper";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-import { ModelBox } from "@/components/ui/modelBox";
+const ModelBox: any = dynamic(() => import("../components/ui/modelBox"), {
+	ssr: false,
+	loading: () => <p>Loading...</p>,
+});
 import MeshComponent from "@/components/ui/test";
+import dynamic from "next/dynamic";
 
 interface ContactObject {
 	svgName: string;
