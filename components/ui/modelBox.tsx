@@ -1,9 +1,10 @@
+"use client";
+
 import React from "react";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import * as THREE from "three";
 import { useEffect, useRef } from "react";
-import { OBJLoader } from "three/examples/jsm/Addons.js";
 
 interface ModelParameters {
 	modelName: string;
