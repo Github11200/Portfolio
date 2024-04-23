@@ -3,6 +3,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import * as THREE from "three";
 import { useEffect, useRef } from "react";
+import { OBJLoader } from "three/examples/jsm/Addons.js";
 
 interface ModelParameters {
 	modelName: string;
@@ -27,8 +28,8 @@ const ModelBox = ({ modelName }: ModelParameters) => {
 			const renderer = new THREE.WebGLRenderer({ alpha: true });
 			renderer.setClearColor(0x000000, 0);
 			const controls = new OrbitControls(camera, renderer.domElement);
-			controls.enablePan = false;
-			controls.enableZoom = false;
+			// controls.enablePan = false;
+			// controls.enableZoom = false;
 			const light = new THREE.AmbientLight(0xffffff, 2); // soft white light
 			scene.add(light);
 

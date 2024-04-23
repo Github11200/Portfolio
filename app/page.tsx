@@ -111,7 +111,8 @@ const Page: React.FC = () => {
 					<div className="flex items-center justify-center">
 						<div className="absolute rounded-full background-blur not-visible translate-x-[50%] blur"></div>{" "}
 						<div className=" not-visible blur">
-							<ModelBox modelName="book.gltf" />
+							<ModelBox modelName="ornate_book/scene.gltf" />
+							{/* <MeshComponent /> */}
 						</div>
 					</div>
 				</div>
