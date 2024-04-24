@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Suspense } from "react";
@@ -13,7 +12,7 @@ import * as THREE from "three";
 import { PerspectiveCamera } from "@react-three/drei";
 
 const Model = () => {
-	const gltf = useLoader(GLTFLoader, "/book.gltf");
+	const gltf = useLoader(GLTFLoader, "/book.glb");
 
 	return (
 		<>
@@ -28,11 +27,12 @@ export default function MeshComponent() {
 	return (
 		<Canvas style={{ width: "50vw", height: "50vh" }}>
 			<Suspense fallback={null}>
-				<PerspectiveCamera
-					position={[0, 0, 1.8]}
-					fov={120}
-					makeDefault={!ortho}
-				/>
+				<color attach="background" args={["#fff"]} />
+				<ambientLight intensity={0.5} />
+				<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+				<pointLight position={[-10, -10, -10]} />
+				<PerspectiveCamera />
+				<OrbitControls />
 				<ambientLight intensity={0.1} />
 				<Model />
 				<OrbitControls />
