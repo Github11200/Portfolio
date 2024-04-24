@@ -6,7 +6,7 @@ import { CardWrapper } from "@/components/ui/cardWrapper";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-import { ModelBox } from "@/components/ui/modelBox";
+import { ModelBox } from "@/components/modelBox";
 import MeshComponent from "@/components/ui/test";
 
 interface ContactObject {
