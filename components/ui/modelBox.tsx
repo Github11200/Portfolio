@@ -87,7 +87,7 @@ export const ModelBox = ({ modelName }: ModelParameters) => {
 	const { nodes, materials } = useGLTF("/book.glb");
 
 	return (
-		<Canvas flat linear>
+		<Canvas>
 			<color attach="background" args={["#fff"]} />
 			<ambientLight intensity={0.5} />
 			<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />

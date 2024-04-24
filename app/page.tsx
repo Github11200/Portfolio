@@ -6,7 +6,7 @@ import { CardWrapper } from "@/components/ui/cardWrapper";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-// import { ModelBox } from "@/components/ui/modelBox";
+import { ModelBox } from "@/components/ui/modelBox";
 
 import MeshComponent from "@/components/ui/test";
 import dynamic from "next/dynamic";
@@ -106,7 +106,7 @@ const Page: React.FC = () => {
 						<h1>Building</h1>
 						<h1>Growing</h1>
 					</div>
-					<div className="flex items-center justify-center w-[100%]">
+					<div className="flex items-center justify-center w-[500px] h-[500px]">
 						<div className="absolute rounded-full background-blur not-visible translate-x-[50%] blur"></div>{" "}
 						<div className=" not-visible blur w-full h-full">
 							<MeshComponent />
