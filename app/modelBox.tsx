@@ -1,11 +1,11 @@
 import React from "react";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import * as THREE from "three";
 import { useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { PerspectiveCamera, useAnimations, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { Stats, OrbitControls } from "@react-three/drei";
 
 interface ModelParameters {
 	modelName: string;
@@ -83,23 +83,81 @@ export const ModelBox = ({ modelName }: ModelParameters) => {
 	// 	}
 	// }, []);
 
-	const { nodes, animations } = useGLTF("/glb/book.glb");
+	const { nodes, materials } = useGLTF("/glb/book.glb");
+	console.log(nodes);
 
 	return (
-		<Canvas>
-			<color attach="background" args={["#000"]} />
+		<Canvas flat linear>
+			<color attach="background" args={["#fff"]} />
 			<ambientLight intensity={0.5} />
 			<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
 			<pointLight position={[-10, -10, -10]} />
 			<PerspectiveCamera />
-			<mesh>
-				<boxGeometry args={[1, 1, 1]} />
-				<meshStandardMaterial color={"orange"} />
-			</mesh>
-			<mesh position={[5, 0, 0]}>
-				<boxGeometry args={[1, 1, 1]} />
-				<meshStandardMaterial color={"red"} />
-			</mesh>
+			<OrbitControls />
+			<group dispose={null}>
+				<mesh
+					castShadow
+					receiveShadow
+					//@ts-ignore
+					geometry={nodes.Cube006.geometry}
+					material={materials["Material.010"]}
+					position={[-0.021, 25.793, 1.751]}
+					rotation={[-0.354, -0.431, -0.221]}
+					scale={5.893}
+				/>
+				<mesh
+					castShadow
+					receiveShadow
+					//@ts-ignore
+					geometry={nodes.Cube007.geometry}
+					material={materials["Material.021"]}
+					position={[-2.182, 25.114, 2.895]}
+					rotation={[1.311, -0.2, 0.44]}
+					scale={[6.033, 0.169, 5.893]}
+				/>
+				<mesh
+					castShadow
+					receiveShadow
+					//@ts-ignore
+					geometry={nodes.Plane006.geometry}
+					material={materials["Material.023"]}
+					position={[5.295, 29.537, 3.369]}
+					rotation={[-2.996, -1.127, 2.01]}
+					scale={0.84}
+				/>
+				<mesh
+					castShadow
+					receiveShadow
+					//@ts-ignore
+					geometry={nodes.Plane007.geometry}
+					material={materials["Material.012"]}
+					position={[5.121, 26.714, 3.293]}
+					rotation={[-2.996, -1.127, 2.01]}
+					scale={0.84}
+				/>
+				<mesh
+					castShadow
+					receiveShadow
+					//@ts-ignore
+					geometry={nodes.Plane008.geometry}
+					material={materials["Material.008"]}
+					position={[4.035, 24.565, 5.254]}
+					rotation={[-2.996, -1.127, 2.01]}
+					scale={0.84}
+				/>
+				<mesh
+					castShadow
+					receiveShadow
+					//@ts-ignore
+					geometry={nodes.Plane009.geometry}
+					material={materials["Material.011"]}
+					position={[3.82, 21.495, 5.226]}
+					rotation={[-2.996, -1.127, 2.01]}
+					scale={0.84}
+				/>
+			</group>
 		</Canvas>
 	);
 };
+
+useGLTF.preload("/glb/book.glb");
