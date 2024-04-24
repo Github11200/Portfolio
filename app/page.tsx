@@ -8,6 +8,7 @@ import Link from "next/link";
 
 import { ModelBox } from "@/components/modelBox";
 import MeshComponent from "@/components/ui/test";
+import dynamic from "next/dynamic";
 
 interface ContactObject {
 	svgName: string;
@@ -108,6 +109,7 @@ const Page: React.FC = () => {
 						<div className="absolute rounded-full background-blur not-visible translate-x-[50%] blur"></div>{" "}
 						<div className=" not-visible blur">
 							<ModelBox modelName="book.gltf" />
+							{/* <MeshComponent /> */}
 						</div>
 					</div>
 				</div>
