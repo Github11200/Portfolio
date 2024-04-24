@@ -33,7 +33,6 @@ export default function MeshComponent() {
 					far={100}
 				/>
 				<OrbitControls />
-				<Stats />
 				<ambientLight intensity={0.1} />
 				<Model />
 				<OrbitControls />
