@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CardWrapper } from "@/components/ui/cardWrapper";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import Autoplay from "embla-carousel-autoplay";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import MeshComponent from "@/components/ui/modelBox";
 import {
@@ -81,6 +81,7 @@ const Page: React.FC = () => {
 
 	return (
 		<div onMouseMove={(event) => updateShadowPosition(event)}>
+			<SpeedInsights />
 			<div
 				className="absolute mouse-blur z-[-10]"
 				style={{
