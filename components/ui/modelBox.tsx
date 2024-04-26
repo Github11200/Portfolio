@@ -8,14 +8,13 @@ import {
 	useLoader,
 } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { useGLTF } from "@react-three/drei";
 import { Suspense, useEffect, useRef } from "react";
-import * as THREE from "three";
 
 import { PerspectiveCamera } from "@react-three/drei";
 
 const Model = () => {
-	const gltf = useLoader(GLTFLoader, "/book.glb");
+	const gltf = useGLTF("/book.glb");
 	const test = useRef<any>();
 
 	useFrame((state) => {
