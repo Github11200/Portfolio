@@ -5,7 +5,6 @@ import Image from "next/image";
 import { CardWrapper } from "@/components/ui/cardWrapper";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
 import MeshComponent from "@/components/ui/modelBox";
@@ -82,7 +81,6 @@ const Page: React.FC = () => {
 
 	return (
 		<div onMouseMove={(event) => updateShadowPosition(event)}>
-			<SpeedInsights />
 			<Analytics />
 			<div
 				className="absolute mouse-blur z-[-10]"
