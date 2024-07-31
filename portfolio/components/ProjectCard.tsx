@@ -26,7 +26,7 @@ export const ProjectCard = ({
     link,
 }: ProjectCardProps) => {
     return (
-        <Card className="w-80 lg:w-96 min-h-max">
+        <Card className="w-96 lg:w-96 min-h-max">
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
             </CardHeader>
@@ -38,9 +38,9 @@ export const ProjectCard = ({
                     className="rounded-lg"
                     alt="Jinay Patel"
                 />
-                <CardDescription className="mt-4">
+                <p className="mt-4 text-base text-muted-foreground">
                     {description}
-                </CardDescription>
+                </p>
             </CardContent>
             <CardFooter className="w-full">
                 <Link href={link} target="_blank" className="w-full">

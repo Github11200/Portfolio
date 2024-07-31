@@ -23,17 +23,18 @@ export const ExperienceCard = ({
     link,
 }: ExperienceCardProps) => {
     return (
-        <Link href={link} target="_blank">
+        <Link href={link} target="_blank" className="w-full">
             <Card className="w-80 sm:w-10/12 lg:w-7/12 xl:w-6/12 mx-auto">
                 <CardHeader>
                     <CardTitle className="inline">
-                        {title} <ExternalLink className="inline ml-2" />
+                        {title} <ExternalLink className="inline ml-2 mb-1" />
                     </CardTitle>
-
                     <CardDescription>{date}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <CardDescription>{description}</CardDescription>
+                    <CardDescription className="text-base text-muted-foreground">
+                        {description}
+                    </CardDescription>
                 </CardContent>
             </Card>
         </Link>

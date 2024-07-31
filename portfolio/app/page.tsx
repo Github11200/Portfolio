@@ -4,14 +4,6 @@ import Link from "next/link";
 import { ProjectCard } from "@/components/ProjectCard";
 import * as React from "react";
 import { SocialButton } from "@/components/SocialButton";
-import type { SVGProps } from "react";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
 import { ExperienceCard } from "@/components/ExperienceCard";
 import { useState, useEffect } from "react";
 
@@ -25,6 +17,7 @@ export default function Home() {
         mouseX: 0,
         mouseY: 0,
     });
+    const [hasMouse, setHasMouse] = useState(false);
     const size = 20;
 
     const updateShadowPosition = (
@@ -51,22 +44,28 @@ export default function Home() {
 
     return (
         <div
-            className="grid justify-items-center gap-40"
-            onMouseMove={(event) => updateShadowPosition(event)}
+            className="grid justify-items-center gap-40 min-w-full"
+            onMouseMove={(event) => {
+                setHasMouse(true);
+                updateShadowPosition(event);
+            }}
         >
-            <div
-                className={`absolute mouse-blur bg-primary rounded-full size-[100px] blur-[120px]`}
+            {/* <div
+                className={
+                    `absolute mouse-blur bg-primary rounded-full size-[100px] blur-[120px] ` +
+                    (!hasMouse && "hidden")
+                }
                 style={{
                     top: glowPosition.mouseY - size * 2,
                     left: glowPosition.mouseX - size * 2,
                 }}
-            ></div>
+            ></div> */}
             <div className="w-9/12 lg:w-7/12 xl:w-6/12 2xl:w-4/12 text-lg sm:text-xl min-h-screen flex items-center">
                 <div>
-                    <h1 className="text-4xl mb-10 not-visible translate-x-[-30%] blur">
-                        Hi, I'm Jinay!
+                    <h1 className="text-4xl mb-10 not-visible translate-x-[-30%] blur font-extrabold">
+                        Hi, I&apos;m Jinay!
                     </h1>
-                    <div className="not-visible translate-x-[-40%] blur">
+                    <div className="not-visible translate-x-[-40%] blur font-light">
                         <p>
                             A <b>full stack developer</b> from Delta, BC{" "}
                         </p>
@@ -78,6 +77,7 @@ export default function Home() {
                                 <Link
                                     href="https://headstarter.co/"
                                     className="underline"
+                                    target="_blank"
                                 >
                                     Headstarter
                                 </Link>
@@ -86,18 +86,21 @@ export default function Home() {
                         <br />
                         <p>
                             Working on{" "}
-                            <Link href="https://viralinsight.vercel.app">
+                            <Link
+                                href="https://viralinsight.vercel.app"
+                                target="_blank"
+                            >
                                 <span className="underline font-bold">
                                     Viral Insight
                                 </span>
                             </Link>
                             , an app that predicts the number of views a video
-                            may get based on it's title
+                            may get based on it&apos;s title
                         </p>
                         <br />
                         <p>
                             Exploring machine learning with{" "}
-                            <Link href="https://pytorch.org/">
+                            <Link href="https://pytorch.org/" target="_blank">
                                 <span className="underline font-bold">
                                     PyTorch
                                 </span>
@@ -126,7 +129,7 @@ export default function Home() {
             </div>
             <div className="grid gap-[50%]">
                 <div className="w-full grid justify-items-center">
-                    <h2 className="text-3xl mb-6 translate-x-[30%] blur not-visible">
+                    <h2 className="text-3xl mb-6 translate-x-[30%] blur not-visible font-bold">
                         My Projects
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 p-2 justify-items-center gap-6 text-3xl mb-6 translate-x-[40%] blur not-visible">
@@ -138,7 +141,7 @@ export default function Home() {
                         />
                         <ProjectCard
                             title="Pure Pursuit Simulator"
-                            description="Simulate the pure pursuit algorithm within your browser, made for Vex Robotics"
+                            description="Simulate the pure pursuit algorithm within your browser"
                             link="https://github.com/Github11200/Pure-Pursuit-Simulator"
                             image="/PurePursuitLogo.png"
                         />
@@ -148,10 +151,16 @@ export default function Home() {
                             link="https://github.com/Github11200/QuantumTrader"
                             image="/QuantumTrader.png"
                         />
+                        <ProjectCard
+                            title="Jensei AI"
+                            description="AI journaling app to make it easier to journal, made at NwHacks 2024"
+                            link="https://devpost.com/software/jinsei-ai"
+                            image="/Jensei.png"
+                        />
                     </div>
                 </div>
-                <div className="w-full grid justify-items-center">
-                    <h2 className="text-3xl mb-6 translate-x-[-30%] blur not-visible">
+                <div className="w-full grid justify-items-center pb-72">
+                    <h2 className="text-3xl mb-6 translate-x-[-30%] blur not-visible font-bold">
                         Experiences
                     </h2>
                     <div className="flex flex-col justify-center gap-6 translate-x-[-20%] blur not-visible">
@@ -166,6 +175,12 @@ export default function Home() {
                             date="October 2023 - Now"
                             description="Work with a team on revamping the Seaquam Robotics website in order to make the datadynamic. My role mainly focuses on the backendand creating an API that gathers data frommultiple locations. Also worked on creating aCMS system using Tauri and Vite."
                             link="https://seaquamrobotics.ca/"
+                        />
+                        <ExperienceCard
+                            title="Air Cadets"
+                            date="November 2020 - Now"
+                            description="Work on various activites related to the cadet program, and work on skills such as leadership, teamwork, communication, and more. Also lead a flight throughout the year, and teach lessons."
+                            link="https://www.northdeltaaircadets.net/"
                         />
                     </div>
                 </div>
