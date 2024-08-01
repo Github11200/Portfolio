@@ -19,7 +19,7 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
     title: "Jinay Patel's Portfolio",
     description:
-        "Jinay Patel | Portfolio | Website | Full Stack Developer | Machine Learning | Competitive Programming | PyTorch | Vancouver | Next JS | Shadcn | Tailwind CSS",
+        "Jinay Patel | Portfolio | Website | Full Stack Developer | Machine Learning | Competitive Programming | PyTorch | Vancouver | Next JS",
 };
 
 export default function RootLayout({
