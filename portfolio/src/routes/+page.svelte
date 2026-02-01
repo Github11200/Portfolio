@@ -8,12 +8,6 @@
 - projects
 -->
 <div class="h-screen">
-	<nav class="navbar mx-auto justify-center gap-20 shadow-sm">
-		<a href="#top">Home</a>
-		<a href="#top">Projects</a>
-		<a href="#top">Blog</a>
-	</nav>
-
 	<div class="flex h-full w-screen items-center justify-center">
 		<div class="flex w-[50%] flex-row">
 			<div class="mr-10">
