@@ -14,7 +14,8 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"@tailwindcss/typography": "^0.5.19"
+		"@tailwindcss/typography": "^0.5.19",
+		"mdsvex": "^0.12.7"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.6",

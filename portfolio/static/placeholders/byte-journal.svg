@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Byte Journal">
+  <rect width="960" height="540" fill="#FEF9C3" />
+  <text
+    x="480"
+    y="270"
+    fill="#422006"
+    font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+    font-size="48"
+    text-anchor="middle"
+    dominant-baseline="middle"
+  >
+    Byte Journal
+  </text>
+</svg>

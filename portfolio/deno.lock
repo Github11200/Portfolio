@@ -1756,6 +1756,7 @@
         "npm:eslint-plugin-svelte@^3.14.0",
         "npm:eslint@^9.39.2",
         "npm:globals@^17.1.0",
+        "npm:mdsvex@~0.12.7",
         "npm:prettier-plugin-svelte@^3.4.1",
         "npm:prettier-plugin-tailwindcss@~0.7.2",
         "npm:prettier@^3.8.1",
