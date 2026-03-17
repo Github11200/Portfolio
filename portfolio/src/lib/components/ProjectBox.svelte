@@ -16,8 +16,8 @@
 const { project, index = 0 }: Props = $props();
 </script>
 
-<article
-	class="overflow-hidden p-0 rounded-none border border-border bg-background/90 shadow-none flex flex-col w-full"
+<Card.Root
+	class="overflow-hidden p-0 border border-border bg-card/90 shadow-none flex flex-col w-full gap-0"
 >
 	<div class="w-full aspect-video overflow-hidden bg-muted">
 		<img
@@ -27,16 +27,18 @@ const { project, index = 0 }: Props = $props();
 			loading={index < 2 ? "eager" : "lazy"}
 		/>
 	</div>
-	<div class="flex flex-col justify-between flex-grow px-6 py-5">
+	<Card.Content class="flex flex-col justify-between grow px-6 py-5">
 		<div>
-			<h2 class="text-xl tracking-tight">{project.name}</h2>
-			<p class="mt-2 leading-relaxed text-muted-foreground">{project.description}</p>
+			<Card.Title class="text-xl tracking-tight">{project.name}</Card.Title>
+			<Card.Description class="mt-2 leading-relaxed text-muted-foreground">{project.description}</Card.Description>
 		</div>
 		<div class="mt-4 flex justify-end">
-			<Button variant="card" href={project.href} class="gap-2">
-				View Project
-				<ArrowUpRight size={16} />
+			<Button variant="card" class="h-auto p-0">
+				<a href={project.href} class="inline-flex items-center gap-2 px-4 py-2">
+					View Project
+					<ArrowUpRight size={16} />
+				</a>
 			</Button>
 		</div>
-	</div>
-</article>
+	</Card.Content>
+</Card.Root>

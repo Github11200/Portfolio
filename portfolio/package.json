@@ -14,8 +14,9 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"@tailwindcss/typography": "^0.5.19",
-		"mdsvex": "^0.12.7"
+		"@bitmachina/highlighter": "1.0.0-alpha.5",
+		"@mistweaverco/mdsvex-shiki": "^1.3.0",
+		"svelte-markdown": "^0.4.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.6",
@@ -24,6 +25,7 @@
 		"@internationalized/date": "^3.12.0",
 		"@lucide/svelte": "^0.561.0",
 		"@sveltejs/adapter-auto": "^7.0.0",
+		"@sveltejs/adapter-vercel": "^6.3.3",
 		"@sveltejs/kit": "^2.50.1",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"@tailwindcss/vite": "^4.1.18",
@@ -35,11 +37,14 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.14.0",
 		"globals": "^17.1.0",
+		"mdsvex": "^0.12.7",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.4.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
+		"shiki": "^4.0.2",
 		"svelte": "^5.48.2",
 		"svelte-check": "^4.3.5",
+		"svelte-preprocess": "^6.0.3",
 		"tailwind-merge": "^3.5.0",
 		"tailwind-variants": "^3.2.2",
 		"tailwindcss": "^4.1.18",

@@ -12,6 +12,6 @@ let {
 <NavigationMenuPrimitive.Item
 	bind:ref
 	data-slot="navigation-menu-item"
-	class={cn("relative flex", className)}
+	class={cn("relative flex m-0", className)}
 	{...restProps}
 />
