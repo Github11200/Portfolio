@@ -1,6 +1,6 @@
 {
   "allowScripts": {
     "allow": [],
-    "deny": ["npm:esbuild@0.25.12", "npm:esbuild@0.27.2", "npm:svelte-preprocess@6.0.3"]
+    "deny": ["npm:esbuild@0.25.12", "npm:esbuild@0.27.2", "npm:sharp@0.34.5", "npm:svelte-preprocess@6.0.3"]
   }
 }

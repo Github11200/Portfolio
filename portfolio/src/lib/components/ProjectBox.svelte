@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { ArrowUpRight } from "@lucide/svelte";
-	import { Button } from "$lib/components/ui/button/index.js";
-	import * as Card from "$lib/components/ui/card/index.js";
+import { ArrowUpRight } from "@lucide/svelte";
+import { Button } from "$lib/components/ui/button/index.js";
+import * as Card from "$lib/components/ui/card/index.js";
 
-	interface Props {
+interface Props {
 	project: {
 		name: string;
 		description: string;
@@ -20,12 +20,12 @@ const { project, index = 0 }: Props = $props();
 	class="overflow-hidden p-0 border border-border bg-card/90 shadow-none flex flex-col w-full gap-0"
 >
 	<div class="w-full aspect-video overflow-hidden bg-muted">
-		<img
-			src={project.image}
-			alt={project.name}
-			class="h-full w-full object-cover"
-			loading={index < 2 ? "eager" : "lazy"}
-		/>
+		<enhanced:img
+  		src={project.image}
+  		alt={project.name}
+  		class="h-full w-full object-cover"
+  		loading={index < 2 ? "eager" : "lazy"}
+    />
 	</div>
 	<Card.Content class="flex flex-col justify-between grow px-6 py-5">
 		<div>

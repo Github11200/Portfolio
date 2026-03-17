@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { mdsvex, escapeSvelte } from "mdsvex";
 import { createHighlighter } from "shiki";
 import adapter from "@sveltejs/adapter-vercel";
+import relativeImages from "mdsvex-relative-images";
 
 const theme = "github-light";
 const highlighter = await createHighlighter({
@@ -42,6 +43,7 @@ const config = {
 					return html;
 				},
 			},
+			remarkPlugins: [[relativeImages]],
 		}),
 	],
 };

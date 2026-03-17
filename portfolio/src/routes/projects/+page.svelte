@@ -3,28 +3,28 @@ import ProjectBox from "$lib/components/ProjectBox.svelte";
 
 const projects = [
 	{
-		name: "Compiler Visualizer",
+		name: "Verbosity",
 		description:
 			"A step-by-step view of tokenization, parsing, and code generation.",
-		image: "https://picsum.photos/960/540?random=1",
-		href: "#",
+		image: "./src/lib/assets/citrus.png",
+		href: "https://github.com/Github11200/Termicord",
 	},
 	{
-		name: "Kernel Sandbox",
+		name: "Termicord",
 		description:
 			"A tiny playground for exploring process scheduling and memory behavior.",
 		image: "https://picsum.photos/960/540?random=2",
 		href: "#",
 	},
 	{
-		name: "Vision Lab",
+		name: "Posturai",
 		description:
 			"An experiment bench for training and comparing lightweight CV models.",
 		image: "https://picsum.photos/960/540?random=3",
 		href: "#",
 	},
 	{
-		name: "Byte Journal",
+		name: "Autonomous Motions Template",
 		description:
 			"A notes app focused on fast writing and searchable technical snippets.",
 		image: "https://picsum.photos/960/540?random=4",

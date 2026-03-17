@@ -16,6 +16,8 @@
 	"dependencies": {
 		"@bitmachina/highlighter": "1.0.0-alpha.5",
 		"@mistweaverco/mdsvex-shiki": "^1.3.0",
+		"mdsvex-enhanced-images": "^0.3.3",
+		"mdsvex-relative-images": "^2.0.0",
 		"svelte-markdown": "^0.4.1"
 	},
 	"devDependencies": {
@@ -24,8 +26,10 @@
 		"@eslint/js": "^9.39.2",
 		"@internationalized/date": "^3.12.0",
 		"@lucide/svelte": "^0.561.0",
+		"@lzinga/mdsvex-enhanced-images": "^1.0.4",
 		"@sveltejs/adapter-auto": "^7.0.0",
 		"@sveltejs/adapter-vercel": "^6.3.3",
+		"@sveltejs/enhanced-img": "^0.10.4",
 		"@sveltejs/kit": "^2.50.1",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"@tailwindcss/vite": "^4.1.18",

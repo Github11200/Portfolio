@@ -25,7 +25,7 @@ export let title, date, image;
 		<!-- Image Section -->
 		{#if image}
 			<div class="mb-8 overflow-hidden rounded-lg border border-border/60">
-				<img src={image} alt={title} loading="lazy" class="h-96 w-full object-cover" />
+				<enhanced:img src="../../lib/assets/citrus.png" alt={title} loading="lazy" class="h-96 w-full object-cover" />
 			</div>
 		{/if}
 

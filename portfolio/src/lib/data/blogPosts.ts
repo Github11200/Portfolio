@@ -1,3 +1,5 @@
+import citrus from "$lib/assets/citrus.png";
+
 export interface BlogPost {
 	slug: string;
 	title: string;
@@ -12,7 +14,7 @@ export const blogPosts: BlogPost[] = [
 		title: "Writing a Lexer from Scratch",
 		description:
 			"A walk-through of tokenizing source text into a stream of typed symbols.",
-		image: "https://picsum.photos/960/540?random=5",
+		image: citrus,
 		date: "2025-12-15",
 	},
 	{
