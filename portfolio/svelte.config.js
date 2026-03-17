@@ -2,6 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { mdsvex, escapeSvelte } from "mdsvex";
 import { createHighlighter } from "shiki";
+import adapter from "@sveltejs/adapter-vercel";
 
 const theme = "github-light";
 const highlighter = await createHighlighter({
@@ -21,6 +22,9 @@ const dirname = path.resolve(fileURLToPath(import.meta.url), "../");
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+	kit: {
+		adapter: adapter({}),
+	},
 	extensions: [".svelte", ".md"],
 	preprocess: [
 		mdsvex({

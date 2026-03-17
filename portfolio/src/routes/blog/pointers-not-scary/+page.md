@@ -15,7 +15,7 @@ A pointer is simply a variable that stores a memory address. That's it. It's jus
 
 `&` is the "address-of" operator. It gives you the memory address of a variable:
 
-```c
+```js
 int x = 42;      // x is stored at address, say, 0x7fff5fbff8ac
 int *ptr = &x;   // ptr stores that address
 ```
@@ -24,7 +24,7 @@ int *ptr = &x;   // ptr stores that address
 
 When applied to a pointer, `*` "dereferences" it—it follows the address to get the value:
 
-```c
+```js
 int value = *ptr;  // Gets the value at the address ptr points to
 *ptr = 100;        // Changes the value x to 100
 ```
@@ -33,7 +33,7 @@ int value = *ptr;  // Gets the value at the address ptr points to
 
 Pointers support arithmetic operations:
 
-```c
+```js
 int arr[10];
 int *p = arr;
 p++;           // Moves to next element (not just next byte!)
