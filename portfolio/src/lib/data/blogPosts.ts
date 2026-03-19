@@ -1,5 +1,3 @@
-import citrus from "$lib/assets/citrus.png";
-
 export interface BlogPost {
 	slug: string;
 	title: string;
@@ -10,11 +8,11 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
 	{
-		slug: "lexer-from-scratch",
-		title: "Writing a Lexer from Scratch",
+		slug: "creating-citrus",
+		title: "Creating Citrus 🍋 - Tetris Written in C",
 		description:
-			"A walk-through of tokenizing source text into a stream of typed symbols.",
-		image: citrus,
+			"My short little journey of creating Tetris in the terminal using C and its standard library.",
+		image: "/creating-citrus/citrus.png",
 		date: "2025-12-15",
 	},
 	{

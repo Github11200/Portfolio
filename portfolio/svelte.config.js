@@ -8,14 +8,14 @@ import relativeImages from "mdsvex-relative-images";
 const theme = "github-light";
 const highlighter = await createHighlighter({
 	themes: [theme],
-	langs: ["javascript", "typescript"],
+	langs: ["javascript", "typescript", "c", "c++"],
 });
 
 const addCodeBlockStyles = (html) => {
 	return html.replace(
 		/<pre class="shiki[^"]*" style="([^"]*)"/,
 		(_match, existingStyles) =>
-			`<pre class="shiki ${theme}" style="${existingStyles}; background-color: var(--muted); color: var(--foreground); padding: calc(var(--spacing) * 4); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow-x: auto;"`,
+			`<pre class="shiki ${theme}" style="${existingStyles}; background-color: var(--muted); color: var(--foreground); padding: calc(var(--spacing) * 4); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow-x: auto; margin-top: 10px;"`,
 	);
 };
 
@@ -39,7 +39,7 @@ const config = {
 						lang,
 						theme,
 					});
-					const html = escapeSvelte(addCodeBlockStyles(rawHtml));
+          const html = escapeSvelte(addCodeBlockStyles(rawHtml));
 					return html;
 				},
 			},
