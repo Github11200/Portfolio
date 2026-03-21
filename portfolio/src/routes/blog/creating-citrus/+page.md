@@ -1,7 +1,7 @@
 ---
 layout: mds
-title: 'Creating Citrus🍋 - Tetris Written in C'
-date: '2025-11-30'
+title: 'Creating Citrus 🍋 - Tetris Written in C'
+date: '2025-04-21'
 image: '/creating-citrus/citrus.png'
 ---
 

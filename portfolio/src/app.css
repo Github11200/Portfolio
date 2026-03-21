@@ -134,6 +134,46 @@
 	body {
 		@apply bg-background text-foreground;
 	}
+
+	.blog-content {
+		font-size: 1.2rem;
+		line-height: 1.8;
+	}
+
+	.blog-content p,
+	.blog-content ul,
+	.blog-content ol {
+		margin-top: calc(var(--spacing) * 6);
+		line-height: 1.85;
+	}
+
+	.blog-content img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: var(--radius-lg);
+		margin-top: calc(var(--spacing) * 8);
+		margin-bottom: calc(var(--spacing) * 10);
+	}
+
+	.blog-content pre {
+		margin-top: calc(var(--spacing) * 8);
+		margin-bottom: calc(var(--spacing) * 8);
+	}
+
+	.blog-content pre + p,
+	.blog-content pre + ul,
+	.blog-content pre + ol,
+	.blog-content p + pre,
+	.blog-content ul + pre,
+	.blog-content ol + pre {
+		margin-top: calc(var(--spacing) * 8);
+	}
+
+	.blog-content :not(pre) > code {
+		font-size: 0.95em;
+	}
+
 	h1 {
 		@apply mt-10 mb-4 scroll-m-20 text-4xl font-extrabold tracking-tight first:mt-0 lg:text-5xl;
 	}

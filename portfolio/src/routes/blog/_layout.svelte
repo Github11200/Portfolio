@@ -7,6 +7,15 @@
 	export let title, date, image;
 </script>
 
+<svelte:head>
+	<link
+		rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"
+		integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP"
+		crossorigin="anonymous"
+	/>
+</svelte:head>
+
 <div class="relative min-h-screen overflow-hidden">
 	<section class="relative mx-auto w-full max-w-4xl px-6 py-16 sm:px-8">
 		<div class="mt-6 flex justify-start">
@@ -19,7 +28,10 @@
 				</a>
 			</Button>
 		</div>
-		<Card.Root class="mx-auto mt-4  mb-6 overflow-hidden border border-border bg-card shadow-none">
+		<Card.Root class="mx-auto mt-4 mb-6 overflow-hidden border border-border bg-card shadow-none">
+			{#if image}
+				<enhanced:img src={image} alt={title} loading="lazy" class="h-96 w-full object-cover" />
+			{/if}
 			<Card.Header class="border-b border-border px-8 py-4">
 				<Card.Title>{title}</Card.Title>
 			</Card.Header>
@@ -28,15 +40,8 @@
 			</Card.Content>
 		</Card.Root>
 
-		<!-- Image Section -->
-		{#if image}
-			<div class="mb-8 overflow-hidden rounded-lg border border-border/60">
-				<enhanced:img src={image} alt={title} loading="lazy" class="h-96 w-full object-cover" />
-			</div>
-		{/if}
-
 		<!-- Content Section -->
-		<div class="prose prose-sm dark:prose-invert max-w-none">
+		<div class="blog-content max-w-none">
 			<slot />
 		</div>
 

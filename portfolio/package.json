@@ -16,8 +16,13 @@
 	"dependencies": {
 		"@bitmachina/highlighter": "1.0.0-alpha.5",
 		"@mistweaverco/mdsvex-shiki": "^1.3.0",
+		"@nvl/sveltex": "^0.4.4",
+		"mathlifier": "^3.5.1",
 		"mdsvex-enhanced-images": "^0.3.3",
 		"mdsvex-relative-images": "^2.0.0",
+		"rehype-katex-svelte": "^1.2.0",
+		"remark-math": "3.0.0",
+		"svelte-katex": "^0.2.0",
 		"svelte-markdown": "^0.4.1"
 	},
 	"devDependencies": {
@@ -41,6 +46,7 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.14.0",
 		"globals": "^17.1.0",
+		"katex": "^0.16.40",
 		"mdsvex": "^0.12.7",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.4.1",

@@ -4,6 +4,8 @@ import { mdsvex, escapeSvelte } from "mdsvex";
 import { createHighlighter } from "shiki";
 import adapter from "@sveltejs/adapter-vercel";
 import relativeImages from "mdsvex-relative-images";
+import rehypeKatexSvelte from 'rehype-katex-svelte';
+import remarkMath from 'remark-math';
 
 const theme = "github-light";
 const highlighter = await createHighlighter({
@@ -15,7 +17,7 @@ const addCodeBlockStyles = (html) => {
 	return html.replace(
 		/<pre class="shiki[^"]*" style="([^"]*)"/,
 		(_match, existingStyles) =>
-			`<pre class="shiki ${theme}" style="${existingStyles}; background-color: var(--muted); color: var(--foreground); padding: calc(var(--spacing) * 4); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow-x: auto; margin-top: 10px;"`,
+			`<pre class="shiki ${theme}" style="${existingStyles}; background-color: var(--muted); color: var(--foreground); padding: calc(var(--spacing) * 4); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow-x: auto;"`,
 	);
 };
 
@@ -43,8 +45,9 @@ const config = {
 					return html;
 				},
 			},
-			remarkPlugins: [[relativeImages]],
-		}),
+      remarkPlugins: [remarkMath, relativeImages],
+      rehypePlugins: [rehypeKatexSvelte],
+    }),
 	],
 };
 
