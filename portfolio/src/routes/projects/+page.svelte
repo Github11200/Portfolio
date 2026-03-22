@@ -6,35 +6,35 @@
 			name: 'Verbosity',
 			description:
 				'My own compiler written in C++ for a programming language that contains no symbols, special characters, or punctuation marks.',
-			image: './src/lib/assets/verbosity.png',
+			image: '/project-images/verbosity.png',
 			href: 'https://github.com/Github11200/Verbosity'
 		},
 		{
 			name: 'Termicord',
 			description:
 				'A message app written in C++ with raw TCP sockets that includes a client, server, and database.',
-			image: './src/lib/assets/termicord.png',
+			image: '/project-images/termicord.png',
 			href: 'https://github.com/Github11200/Termicord'
 		},
 		{
 			name: 'Posturai',
 			description:
 				'A machine learning model written in PyTorch that alerts the user if their posture is not great.',
-			image: './src/lib/assets/posturai.png',
+			image: '/project-images/posturai.png',
 			href: 'https://github.com/Github11200/Posturai'
 		},
 		{
 			name: 'Autonomous Motions Template',
 			description:
 				'A template written in C++ that allows a robot to do autonomous motions like driving to points or following paths.',
-			image: './src/lib/assets/robot.png',
+			image: '/project-images/robot.png',
 			href: 'https://github.com/Github11200/Push-Back'
 		},
 		{
 			name: 'Citrus',
 			description:
 				'A game of Tetris that runs in the terminal and is written in C using just the standard library.',
-			image: './src/lib/assets/citrus.png',
+			image: '/project-images/citrus.png',
 			href: 'https://github.com/Github11200/Citrus'
 		}
 	] as const;
