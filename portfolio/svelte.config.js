@@ -56,7 +56,10 @@ const config = {
       remarkPlugins: [remarkMath, relativeImages],
       rehypePlugins: [rehypeKatexSvelte],
     }),
-	],
+  ],
+  paths: {
+    base: process.argv.includes('dev') ? '' : '/Portfolio',
+  },
 };
 
 export default config;

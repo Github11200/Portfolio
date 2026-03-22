@@ -11,13 +11,15 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"deploy": "npx gh-pages -d build"
 	},
 	"dependencies": {
 		"@bitmachina/highlighter": "1.0.0-alpha.5",
 		"@mistweaverco/mdsvex-shiki": "^1.3.0",
 		"@nvl/sveltex": "^0.4.4",
 		"@sveltejs/adapter-static": "^3.0.10",
+		"gh-pages": "^6.3.0",
 		"mathlifier": "^3.5.1",
 		"mdsvex-enhanced-images": "^0.3.3",
 		"mdsvex-relative-images": "^2.0.0",

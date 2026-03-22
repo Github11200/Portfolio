@@ -9,4 +9,4 @@
 	const { href, text }: Props = $props();
 </script>
 
-<a href={resolve(href)} class="underline">{text}</a>
+<a href={href} class="underline">{text}</a>

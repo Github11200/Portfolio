@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Github, Linkedin, FileUser } from '@lucide/svelte';
+	import { resolve } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import Link from '$lib/components/ui/Link.svelte';
 </script>
 
 <div class="relative min-h-screen overflow-hidden">
@@ -17,17 +17,15 @@
 					I'm currently a Grade 12 student interested in low-level programming and machine learning.
 					<br />
 					<br />
-					Previously, I've created <Link
-						href="https://github.com/Github11200/Verbosity"
-						text="my own programming language"
-					/>, a <Link href="https://github.com/Github11200/Termicord" text="messaging app" /> using raw
-					TCP sockets, and <Link
-						href="https://github.com/Github11200/Push-Back"
-						text="an autonomous motions template"
-					/> that contains algorithms to let robots move to points or follow paths. <br />
+					Previously, I've created <a href="https://github.com/Github11200/Verbosity"
+						>my own programming language</a
+					>, a <a href="https://github.com/Github11200/Termicord">messaging app</a> using raw TCP
+					sockets, and <a href="https://github.com/Github11200/Push-Back"
+						>an autonomous motions template</a
+					> that contains algorithms to let robots move to points or follow paths. <br />
 					<br />
-					Feel free to check out some <Link href="/blog" text="articles" /> I've written in the past or
-					check out some other <Link href="/blog" text="projects" /> I've created as well.
+					Feel free to check out some <a href={resolve('/blog')}>articles</a> I've written in the past or
+					check out some other <a href={resolve('/blog')}>projects</a> I've created as well.
 					<br />
 					<br />
 					If you'd like to reach out then just send me a message on LinkedIn!
