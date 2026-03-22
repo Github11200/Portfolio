@@ -2,10 +2,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { mdsvex, escapeSvelte } from "mdsvex";
 import { createHighlighter } from "shiki";
-import adapter from "@sveltejs/adapter-vercel";
 import relativeImages from "mdsvex-relative-images";
 import rehypeKatexSvelte from 'rehype-katex-svelte';
 import remarkMath from 'remark-math';
+import adapter from '@sveltejs/adapter-static';
 
 const theme = "github-light";
 const highlighter = await createHighlighter({
@@ -26,7 +26,15 @@ const dirname = path.resolve(fileURLToPath(import.meta.url), "../");
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: adapter({}),
+	adapter: adapter({
+				// default options are shown. On some platforms
+				// these options are set automatically — see below
+				pages: 'build',
+				assets: 'build',
+				fallback: undefined,
+				precompress: false,
+				strict: true
+			})
 	},
 	extensions: [".svelte", ".md"],
 	preprocess: [
