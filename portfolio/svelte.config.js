@@ -58,7 +58,7 @@ const config = {
     }),
   ],
   paths: {
-    base: process.argv.includes('dev') ? '' : '/Portfolio',
+    base: process.argv.includes('dev') ? '' : '/Portfolio/',
   },
 };
 
