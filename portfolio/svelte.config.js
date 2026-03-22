@@ -5,7 +5,7 @@ import { createHighlighter } from "shiki";
 import relativeImages from "mdsvex-relative-images";
 import rehypeKatexSvelte from 'rehype-katex-svelte';
 import remarkMath from 'remark-math';
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-vercel';
 
 const theme = "github-light";
 const highlighter = await createHighlighter({
@@ -26,15 +26,7 @@ const dirname = path.resolve(fileURLToPath(import.meta.url), "../");
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-	adapter: adapter({
-				// default options are shown. On some platforms
-				// these options are set automatically — see below
-				pages: 'build',
-				assets: 'build',
-				fallback: undefined,
-				precompress: false,
-				strict: true
-			})
+	adapter: adapter({})
 	},
 	extensions: [".svelte", ".md"],
 	preprocess: [
@@ -56,10 +48,7 @@ const config = {
       remarkPlugins: [remarkMath, relativeImages],
       rehypePlugins: [rehypeKatexSvelte],
     }),
-  ],
-  paths: {
-    base: process.argv.includes('dev') ? '' : '/Portfolio/',
-  },
+  ]
 };
 
 export default config;
