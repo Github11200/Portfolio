@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { resolve } from '$app/paths';
-	import favicon from '$lib/assets/favicon.svg';
+	import favicon from '$lib/assets/favicon.png';
 	import * as NavigationMenu from '$lib/components/ui/navigation-menu/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { dev } from '$app/environment';
