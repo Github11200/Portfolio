@@ -7,6 +7,14 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+ 	{
+		slug: "creating-verbosity",
+		title: "How I Made my Own Programming Language — Verbosity",
+		description:
+			"An explanation of how my compiler compiles my own programming into C++.",
+		date: "2025-04-21",
+		image: "/verbosity/verbosity.png",
+	},
 	{
 		slug: "creating-citrus",
 		title: "Creating Citrus 🍋 - Tetris Written in C",
