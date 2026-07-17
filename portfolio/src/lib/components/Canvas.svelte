@@ -13,8 +13,16 @@
 	const acceleration = 0.001;
 
 	let stage: Stage | null = $state(null);
+	let screenWidth: number, screenHeigth: number;
+
+	function isOnGround(object: Object): boolean {
+		if (object.y + object.height >= screenHeigth) return true;
+		return false;
+	}
 
 	onMount(async () => {
+		((screenWidth = window.innerWidth), (screenHeigth = window.innerHeight));
+
 		if (stage === null) return;
 
 		const anim = new Konva.Animation(function (frame) {
@@ -22,6 +30,11 @@
 				let deltaD =
 					objects[i].velocity * frame.timeDiff +
 					0.5 * acceleration * frame.timeDiff * frame.timeDiff;
+
+				if (isOnGround(objects[i])) {
+					objects[i].velocity = 0;
+					deltaD = 0;
+				}
 
 				objects[i].y += deltaD;
 
@@ -34,15 +47,6 @@
 
 		anim.start();
 	});
-
-	function changeSize(e) {
-		// to() is a method of `Konva.Node` instances
-		e.target.to({
-			scaleX: Math.random() + 0.8,
-			scaleY: Math.random() + 0.8,
-			duration: 0.2
-		});
-	}
 </script>
 
 <Stage width={window.innerWidth} height={window.innerHeight} bind:this={stage}>
@@ -56,8 +60,6 @@
 				draggable
 				// @ts-ignore
 				bind:this={objectBindings[i]}
-				ondragstart={changeSize}
-				ondragend={changeSize}
 			/>
 		{/each}
 	</Layer>
