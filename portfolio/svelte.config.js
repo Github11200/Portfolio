@@ -26,7 +26,10 @@ const dirname = path.resolve(fileURLToPath(import.meta.url), "../");
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-	adapter: adapter({})
+		adapter: adapter({}),
+	},
+	compilerOptions: {
+		runes: true
 	},
 	extensions: [".svelte", ".md"],
 	preprocess: [
@@ -41,14 +44,14 @@ const config = {
 						lang,
 						theme,
 					});
-          const html = escapeSvelte(addCodeBlockStyles(rawHtml));
+					const html = escapeSvelte(addCodeBlockStyles(rawHtml));
 					return html;
 				},
 			},
-      remarkPlugins: [remarkMath, relativeImages],
-      rehypePlugins: [rehypeKatexSvelte],
-    }),
-  ]
+			remarkPlugins: [remarkMath, relativeImages],
+			rehypePlugins: [rehypeKatexSvelte],
+		}),
+	]
 };
 
 export default config;
