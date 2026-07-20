@@ -1,24 +1,19 @@
 <script lang="ts">
 	import { Stage, Layer, Rect, RegularPolygon } from 'svelte-konva';
-	import type { Object } from '$lib/types';
 	import { onMount } from 'svelte';
 	import Konva from 'konva';
+	import World from '$lib/physics/world';
+	import Object from '$lib/physics/object';
+	import Vector2D from '$lib/physics/vector';
 
-	let objects: Object[] = $state([
-		{ id: '1', x: 0, y: 0, width: 50, height: 50, velocity: 0, mass: 0 }
+	const world = new World([
+		new Object(new Vector2D(0, 0), new Vector2D(0, 0), 10, 0, 0, 50, 50, '', '')
 	]);
 
 	let objectBindings: (Konva.Rect | null)[] = $state([]);
 
-	const acceleration = 0.001;
-
 	let stage: Stage | null = $state(null);
 	let screenWidth: number, screenHeigth: number;
-
-	function isOnGround(object: Object): boolean {
-		if (object.y + object.height >= screenHeigth) return true;
-		return false;
-	}
 
 	onMount(async () => {
 		((screenWidth = window.innerWidth), (screenHeigth = window.innerHeight));
@@ -26,22 +21,12 @@
 		if (stage === null) return;
 
 		const anim = new Konva.Animation(function (frame) {
-			for (let i = 0; i < objects.length; ++i) {
-				let deltaD =
-					objects[i].velocity * frame.timeDiff +
-					0.5 * acceleration * frame.timeDiff * frame.timeDiff;
+			world.step(frame.timeDiff);
 
-				if (isOnGround(objects[i])) {
-					objects[i].velocity = 0;
-					deltaD = 0;
-				}
-
-				objects[i].y += deltaD;
-
-				let vf = Math.sqrt(objects[i].velocity * objects[i].velocity + 2 * acceleration * deltaD);
-				objects[i].velocity = vf;
-
-				objectBindings[i]?.node.y(objects[i].y);
+			for (let i = 0; i < world.objects.length; ++i) {
+				objectBindings[i]?.node.x(world.objects[i].position.x);
+				objectBindings[i]?.node.y(world.objects[i].position.y);
+				objectBindings[i]?.node.rotation(world.objects[i].rotation);
 			}
 		});
 
@@ -51,13 +36,17 @@
 
 <Stage width={window.innerWidth} height={window.innerHeight} bind:this={stage}>
 	<Layer>
-		{#each objects as object, i (object.id)}
+		{#each world.objects as object, i (object.id)}
 			<Rect
-				width={50}
-				height={50}
-				y={100}
+				width={object.width}
+				height={object.height}
+				x={object.position.x}
+				y={object.position.y}
+				rotation={0}
 				fill="green"
 				draggable
+				offsetX={object.width / 2}
+				offsetY={object.height / 2}
 				// @ts-ignore
 				bind:this={objectBindings[i]}
 			/>
