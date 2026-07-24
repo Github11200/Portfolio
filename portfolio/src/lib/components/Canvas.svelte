@@ -7,7 +7,7 @@
 	import Vector2D from '$lib/physics/vector';
 
 	const world = new World([
-		new Object(new Vector2D(0, 0), new Vector2D(0, 0), 10, 0, 0, 50, 50, '', '')
+		new Object(new Vector2D(100, 100), new Vector2D(1, 0), 0.01, 0, 10, 50, 50, '', '')
 	]);
 
 	let objectBindings: (Konva.Rect | null)[] = $state([]);
