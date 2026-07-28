@@ -1,4 +1,9 @@
 {
     "editor.fontSize": 15,
-    "cSpell.words": ["drei", "GLTF", "lexend"]
+    "cSpell.words": [
+        "drei",
+        "GLTF",
+        "lexend"
+    ],
+    "editor.tabSize": 2
 }
