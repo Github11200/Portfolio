@@ -27,12 +27,18 @@ export default class Vector2D {
     return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2))
   }
 
-  dotProduct(v: Vector2D) {
+  dot(v: Vector2D) {
     return this.x * v.x + this.y * v.y
   }
 
   crossProduct(scaler: number) {
     return new Vector2D(-this.y * scaler, this.x * scaler)
+  }
+
+  // Apply a rotation matrix to rotate a vector by some number of radians
+  rotate(angle: number) {
+    return new Vector2D(this.x * Math.cos(angle) - this.y * Math.sin(angle),
+      this.x * Math.sin(angle) + this.y * Math.cos(angle));
   }
 
   normalize() {

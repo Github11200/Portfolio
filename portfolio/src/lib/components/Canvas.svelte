@@ -3,53 +3,43 @@
 	import { onMount } from 'svelte';
 	import Konva from 'konva';
 	import World from '$lib/physics/world';
-	import Object from '$lib/physics/object';
+	import { Object } from '$lib/physics/object';
 	import Vector2D from '$lib/physics/vector';
+	import CollisionHelper from '$lib/physics/collisions';
 
 	const world = new World([
-		new Object(new Vector2D(100, 100), new Vector2D(1, 0), 0.01, 0, 10, 50, 50, '', '')
+		new Object(new Vector2D(100, 100), new Vector2D(0, 0), 0.01, 0, 10, 50, 50, 'green', ''),
+		new Object(new Vector2D(75, 125), new Vector2D(0, 0), 0.01, 0, 10, 50, 50, 'red', '')
 	]);
 
-	let objectBindings: (Konva.Rect | null)[] = $state([]);
-
-	let stage: Stage | null = $state(null);
-	let screenWidth: number, screenHeigth: number;
-
 	onMount(async () => {
-		((screenWidth = window.innerWidth), (screenHeigth = window.innerHeight));
+		let stage = new Konva.Stage({
+			container: 'canvas-container',
+			width: window.innerWidth,
+			height: window.innerHeight
+		});
 
-		if (stage === null) return;
+		let layer = new Konva.Layer();
+		stage.add(layer);
 
+		// Update the canvas size if the window is resized
+		window.addEventListener('resize', () => {
+			(stage.width(window.innerWidth), stage.height(window.innerHeight));
+		});
+
+		console.log(world.objects[0].getTransformedVertices());
+		// console.log(new CollisionHelper().checkCollision(world.objects[0], world.objects[1]));
+		for (const object of world.objects) layer.add(object.getKonvaObject());
+
+		console.log(world.objects[0].getAABB());
+		console.log(world.objects[1].getAABB());
 		const anim = new Konva.Animation(function (frame) {
 			world.step(frame.timeDiff);
-
-			for (let i = 0; i < world.objects.length; ++i) {
-				objectBindings[i]?.node.x(world.objects[i].position.x);
-				objectBindings[i]?.node.y(world.objects[i].position.y);
-				objectBindings[i]?.node.rotation(world.objects[i].rotation);
-			}
+			// for (const object of world.objects) object.updateKonvaObject();
 		});
 
 		anim.start();
 	});
 </script>
 
-<Stage width={window.innerWidth} height={window.innerHeight} bind:this={stage}>
-	<Layer>
-		{#each world.objects as object, i (object.id)}
-			<Rect
-				width={object.width}
-				height={object.height}
-				x={object.position.x}
-				y={object.position.y}
-				rotation={0}
-				fill="green"
-				draggable
-				offsetX={object.width / 2}
-				offsetY={object.height / 2}
-				// @ts-ignore
-				bind:this={objectBindings[i]}
-			/>
-		{/each}
-	</Layer>
-</Stage>
+<div id="canvas-container"></div>

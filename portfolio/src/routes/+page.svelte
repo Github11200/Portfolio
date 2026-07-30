@@ -13,7 +13,7 @@
 </script>
 
 {#if CanvasComponent}
-	<div class="fixed z-[-1] h-screen w-screen">
+	<div class="fixed z-200 h-screen w-screen">
 		<CanvasComponent />
 	</div>
 {/if}
