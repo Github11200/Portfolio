@@ -14,18 +14,27 @@
 			<div class="space-y-6">
 				<h1 class="text-2xl font-semibold tracking-tight sm:text-4xl">Jinay Patel</h1>
 				<p class="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-					I'm an incoming Computer Engineering major at the University of Waterloo this fall; My main interests include low-level programming and machine learning;
+					I'm an incoming Computer Engineering major at the University of Waterloo this fall; My
+					main interests include low-level programming and machine learning;
 					<br />
 					<br />
-					Previously, I've created <a href="https://github.com/Github11200/Verbosity" class="font-bold underline"
+					Previously, I've created
+					<a href="https://github.com/Github11200/Verbosity" class="font-bold underline"
 						>my own programming language</a
-					>, a <a href="https://github.com/Github11200/Termicord" class="font-bold underline">messaging app</a> using raw TCP
-					sockets, and <a href="https://github.com/Github11200/Push-Back" class="font-bold underline"
+					>, a
+					<a href="https://github.com/Github11200/Termicord" class="font-bold underline"
+						>messaging app</a
+					>
+					using raw TCP sockets, and
+					<a href="https://github.com/Github11200/Push-Back" class="font-bold underline"
 						>an autonomous motions template</a
-					> that contains algorithms to let robots move to points or follow paths. <br />
+					>
+					that contains algorithms to let robots move to points or follow paths. <br />
 					<br />
-					Feel free to check out some <a href={resolve('/blog')} class="font-bold underline">articles</a> I've written in the past or
-					my other <a href={resolve('/blog')} class="font-bold underline">projects</a>.
+					Feel free to check out some
+					<a href={resolve('/blog')} class="font-bold underline">articles</a>
+					I've written in the past or my other
+					<a href={resolve('/blog')} class="font-bold underline">projects</a>.
 					<br />
 					<br />
 					If you'd like to reach out then feel free to send me a message on LinkedIn!
@@ -43,7 +52,7 @@
 					</a>
 					<a
 						class="col-span-2 sm:col-span-1"
-						href="https://drive.google.com/file/d/1UslT3CCwyRGmOWgkhb5iPeZ3uHFiPCuA/view?usp=drive_link/"
+						href="https://drive.google.com/file/d/1umUoKVOtOqldoiI5ccnjN55PszYAxzwC/view?usp=drive_link"
 						target="_blank"
 					>
 						<Button variant="card" class="h-full w-full border border-[#b51208]">
