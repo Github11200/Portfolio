@@ -5,11 +5,10 @@
 	import World from '$lib/physics/world';
 	import { Object } from '$lib/physics/object';
 	import Vector2D from '$lib/physics/vector';
-	import CollisionHelper from '$lib/physics/collisions';
 
 	const world = new World([
-		new Object(new Vector2D(100, 100), new Vector2D(0, 0), 0.01, 0, 10, 50, 50, 'green', ''),
-		new Object(new Vector2D(75, 125), new Vector2D(0, 0), 0.01, 0, 10, 50, 50, 'red', '')
+		new Object(new Vector2D(100, 100), new Vector2D(0, 0), 0, 0, 10, 0.5, 50, 50, 'green', ''),
+		new Object(new Vector2D(400, 130), new Vector2D(0, 0), 0, 0, 10, 0.5, 50, 50, 'red', '')
 	]);
 
 	onMount(async () => {
@@ -27,15 +26,20 @@
 			(stage.width(window.innerWidth), stage.height(window.innerHeight));
 		});
 
-		console.log(world.objects[0].getTransformedVertices());
-		// console.log(new CollisionHelper().checkCollision(world.objects[0], world.objects[1]));
+		// Helper for testing the physics
+		window.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowRight') world.objects[0].applyForce(new Vector2D(0.5, 0));
+			if (e.key === 'ArrowLeft') world.objects[0].applyForce(new Vector2D(-0.5, 0));
+			if (e.key === 'ArrowUp') world.objects[0].applyForce(new Vector2D(0, 0.5));
+			if (e.key === 'ArrowDown') world.objects[0].applyForce(new Vector2D(0, -0.5));
+		});
+
+		// Add all the objects
 		for (const object of world.objects) layer.add(object.getKonvaObject());
 
-		console.log(world.objects[0].getAABB());
-		console.log(world.objects[1].getAABB());
 		const anim = new Konva.Animation(function (frame) {
 			world.step(frame.timeDiff);
-			// for (const object of world.objects) object.updateKonvaObject();
+			for (const object of world.objects) object.updateKonvaObject();
 		});
 
 		anim.start();

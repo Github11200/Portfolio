@@ -8,6 +8,7 @@ export class Object {
   angularVelocity: number = 0
   rotation: number = 0
   mass: number = 0
+  restitution: number = 0
 
   force: Vector2D = new Vector2D(0, 0)
 
@@ -27,6 +28,7 @@ export class Object {
     angularVelocity: number,
     rotation: number,
     mass: number,
+    restitution: number,
     width: number,
     height: number,
     color: string,
@@ -36,6 +38,7 @@ export class Object {
     this.angularVelocity = angularVelocity
     this.rotation = rotation
     this.mass = mass
+    this.restitution = restitution
 
     this.width = width
     this.height = height
@@ -67,6 +70,7 @@ export class Object {
   }
 
   updateKonvaObject() {
+    // TODO: Update the vertices instead of the rotation or position
     this.konvaObject.x(this.position.x)
     this.konvaObject.y(this.position.y)
     this.konvaObject.width(this.width)
