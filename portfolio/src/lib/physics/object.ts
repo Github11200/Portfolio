@@ -9,6 +9,7 @@ export class Object {
   rotation: number = 0
   mass: number = 0
   restitution: number = 0
+  isStatic: boolean = false
 
   force: Vector2D = new Vector2D(0, 0)
 
@@ -29,6 +30,7 @@ export class Object {
     rotation: number,
     mass: number,
     restitution: number,
+    isStatic: boolean,
     width: number,
     height: number,
     color: string,
@@ -39,6 +41,7 @@ export class Object {
     this.rotation = rotation
     this.mass = mass
     this.restitution = restitution
+    this.isStatic = isStatic
 
     this.width = width
     this.height = height
@@ -76,7 +79,7 @@ export class Object {
     this.konvaObject.width(this.width)
     this.konvaObject.height(this.height)
     this.konvaObject.fill(this.color)
-    this.konvaObject.stroke(this.color)
+    this.konvaObject.stroke("red")
   }
 
   applyForce(force: Vector2D) {
@@ -109,7 +112,7 @@ export class Object {
   }
 
   step(dt: number) {
-    if (this.beingDragged)
+    if (this.beingDragged || this.isStatic)
       return
     const acceleration = this.force.scale(1 / this.mass)
 
@@ -134,5 +137,10 @@ export class Object {
       minY: minY,
       maxY: maxY
     }
+  }
+
+  move(v: Vector2D) {
+    if (this.isStatic) return
+    this.position = this.position.add(v)
   }
 }

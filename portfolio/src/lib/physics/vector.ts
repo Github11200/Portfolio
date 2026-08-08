@@ -1,3 +1,5 @@
+const smallNumber = 1e-2
+
 export default class Vector2D {
   x = 0
   y = 0
@@ -5,6 +7,14 @@ export default class Vector2D {
   constructor(x: number, y: number) {
     this.x = x
     this.y = y
+  }
+
+  numbersNearlyEqual(a: number, b: number): boolean {
+    return Math.abs(a - b) < smallNumber
+  }
+
+  nearlyEqual(v: Vector2D) {
+    return this.numbersNearlyEqual(this.x, v.x) && this.numbersNearlyEqual(this.y, v.y)
   }
 
   add(v: Vector2D) {
@@ -43,5 +53,9 @@ export default class Vector2D {
 
   normalize() {
     return new Vector2D(this.x / this.magnitude(), this.y / this.magnitude())
+  }
+
+  distanceTo(v: Vector2D) {
+    return Math.sqrt(Math.pow(v.x - this.x, 2) + Math.pow(v.y - this.y, 2))
   }
 }

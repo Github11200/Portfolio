@@ -7,8 +7,45 @@
 	import Vector2D from '$lib/physics/vector';
 
 	const world = new World([
-		new Object(new Vector2D(100, 100), new Vector2D(0, 0), 0, 0, 10, 0.5, 50, 50, 'green', ''),
-		new Object(new Vector2D(400, 130), new Vector2D(0, 0), 0, 0, 10, 0.5, 50, 50, 'red', '')
+		new Object(
+			new Vector2D(100, 889),
+			new Vector2D(0, 0),
+			0,
+			0,
+			10,
+			0.5,
+			false,
+			50,
+			50,
+			'green',
+			''
+		),
+		// new Object(
+		// 	new Vector2D(400, 130),
+		// 	new Vector2D(0, 0),
+		// 	0,
+		// 	0,
+		// 	10,
+		// 	0.5,
+		// 	false,
+		// 	50,
+		// 	50,
+		// 	'green',
+		// 	''
+		// ),
+		new Object(
+			new Vector2D(0, window.innerHeight - 50),
+			new Vector2D(0, 0),
+			0,
+			0,
+			10,
+			0.5,
+			true,
+			window.innerWidth,
+			50,
+			'pink',
+			''
+		)
 	]);
 
 	onMount(async () => {
@@ -28,10 +65,28 @@
 
 		// Helper for testing the physics
 		window.addEventListener('keydown', (e) => {
-			if (e.key === 'ArrowRight') world.objects[0].applyForce(new Vector2D(0.5, 0));
-			if (e.key === 'ArrowLeft') world.objects[0].applyForce(new Vector2D(-0.5, 0));
-			if (e.key === 'ArrowUp') world.objects[0].applyForce(new Vector2D(0, 0.5));
-			if (e.key === 'ArrowDown') world.objects[0].applyForce(new Vector2D(0, -0.5));
+			if (e.key === 'ArrowRight') world.objects[0].applyForce(new Vector2D(5, 0));
+			if (e.key === 'ArrowLeft') world.objects[0].applyForce(new Vector2D(-5, 0));
+			if (e.key === 'ArrowUp') world.objects[0].applyForce(new Vector2D(0, -5));
+			if (e.key === 'ArrowDown') world.objects[0].applyForce(new Vector2D(0, 5));
+			if (e.key === 'Enter') {
+				world.objects.push(
+					new Object(
+						new Vector2D(400, 100),
+						new Vector2D(0, 0),
+						0,
+						0,
+						10,
+						0.5,
+						false,
+						50,
+						50,
+						'green ',
+						''
+					)
+				);
+				layer.add(world.objects[world.objects.length - 1].getKonvaObject());
+			}
 		});
 
 		// Add all the objects
