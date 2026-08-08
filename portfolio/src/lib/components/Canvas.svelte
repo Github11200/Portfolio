@@ -15,24 +15,26 @@
 			10,
 			0.5,
 			false,
+			50 / Math.sqrt(3),
 			50,
-			50,
+			'Hexagon',
 			'green',
 			''
 		),
-		// new Object(
-		// 	new Vector2D(400, 130),
-		// 	new Vector2D(0, 0),
-		// 	0,
-		// 	0,
-		// 	10,
-		// 	0.5,
-		// 	false,
-		// 	50,
-		// 	50,
-		// 	'green',
-		// 	''
-		// ),
+		new Object(
+			new Vector2D(400, 130),
+			new Vector2D(0, 0),
+			0,
+			0,
+			10,
+			0.5,
+			false,
+			50,
+			50,
+			'Square',
+			'green',
+			''
+		),
 		new Object(
 			new Vector2D(0, window.innerHeight - 50),
 			new Vector2D(0, 0),
@@ -43,6 +45,7 @@
 			true,
 			window.innerWidth,
 			50,
+			'Square',
 			'pink',
 			''
 		)
@@ -81,7 +84,8 @@
 						false,
 						50,
 						50,
-						'green ',
+						'Square',
+						'green',
 						''
 					)
 				);

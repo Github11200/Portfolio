@@ -2,6 +2,8 @@ import type { AABB } from "$lib/types";
 import Konva from "konva";
 import Vector2D from "./vector";
 
+type Shape = "Square" | "Hexagon"
+
 export class Object {
   position: Vector2D = new Vector2D(0, 0)
   velocity: Vector2D = new Vector2D(0, 0)
@@ -21,8 +23,33 @@ export class Object {
 
   vertices: Vector2D[] = []
 
-  konvaObject: Konva.Rect
+  konvaObject: Konva.RegularPolygon | Konva.Rect
   beingDragged: boolean = false
+
+  // TODO: Change the vertices based on the shape type
+  private createKonvaObject(shape: Shape) {
+    if (shape === "Square") {
+      return new Konva.Rect({
+        x: this.position.x,
+        y: this.position.y,
+        width: this.width,
+        height: this.height,
+        fill: this.color,
+        stroke: this.color,
+        draggable: true,
+      })
+    } else {
+      return new Konva.RegularPolygon({
+        x: this.position.x,
+        y: this.position.y,
+        fill: this.color,
+        stroke: this.color,
+        draggable: true,
+        sides: 6,
+        radius: this.width,
+      });
+    }
+  }
 
   constructor(position: Vector2D,
     velocity: Vector2D,
@@ -33,6 +60,7 @@ export class Object {
     isStatic: boolean,
     width: number,
     height: number,
+    shape: Shape,
     color: string,
     id: string) {
     this.position = position
@@ -50,15 +78,7 @@ export class Object {
     this.id = id
     this.vertices = this.generateVertices()
 
-    this.konvaObject = new Konva.Rect({
-      x: this.position.x,
-      y: this.position.y,
-      width: this.width,
-      height: this.height,
-      fill: this.color,
-      stroke: this.color,
-      draggable: true,
-    });
+    this.konvaObject = this.createKonvaObject(shape)
 
     this.konvaObject.on("dragstart", (e) => { this.beingDragged = true })
     this.konvaObject.on("dragend", (e) => { this.beingDragged = false })
@@ -80,6 +100,8 @@ export class Object {
     this.konvaObject.height(this.height)
     this.konvaObject.fill(this.color)
     this.konvaObject.stroke("red")
+    if (this.konvaObject instanceof Konva.RegularPolygon)
+      this.konvaObject.radius(this.width)
   }
 
   applyForce(force: Vector2D) {
