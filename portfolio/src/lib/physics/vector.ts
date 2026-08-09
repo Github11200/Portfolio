@@ -9,7 +9,7 @@ export default class Vector2D {
     this.y = y
   }
 
-  numbersNearlyEqual(a: number, b: number): boolean {
+  private numbersNearlyEqual(a: number, b: number): boolean {
     return Math.abs(a - b) < smallNumber
   }
 
@@ -41,8 +41,12 @@ export default class Vector2D {
     return this.x * v.x + this.y * v.y
   }
 
-  crossProduct(scaler: number) {
+  scalarCrossProduct(scaler: number) {
     return new Vector2D(-this.y * scaler, this.x * scaler)
+  }
+
+  crossProduct(v: Vector2D) {
+    return this.x * v.y - this.y * v.x
   }
 
   // Apply a rotation matrix to rotate a vector by some number of radians

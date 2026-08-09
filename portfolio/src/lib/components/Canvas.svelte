@@ -8,25 +8,11 @@
 
 	const world = new World([
 		new Object(
-			new Vector2D(100, 889),
+			new Vector2D(window.innerWidth / 2, window.innerHeight - 500),
 			new Vector2D(0, 0),
 			0,
-			0,
-			10,
-			0.5,
-			false,
-			50 / Math.sqrt(3),
-			50,
-			'Hexagon',
-			'green',
-			''
-		),
-		new Object(
-			new Vector2D(400, 130),
-			new Vector2D(0, 0),
-			0,
-			0,
-			10,
+			30,
+			1,
 			0.5,
 			false,
 			50,
@@ -35,8 +21,22 @@
 			'green',
 			''
 		),
+		// new Object(
+		// 	new Vector2D(window.innerWidth / 2 + 80, window.innerHeight - 500),
+		// 	new Vector2D(0, 0),
+		// 	0,
+		// 	0,
+		// 	10,
+		// 	0.5,
+		// 	false,
+		// 	50,
+		// 	50,
+		// 	'Square',
+		// 	'green',
+		// 	''
+		// ),
 		new Object(
-			new Vector2D(0, window.innerHeight - 50),
+			new Vector2D(window.innerWidth / 2, window.innerHeight - 25),
 			new Vector2D(0, 0),
 			0,
 			0,

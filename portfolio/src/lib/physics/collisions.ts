@@ -28,17 +28,18 @@ export default class CollisionHelper {
     }
   }
 
-  private findContactPoints(verticesA: Vector2D[], verticesB: Vector2D[]): ContactPoints {
+  findContactPoints(verticesA: Vector2D[], verticesB: Vector2D[]): ContactPoints {
     let contactPointOne = new Vector2D(0, 0)
     let contactPointTwo = null
     let minimumDistance = Infinity
+
 
     for (let i = 0; i < verticesA.length; ++i) {
       const vertex = verticesA[i]
 
       // Go through the edge segments of B
       for (let j = 0; j < verticesB.length; ++j) {
-        const res = this.pointSegmentDistance(verticesB[j], verticesB[(j + 1) % verticesB.length], vertex)
+        const res = this.pointSegmentDistance(vertex, verticesB[j], verticesB[(j + 1) % verticesB.length])
 
         // If this new contact point is the same distance and it's not the
         // same one that's already been used then update the points
@@ -46,7 +47,7 @@ export default class CollisionHelper {
           contactPointTwo = res.contactPoint
         else if (res.distance < minimumDistance) {
           contactPointOne = res.contactPoint
-          contactPointTwo = new Vector2D(0, 0)
+          contactPointTwo = null
 
           minimumDistance = res.distance
         }
@@ -58,7 +59,7 @@ export default class CollisionHelper {
 
       // Go through the edge segments of B
       for (let j = 0; j < verticesA.length; ++j) {
-        const res = this.pointSegmentDistance(verticesA[j], verticesA[(j + 1) % verticesA.length], vertex)
+        const res = this.pointSegmentDistance(vertex, verticesA[j], verticesA[(j + 1) % verticesA.length])
 
         // If this new contact point is the same distance and it's not the
         // same one that's already been used then update the points
@@ -66,7 +67,7 @@ export default class CollisionHelper {
           contactPointTwo = res.contactPoint
         else if (res.distance < minimumDistance) {
           contactPointOne = res.contactPoint
-          contactPointTwo = new Vector2D(0, 0)
+          contactPointTwo = null
 
           minimumDistance = res.distance
         }
@@ -121,7 +122,7 @@ export default class CollisionHelper {
 
       // Get the perpendicular vector by swapping the coordinates
       // and multiplying the y coordinate by -1
-      let axis: Vector2D = edge.crossProduct(1).normalize();
+      let axis: Vector2D = edge.scalarCrossProduct(1).normalize();
 
       const { min: minA, max: maxA } = this.projectVertices(verticesA, axis)
       const { min: minB, max: maxB } = this.projectVertices(verticesB, axis)
@@ -149,7 +150,7 @@ export default class CollisionHelper {
 
       const edge: Vector2D = vb.subtract(va);
 
-      const axis: Vector2D = edge.crossProduct(1).normalize();
+      const axis: Vector2D = edge.scalarCrossProduct(1).normalize();
 
       const { min: minA, max: maxA } = this.projectVertices(verticesA, axis)
       const { min: minB, max: maxB } = this.projectVertices(verticesB, axis)
@@ -181,9 +182,9 @@ export default class CollisionHelper {
     return { colliding: true, depth: depth, normal: normal };
   }
 
-  overlaps(object1: Object, object2: Object) {
-    const bb1 = object1.getAABB()
-    const bb2 = object2.getAABB()
+  overlaps(objectA: Object, objectB: Object) {
+    const bb1 = objectA.getAABB()
+    const bb2 = objectB.getAABB()
 
     return ((bb1.maxX >= bb2.minX && bb1.minX <= bb2.maxX)) &&
       ((bb1.maxY >= bb2.minY && bb1.minY <= bb2.maxY))
@@ -196,33 +197,84 @@ export default class CollisionHelper {
     return this.SATCollisionDetection(object1.getTransformedVertices(), object2.getTransformedVertices());
   }
 
-  resolveCollision(object1: Object, object2: Object, normal: Vector2D, depth: number) {
-    const restitution = Math.min(object1.restitution, object2.restitution)
-    const relativeVelocity = object2.velocity.subtract(object1.velocity)
-    const inverseMass1 = object1.isStatic ? 0 : 1 / object1.mass
-    const inverseMass2 = object2.isStatic ? 0 : 1 / object2.mass
-    const inverseMassSum = inverseMass1 + inverseMass2
+  resolveCollision(objectA: Object, objectB: Object, normal: Vector2D, depth: number) {
+    const contactPoints = this.findContactPoints(objectA.getTransformedVertices(), objectB.getTransformedVertices())
+    const contacts = [contactPoints.pointOne]
+    if (contactPoints.pointTwo !== null) contacts.push(contactPoints.pointTwo)
 
-    if (inverseMassSum === 0)
-      return
+    const restitution = Math.min(objectA.restitution, objectB.restitution)
+    let impulses = []
+    let raList = []
+    let rbList = []
 
-    const velocityAlongNormal = relativeVelocity.dot(normal)
+    if (objectA.inverseMass + objectB.inverseMass > 0) {
+      const slop = 0.01
+      const percent = 0.2
+      const correctionMagnitude = Math.max(depth - slop, 0) * percent / (objectA.inverseMass + objectB.inverseMass)
+      const correction = normal.scale(correctionMagnitude)
 
-    if (velocityAlongNormal > 0)
-      return
+      objectA.move(correction.scale(-objectA.inverseMass))
+      objectB.move(correction.scale(objectB.inverseMass))
+    }
 
-    const impulseMagnitude = (-(1 + restitution) * velocityAlongNormal) / inverseMassSum
+    for (let i = 0; i < contacts.length; ++i) {
+      // Get the radius from the object center to the point of collision
+      const ra = contacts[i].subtract(objectA.position)
+      const rb = contacts[i].subtract(objectB.position)
 
-    const impulse = normal.scale(impulseMagnitude)
+      // Find the perpendicular vectors for the angular velocity
+      const raPerpendicular = ra.scalarCrossProduct(1)
+      const rbPerpendicular = rb.scalarCrossProduct(1)
 
-    object1.velocity = object1.velocity.subtract(impulse.scale(inverseMass1))
-    object2.velocity = object2.velocity.add(impulse.scale(inverseMass2))
+      const angularLinearVelocityA = raPerpendicular.scale(objectA.angularVelocity)
+      const angularLinearVelocityB = rbPerpendicular.scale(objectB.angularVelocity)
 
-    const correction = normal.scale(depth / inverseMassSum)
-    object1.move(correction.scale(-inverseMass1))
-    object2.move(correction.scale(inverseMass2))
+      const objectAVelocity = angularLinearVelocityA.add(objectA.velocity)
+      const objectBVelocity = angularLinearVelocityB.add(objectB.velocity)
 
-    // TODO: Fix the contact points function, it's tweaking out 
-    const contactPoints = this.findContactPoints(object1.getTransformedVertices(), object2.getTransformedVertices())
+      const relativeVelocity = objectBVelocity.subtract(objectAVelocity)
+
+      const contactVelocityMagnitude = relativeVelocity.dot(normal)
+
+      // The bodies are moving away, so we don't need to resolve the collision
+      if (contactVelocityMagnitude >= 0)
+        continue
+
+      // Get the perpendicular values
+      const raPerpendicularDotNormal = raPerpendicular.dot(normal)
+      const rbPerpendicularDotNormal = rbPerpendicular.dot(normal)
+
+      const inverseMassSum = objectA.inverseMass + objectB.inverseMass +
+        Math.pow(raPerpendicularDotNormal, 2) * objectA.inverseInertia +
+        Math.pow(rbPerpendicularDotNormal, 2) * objectB.inverseInertia
+
+      if (inverseMassSum === 0)
+        continue
+
+      let impulseMagnitude = -(1 + restitution) * contactVelocityMagnitude
+      impulseMagnitude /= inverseMassSum
+
+      // If we have 2 contact points, then each point should get half of the impulse
+      impulseMagnitude /= contacts.length
+
+      const impulse = normal.scale(impulseMagnitude)
+      impulses.push(impulse)
+      raList.push(ra)
+      rbList.push(rb)
+    }
+
+    // Apply the impulses after calculating them because if there are 2 
+    // contact points then applying one impulse will affect the second
+    for (let i = 0; i < impulses.length; ++i) {
+      const impulse = impulses[i]
+
+      // Use cross products for the angular velocity so if the impulse is pointing 90 degrees
+      // it has a stronger effect than if it was pointing in the same direction as ra
+      objectA.velocity = objectA.velocity.subtract(impulse.scale(objectA.inverseMass))
+      objectA.angularVelocity -= raList[i].crossProduct(impulse) * objectA.inverseInertia
+
+      objectB.velocity = objectB.velocity.add(impulse.scale(objectB.inverseMass))
+      objectB.angularVelocity += rbList[i].crossProduct(impulse) * objectB.inverseInertia
+    }
   }
 }
