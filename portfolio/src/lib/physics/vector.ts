@@ -1,4 +1,4 @@
-const smallNumber = 1e-2
+const epsilon = 1e-2
 
 export default class Vector2D {
   x = 0
@@ -10,7 +10,7 @@ export default class Vector2D {
   }
 
   private numbersNearlyEqual(a: number, b: number): boolean {
-    return Math.abs(a - b) < smallNumber
+    return Math.abs(a - b) < epsilon
   }
 
   nearlyEqual(v: Vector2D) {

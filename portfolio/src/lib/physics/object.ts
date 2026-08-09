@@ -120,7 +120,7 @@ export class Object {
     this.konvaObject.height(this.height)
     this.konvaObject.fill(this.color)
     this.konvaObject.stroke("red")
-    this.konvaObject.rotation(this.rotation)
+    this.konvaObject.rotation(this.rotation * (180 / Math.PI))
     if (this.konvaObject instanceof Konva.RegularPolygon)
       this.konvaObject.radius(this.width)
   }

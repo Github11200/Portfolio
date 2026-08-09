@@ -1,6 +1,8 @@
 import { Object } from "./object";
 import Vector2D from "./vector";
 
+const epsilon = 1.5
+
 type CollisionResult = { colliding: boolean, depth: number, normal: Vector2D }
 type PointSegmentDistance = { distance: number, contactPoint: Vector2D }
 type ContactPoints = { pointOne: Vector2D, pointTwo: Vector2D | null }
@@ -43,7 +45,7 @@ export default class CollisionHelper {
 
         // If this new contact point is the same distance and it's not the
         // same one that's already been used then update the points
-        if (res.distance === minimumDistance && !res.contactPoint.nearlyEqual(contactPointOne))
+        if (Math.abs(res.distance - minimumDistance) < epsilon && !res.contactPoint.nearlyEqual(contactPointOne))
           contactPointTwo = res.contactPoint
         else if (res.distance < minimumDistance) {
           contactPointOne = res.contactPoint
@@ -63,7 +65,7 @@ export default class CollisionHelper {
 
         // If this new contact point is the same distance and it's not the
         // same one that's already been used then update the points
-        if (res.distance === minimumDistance && !res.contactPoint.nearlyEqual(contactPointOne))
+        if (Math.abs(res.distance - minimumDistance) < epsilon && !res.contactPoint.nearlyEqual(contactPointOne))
           contactPointTwo = res.contactPoint
         else if (res.distance < minimumDistance) {
           contactPointOne = res.contactPoint
@@ -258,6 +260,7 @@ export default class CollisionHelper {
       impulseMagnitude /= contacts.length
 
       const impulse = normal.scale(impulseMagnitude)
+
       impulses.push(impulse)
       raList.push(ra)
       rbList.push(rb)
