@@ -199,7 +199,6 @@
 			const index = getIndex();
 			console.log(index);
 			if (index === undefined) {
-				// TODO: Handle it here
 			} else {
 				world.objects.push(objects[index]);
 				layer.add(world.objects.at(-1).getKonvaObject());
