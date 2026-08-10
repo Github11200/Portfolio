@@ -1,9 +1,6 @@
 import type { AABB } from "$lib/types";
 import Konva from "konva";
 import Vector2D from "./vector";
-import logo from "../../../static/logo.svg"
-
-type Shape = "Square" | "Hexagon"
 
 interface ObjectProperties {
   position: Vector2D,
@@ -13,13 +10,11 @@ interface ObjectProperties {
   mass: number,
   restitution: number,
   isStatic: boolean,
-  shape: Shape,
-  color: string,
-  id: string
   width: number,
   height: number,
   staticFriction: number,
-  dynamicFriction: number
+  dynamicFriction: number,
+  logoSrc: string
 }
 
 export abstract class Object {
@@ -41,10 +36,9 @@ export abstract class Object {
 
   width: number = 0
   height: number = 0
-  color: string = ""
-  shape: Shape
 
   id: string = ""
+  logoSrc: string = ""
 
   vertices: Vector2D[] = []
 
@@ -61,11 +55,9 @@ export abstract class Object {
     isStatic,
     width,
     height,
-    shape,
-    color,
-    id,
     staticFriction,
-    dynamicFriction }: ObjectProperties) {
+    dynamicFriction,
+    logoSrc }: ObjectProperties) {
     this.position = position
     this.velocity = velocity
     this.angularVelocity = angularVelocity
@@ -80,10 +72,8 @@ export abstract class Object {
 
     this.width = width
     this.height = height
-    this.color = color
-    this.shape = shape
 
-    this.id = id
+    this.logoSrc = logoSrc
     this.vertices = this.generateVertices()
 
     this.konvaObject = this.createKonvaObject()
@@ -114,10 +104,6 @@ export abstract class Object {
     this.konvaObject.x(this.position.x)
     this.konvaObject.y(this.position.y)
 
-    if (!(this.konvaObject instanceof Konva.Group)) {
-      this.konvaObject.fill(this.color)
-      this.konvaObject.stroke("red")
-    }
     this.konvaObject.rotation(this.rotation * (180 / Math.PI))
 
     if (this.konvaObject instanceof Konva.RegularPolygon)
@@ -180,17 +166,37 @@ export abstract class Object {
 
 export class Box extends Object {
   createKonvaObject() {
-    return new Konva.Rect({
-      x: this.position.x,
-      y: this.position.y,
+    const imageObject = new Image()
+    imageObject.src = this.logoSrc
+
+    const group = new Konva.Group({
+      draggable: true
+    })
+
+    const image = new Konva.Image({
+      image: imageObject,
+      x: 0,
+      y: 0,
       width: this.width,
       height: this.height,
-      fill: this.color,
-      stroke: this.color,
-      draggable: true,
       offsetX: this.width / 2,
-      offsetY: this.height / 2
+      offsetY: this.height / 2,
+      rotation: 0
     })
+
+    const rect = new Konva.Rect({
+      x: 0,
+      y: 0,
+      width: this.width,
+      height: this.height,
+      offsetX: this.width / 2,
+      offsetY: this.height / 2,
+    })
+
+    group.add(rect)
+    group.add(image)
+
+    return group
   }
 
   generateVertices(): Vector2D[] {
@@ -210,11 +216,10 @@ export class Box extends Object {
 export class Hexagon extends Object {
   createKonvaObject() {
     const imageObject = new Image()
-    imageObject.src = logo
+    imageObject.src = this.logoSrc
 
     const group = new Konva.Group({
-      width: 200,
-      height: 200,
+      draggable: true
     })
 
     const image = new Konva.Image({
@@ -231,12 +236,10 @@ export class Hexagon extends Object {
     const polygon = new Konva.RegularPolygon({
       x: 0,
       y: 0,
-      fill: this.color,
-      stroke: this.color,
-      draggable: true,
       sides: 6,
       radius: this.width,
       rotation: this.rotation,
+      fill: "red"
     });
 
     group.add(polygon)

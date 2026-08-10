@@ -7,7 +7,7 @@ image: '/range-queries-part-two/rqp2.jpg'
 
 <script>
   import Link from "$lib/components/ui/Link.svelte"
-  import Katex from 'svelte-katex'
+  import Katex from '$lib/components/Katex.svelte';
 </script>
 
 ## Binary Indexed Tree

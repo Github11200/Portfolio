@@ -6,6 +6,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { dev } from '$app/environment';
 	import { injectAnalytics } from '@vercel/analytics/sveltekit';
+	import 'katex/dist/katex.min.css';
 
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
 

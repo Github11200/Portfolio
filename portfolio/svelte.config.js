@@ -54,6 +54,14 @@ const config = {
     }),
     vitePreprocess({ sourceMap: true })
   ],
+
+  vitePlugin: {
+    dynamicCompileOptions({ filename }) {
+      if (filename.includes('.md')) {
+        return { runes: false };
+      }
+    }
+  }
 };
 
 export default config;

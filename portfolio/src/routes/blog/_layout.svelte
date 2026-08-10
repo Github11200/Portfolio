@@ -4,7 +4,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import '@mistweaverco/mdsvex-shiki/styles.css';
 
-	export let title, date, image;
+	let { title, date, image, Link } = $props();
 </script>
 
 <svelte:head>
