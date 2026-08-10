@@ -205,7 +205,11 @@ export default class CollisionHelper {
     if (contactPoints.pointTwo !== null) contacts.push(contactPoints.pointTwo)
 
     const restitution = Math.min(objectA.restitution, objectB.restitution)
+    const staticFriction = (objectA.staticFriction + objectB.staticFriction) / 2
+    const dynamicFriction = (objectA.dynamicFriction + objectB.dynamicFriction) / 2
+
     let impulses = []
+    let frictionImpulses = []
     let raList = []
     let rbList = []
 
@@ -238,39 +242,57 @@ export default class CollisionHelper {
 
       const contactVelocityMagnitude = relativeVelocity.dot(normal)
 
+      // Calculate the tangent velocity by first projecting the relative velocity onto the normal vector and then
+      // scaling the normal to that value, and then subtracting those two to get the tangent vector
+      let tangent = relativeVelocity.subtract(normal.scale(contactVelocityMagnitude))
+
       // The bodies are moving away, so we don't need to resolve the collision
       if (contactVelocityMagnitude >= 0)
         continue
 
-      // Get the perpendicular values
-      const raPerpendicularDotNormal = raPerpendicular.dot(normal)
-      const rbPerpendicularDotNormal = rbPerpendicular.dot(normal)
+      const calculateImpulse = (vector: Vector2D, isFrictionImpulse: boolean, normalImpulseMagnitude: number = 0): Vector2D => {
+        // Get the perpendicular values
+        const raPerpendicularDotNormal = raPerpendicular.dot(vector)
+        const rbPerpendicularDotNormal = rbPerpendicular.dot(vector)
 
-      const inverseMassSum = objectA.inverseMass + objectB.inverseMass +
-        Math.pow(raPerpendicularDotNormal, 2) * objectA.inverseInertia +
-        Math.pow(rbPerpendicularDotNormal, 2) * objectB.inverseInertia
+        const inverseMassSum = objectA.inverseMass + objectB.inverseMass +
+          Math.pow(raPerpendicularDotNormal, 2) * objectA.inverseInertia +
+          Math.pow(rbPerpendicularDotNormal, 2) * objectB.inverseInertia
 
-      if (inverseMassSum === 0)
-        continue
+        if (inverseMassSum === 0)
+          return new Vector2D(0, 0)
 
-      let impulseMagnitude = -(1 + restitution) * contactVelocityMagnitude
-      impulseMagnitude /= inverseMassSum
+        let c = -(1 + restitution)
+        if (isFrictionImpulse)
+          c = -1
 
-      // If we have 2 contact points, then each point should get half of the impulse
-      impulseMagnitude /= contacts.length
+        let impulseMagnitude = c * contactVelocityMagnitude
+        impulseMagnitude /= inverseMassSum
 
-      const impulse = normal.scale(impulseMagnitude)
+        // If we have 2 contact points, then each point should get half of the impulse
+        impulseMagnitude /= contacts.length
 
-      impulses.push(impulse)
+        let impulse = vector.scale(impulseMagnitude)
+        if (isFrictionImpulse && Math.abs(impulseMagnitude) > normalImpulseMagnitude * staticFriction)
+          impulse = vector.scale(normalImpulseMagnitude * dynamicFriction)
+
+        return isFrictionImpulse ? impulse.scale(-1) : impulse
+      }
+
+      impulses.push(calculateImpulse(normal, false))
+
+      // If the tangent is 0 then there is no friction to apply
+      if (tangent.nearlyEqual(new Vector2D(0, 0)))
+        frictionImpulses.push(new Vector2D(0, 0))
+      else {
+        tangent = tangent.normalize()
+        frictionImpulses.push(calculateImpulse(tangent, true, impulses.at(-1)?.magnitude()))
+      }
       raList.push(ra)
       rbList.push(rb)
     }
 
-    // Apply the impulses after calculating them because if there are 2 
-    // contact points then applying one impulse will affect the second
-    for (let i = 0; i < impulses.length; ++i) {
-      const impulse = impulses[i]
-
+    const applyImpulse = (impulse: Vector2D, i: number) => {
       // Use cross products for the angular velocity so if the impulse is pointing 90 degrees
       // it has a stronger effect than if it was pointing in the same direction as ra
       objectA.velocity = objectA.velocity.subtract(impulse.scale(objectA.inverseMass))
@@ -279,5 +301,12 @@ export default class CollisionHelper {
       objectB.velocity = objectB.velocity.add(impulse.scale(objectB.inverseMass))
       objectB.angularVelocity += rbList[i].crossProduct(impulse) * objectB.inverseInertia
     }
+
+    // Apply the impulses after calculating them because if there are 2 
+    // contact points then applying one impulse will affect the second
+    for (let i = 0; i < impulses.length; ++i)
+      applyImpulse(impulses[i], i)
+    for (let i = 0; i < frictionImpulses.length; ++i)
+      applyImpulse(frictionImpulses[i], i)
   }
 }

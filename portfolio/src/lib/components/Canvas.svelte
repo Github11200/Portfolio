@@ -29,11 +29,13 @@
 			mass: 10,
 			restitution: 0.9,
 			isStatic: false,
-			width: 50,
+			width: 100,
 			height: 50,
 			shape: 'Square',
 			color: 'pink',
-			id: ''
+			id: '',
+			staticFriction: 0.9,
+			dynamicFriction: 0.9
 		}),
 		// new Object(
 		// 	new Vector2D(window.innerWidth / 2 + 80, window.innerHeight - 500),
@@ -58,10 +60,12 @@
 			restitution: 0.9,
 			isStatic: true,
 			width: window.innerWidth,
-			height: 50,
+			height: 1,
 			shape: 'Square',
 			color: 'pink',
-			id: ''
+			id: '',
+			staticFriction: 0.9,
+			dynamicFriction: 0.4
 		})
 	]);
 
@@ -100,7 +104,9 @@
 						height: 50,
 						shape: 'Square',
 						color: 'pink',
-						id: ''
+						id: '',
+						staticFriction: 0.5,
+						dynamicFriction: 0.4
 					})
 				);
 				layer.add(world.objects[world.objects.length - 1].getKonvaObject());
@@ -114,8 +120,6 @@
 			world.step(frame.timeDiff);
 			for (const object of world.objects) object.updateKonvaObject();
 		});
-
-		console.log(world.objects[0].vertices);
 		anim.start();
 	});
 </script>

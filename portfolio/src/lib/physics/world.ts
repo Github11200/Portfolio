@@ -24,6 +24,10 @@ export default class World {
     }
   }
 
+  updateGravity() {
+
+  }
+
   step(dt: number) {
     for (let i = 0; i < this.iterations; ++i) {
       for (let object of this.objects)

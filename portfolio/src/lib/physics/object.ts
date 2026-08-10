@@ -1,6 +1,7 @@
 import type { AABB } from "$lib/types";
 import Konva from "konva";
 import Vector2D from "./vector";
+import logo from "../../../static/logo.svg"
 
 type Shape = "Square" | "Hexagon"
 
@@ -47,7 +48,7 @@ export abstract class Object {
 
   vertices: Vector2D[] = []
 
-  konvaObject: Konva.RegularPolygon | Konva.Rect
+  konvaObject: Konva.RegularPolygon | Konva.Rect | Konva.Group
   beingDragged: boolean = false
 
   constructor({
@@ -87,8 +88,11 @@ export abstract class Object {
 
     this.konvaObject = this.createKonvaObject()
 
+    // @ts-ignore
     this.konvaObject.on("dragstart", () => { this.beingDragged = true })
+    // @ts-ignore
     this.konvaObject.on("dragend", () => { this.beingDragged = false })
+    // @ts-ignore
     this.konvaObject.on("dragmove", (e) => {
       this.position.x = e.target.x()
       this.position.y = e.target.y()
@@ -102,15 +106,18 @@ export abstract class Object {
     return this.konvaObject
   }
 
-  abstract createKonvaObject(): Konva.Rect | Konva.RegularPolygon
+  abstract createKonvaObject(): Konva.Rect | Konva.RegularPolygon | Konva.Group
   abstract getRotationalInertia(): number
   abstract generateVertices(): Vector2D[]
 
   updateKonvaObject() {
     this.konvaObject.x(this.position.x)
     this.konvaObject.y(this.position.y)
-    this.konvaObject.fill(this.color)
-    this.konvaObject.stroke("red")
+
+    if (!(this.konvaObject instanceof Konva.Group)) {
+      this.konvaObject.fill(this.color)
+      this.konvaObject.stroke("red")
+    }
     this.konvaObject.rotation(this.rotation * (180 / Math.PI))
 
     if (this.konvaObject instanceof Konva.RegularPolygon)
@@ -202,16 +209,40 @@ export class Box extends Object {
 
 export class Hexagon extends Object {
   createKonvaObject() {
-    return new Konva.RegularPolygon({
-      x: this.position.x,
-      y: this.position.y,
+    const imageObject = new Image()
+    imageObject.src = logo
+
+    const group = new Konva.Group({
+      width: 200,
+      height: 200,
+    })
+
+    const image = new Konva.Image({
+      image: imageObject,
+      x: 0,
+      y: 0,
+      width: this.width * 2,
+      height: this.width * 2,
+      offsetX: this.width,
+      offsetY: this.width,
+      rotation: (Math.PI) / 3
+    })
+
+    const polygon = new Konva.RegularPolygon({
+      x: 0,
+      y: 0,
       fill: this.color,
       stroke: this.color,
       draggable: true,
       sides: 6,
       radius: this.width,
-      rotation: this.rotation
+      rotation: this.rotation,
     });
+
+    group.add(polygon)
+    group.add(image)
+
+    return group
   }
 
   generateVertices(): Vector2D[] {
