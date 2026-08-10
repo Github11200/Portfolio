@@ -3,24 +3,38 @@
 	import { onMount } from 'svelte';
 	import Konva from 'konva';
 	import World from '$lib/physics/world';
-	import { Object } from '$lib/physics/object';
+	import { Box, Hexagon, Object } from '$lib/physics/object';
 	import Vector2D from '$lib/physics/vector';
 
 	const world = new World([
-		new Object(
-			new Vector2D(window.innerWidth / 2, window.innerHeight - 500),
-			new Vector2D(0, 0),
-			0,
-			30,
-			10,
-			0.5,
-			false,
-			50,
-			50,
-			'Square',
-			'green',
-			''
-		),
+		// new Box({
+		// 	position: new Vector2D(window.innerWidth / 2, window.innerHeight - 500),
+		// 	velocity: new Vector2D(0, 0),
+		// 	angularVelocity: 0,
+		// 	rotation: 30,
+		// 	mass: 10,
+		// 	restitution: 0.5,
+		// 	isStatic: false,
+		// 	width: 50,
+		// 	height: 50,
+		// 	shape: 'Square',
+		// 	color: 'green',
+		// 	id: ''
+		// }),
+		new Hexagon({
+			position: new Vector2D(window.innerWidth / 2, 100),
+			velocity: new Vector2D(0, 0),
+			angularVelocity: 0,
+			rotation: Math.PI / 6,
+			mass: 10,
+			restitution: 0.9,
+			isStatic: false,
+			width: 50,
+			height: 50,
+			shape: 'Square',
+			color: 'pink',
+			id: ''
+		}),
 		// new Object(
 		// 	new Vector2D(window.innerWidth / 2 + 80, window.innerHeight - 500),
 		// 	new Vector2D(0, 0),
@@ -35,20 +49,20 @@
 		// 	'green',
 		// 	''
 		// ),
-		new Object(
-			new Vector2D(window.innerWidth / 2, window.innerHeight - 25),
-			new Vector2D(0, 0),
-			0,
-			0,
-			10,
-			0.5,
-			true,
-			window.innerWidth,
-			50,
-			'Square',
-			'pink',
-			''
-		)
+		new Box({
+			position: new Vector2D(window.innerWidth / 2, window.innerHeight - 25),
+			velocity: new Vector2D(0, 0),
+			angularVelocity: 0,
+			rotation: 0,
+			mass: 10,
+			restitution: 0.9,
+			isStatic: true,
+			width: window.innerWidth,
+			height: 50,
+			shape: 'Square',
+			color: 'pink',
+			id: ''
+		})
 	]);
 
 	onMount(async () => {
@@ -74,20 +88,20 @@
 			if (e.key === 'ArrowDown') world.objects[0].applyForce(new Vector2D(0, 5));
 			if (e.key === 'Enter') {
 				world.objects.push(
-					new Object(
-						new Vector2D(400, 100),
-						new Vector2D(0, 0),
-						0,
-						0,
-						10,
-						0.5,
-						false,
-						50,
-						50,
-						'Square',
-						'green',
-						''
-					)
+					new Hexagon({
+						position: new Vector2D(window.innerWidth / 2, 100),
+						velocity: new Vector2D(0, 0),
+						angularVelocity: 0,
+						rotation: Math.PI / 6,
+						mass: 10,
+						restitution: 0.5,
+						isStatic: false,
+						width: 50,
+						height: 50,
+						shape: 'Square',
+						color: 'pink',
+						id: ''
+					})
 				);
 				layer.add(world.objects[world.objects.length - 1].getKonvaObject());
 			}
@@ -101,6 +115,7 @@
 			for (const object of world.objects) object.updateKonvaObject();
 		});
 
+		console.log(world.objects[0].vertices);
 		anim.start();
 	});
 </script>

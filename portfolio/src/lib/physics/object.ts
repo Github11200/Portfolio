@@ -4,7 +4,24 @@ import Vector2D from "./vector";
 
 type Shape = "Square" | "Hexagon"
 
-export class Object {
+interface ObjectProperties {
+  position: Vector2D,
+  velocity: Vector2D,
+  angularVelocity: number,
+  rotation: number,
+  mass: number,
+  restitution: number,
+  isStatic: boolean,
+  shape: Shape,
+  color: string,
+  id: string
+  width: number,
+  height: number,
+  staticFriction: number,
+  dynamicFriction: number
+}
+
+export abstract class Object {
   position: Vector2D = new Vector2D(0, 0)
   velocity: Vector2D = new Vector2D(0, 0)
   angularVelocity: number = 0
@@ -15,6 +32,9 @@ export class Object {
   isStatic: boolean = false
   inertia: number = 0
   inverseInertia: number = 0
+
+  staticFriction: number = 0 // The friction right when you start moving an object
+  dynamicFriction: number = 0 // The friction while the object is moving
 
   force: Vector2D = new Vector2D(0, 0)
 
@@ -30,51 +50,29 @@ export class Object {
   konvaObject: Konva.RegularPolygon | Konva.Rect
   beingDragged: boolean = false
 
-  // TODO: Change the vertices based on the shape type
-  private createKonvaObject() {
-    if (this.shape === "Square") {
-      return new Konva.Rect({
-        x: this.position.x,
-        y: this.position.y,
-        width: this.width,
-        height: this.height,
-        fill: this.color,
-        stroke: this.color,
-        draggable: true,
-        offsetX: this.width / 2,
-        offsetY: this.height / 2
-      })
-    } else {
-      return new Konva.RegularPolygon({
-        x: this.position.x,
-        y: this.position.y,
-        fill: this.color,
-        stroke: this.color,
-        draggable: true,
-        sides: 6,
-        radius: this.width,
-      });
-    }
-  }
-
-  constructor(position: Vector2D,
-    velocity: Vector2D,
-    angularVelocity: number,
-    rotation: number,
-    mass: number,
-    restitution: number,
-    isStatic: boolean,
-    width: number,
-    height: number,
-    shape: Shape,
-    color: string,
-    id: string) {
+  constructor({
+    position,
+    velocity,
+    angularVelocity,
+    rotation,
+    mass,
+    restitution,
+    isStatic,
+    width,
+    height,
+    shape,
+    color,
+    id,
+    staticFriction,
+    dynamicFriction }: ObjectProperties) {
     this.position = position
     this.velocity = velocity
     this.angularVelocity = angularVelocity
     this.rotation = rotation
     this.restitution = restitution
     this.isStatic = isStatic
+    this.staticFriction = staticFriction
+    this.dynamicFriction = dynamicFriction
 
     this.mass = mass
     this.inverseMass = this.isStatic ? 0 : 1 / this.mass
@@ -96,7 +94,6 @@ export class Object {
       this.position.y = e.target.y()
     })
 
-
     this.inertia = this.getRotationalInertia()
     this.inverseInertia = this.isStatic ? 0 : 1 / this.inertia
   }
@@ -105,37 +102,27 @@ export class Object {
     return this.konvaObject
   }
 
-  getRotationalInertia(): number {
-    if (this.shape === "Square")
-      return (1 / 12) * this.mass * (Math.pow(this.height, 2) + Math.pow(this.width, 2))
-    // TODO: Implement moment of inertia for a hexagon
-    return 0
-  }
+  abstract createKonvaObject(): Konva.Rect | Konva.RegularPolygon
+  abstract getRotationalInertia(): number
+  abstract generateVertices(): Vector2D[]
 
   updateKonvaObject() {
-    // TODO: Update the vertices instead of the rotation or position
     this.konvaObject.x(this.position.x)
     this.konvaObject.y(this.position.y)
-    this.konvaObject.width(this.width)
-    this.konvaObject.height(this.height)
     this.konvaObject.fill(this.color)
     this.konvaObject.stroke("red")
     this.konvaObject.rotation(this.rotation * (180 / Math.PI))
+
     if (this.konvaObject instanceof Konva.RegularPolygon)
       this.konvaObject.radius(this.width)
+    else {
+      this.konvaObject.width(this.width)
+      this.konvaObject.height(this.height)
+    }
   }
 
   applyForce(force: Vector2D) {
     this.force = this.force.add(force);
-  }
-
-  generateVertices(): Vector2D[] {
-    return [
-      new Vector2D(-this.width / 2, this.height / 2),
-      new Vector2D(this.width / 2, this.height / 2),
-      new Vector2D(this.width / 2, -this.height / 2),
-      new Vector2D(-this.width / 2, -this.height / 2),
-    ]
   }
 
   // Convert from the local cartesian system for this object to global world coordinates
@@ -181,5 +168,63 @@ export class Object {
   move(v: Vector2D) {
     if (this.isStatic) return
     this.position = this.position.add(v)
+  }
+}
+
+export class Box extends Object {
+  createKonvaObject() {
+    return new Konva.Rect({
+      x: this.position.x,
+      y: this.position.y,
+      width: this.width,
+      height: this.height,
+      fill: this.color,
+      stroke: this.color,
+      draggable: true,
+      offsetX: this.width / 2,
+      offsetY: this.height / 2
+    })
+  }
+
+  generateVertices(): Vector2D[] {
+    return [
+      new Vector2D(-this.width / 2, this.height / 2),
+      new Vector2D(this.width / 2, this.height / 2),
+      new Vector2D(this.width / 2, -this.height / 2),
+      new Vector2D(-this.width / 2, -this.height / 2),
+    ]
+  }
+
+  getRotationalInertia(): number {
+    return (1 / 12) * this.mass * (Math.pow(this.height, 2) + Math.pow(this.width, 2))
+  }
+}
+
+export class Hexagon extends Object {
+  createKonvaObject() {
+    return new Konva.RegularPolygon({
+      x: this.position.x,
+      y: this.position.y,
+      fill: this.color,
+      stroke: this.color,
+      draggable: true,
+      sides: 6,
+      radius: this.width,
+      rotation: this.rotation
+    });
+  }
+
+  generateVertices(): Vector2D[] {
+    let generatedVertices = []
+    for (let i = 0; i < 6; ++i) {
+      const angle = (Math.PI / 3) * i + (Math.PI / 6);
+      generatedVertices.push(new Vector2D(this.width * Math.cos(angle), this.width * Math.sin(angle)))
+    }
+
+    return generatedVertices
+  }
+
+  getRotationalInertia(): number {
+    return (5 / 12) * this.mass * Math.pow(this.width, 2)
   }
 }
