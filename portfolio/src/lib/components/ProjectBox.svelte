@@ -17,7 +17,7 @@
 </script>
 
 <Card.Root
-	class="flex w-full flex-col gap-0 overflow-hidden border border-border bg-card/90 p-0 shadow-none"
+	class="flex w-full flex-col gap-0 overflow-hidden p-0 shadow-none"
 >
 	<div class="aspect-video w-full overflow-hidden bg-muted">
 		<enhanced:img

@@ -7,7 +7,7 @@ image: '/range-queries-part-three/rqp3.jpg'
 
 <script>
   import Link from "$lib/components/ui/Link.svelte"
-  import Katex from 'svelte-katex'
+ import Katex from '$lib/components/Katex.svelte';
 </script>
 
 ## What are Segment Trees?
