@@ -34,7 +34,7 @@
 		class="flex min-h-screen w-screen items-start justify-center px-6 pt-24 pb-8 sm:items-center sm:pt-0 sm:pb-0"
 	>
 		<section
-			class="pointer-events-auto w-full max-w-3xl overflow-hidden rounded-(--radius) p-8 backdrop-blur-sm sm:p-12"
+			class="pointer-events-auto w-full max-w-3xl overflow-hidden rounded-(--radius) backdrop-blur-sm sm:p-12"
 		>
 			<div class="space-y-6">
 				<h1 class="text-2xl font-semibold tracking-tight sm:text-4xl">Jinay Patel</h1>
@@ -96,7 +96,7 @@
 				</div>
 			</div>
 		</section>
-		<footer class="pointer-events-auto absolute bottom-3 left-3">
+		<footer class="pointer-events-auto absolute bottom-3 left-3 text-sm">
 			Custom <a
 				href="https://github.com/Github11200/Portfolio/blob/master/portfolio/src/lib/physics.ts"
 				class="underline"
