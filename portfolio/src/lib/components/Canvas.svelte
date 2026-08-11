@@ -201,7 +201,7 @@
 		window.addEventListener('click', (e) => {
 			const index = getIndex();
 			if (index !== undefined) {
-				objects[index].position = new Vector2D(e.offsetX, e.offsetY);
+				objects[index].position = new Vector2D(e.offsetX, 150);
 				world.objects.push(objects[index]);
 				layer.add(world.objects.at(-1).getKonvaObject());
 			}
