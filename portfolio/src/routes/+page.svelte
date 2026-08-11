@@ -1,28 +1,40 @@
 <script lang="ts">
-	import { Github, Linkedin, FileUser } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
+	import CustomToast from '$lib/components/CustomToast.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import LinkedinOutlineIcon from '@iconify-svelte/basil/linkedin-outline';
+	import GithubLineIcon from '@iconify-svelte/mingcute/github-line';
+	import { FileUser } from '@lucide/svelte';
 	import { onMount } from 'svelte';
+	import { toast } from 'svelte-sonner';
 
 	let CanvasComponent: any = $state();
+	let clicked = false;
 
 	onMount(async () => {
 		const module = await import('$lib/components/Canvas.svelte');
 		CanvasComponent = module.default;
+
+		toast("Try clicking to view technologies I'm familiar with!");
+
+		window.addEventListener('click', () => {
+			if (clicked) return;
+			toast.dismiss();
+		});
 	});
 </script>
 
 {#if CanvasComponent}
-	<div class="fixed z-200 h-screen w-screen">
+	<div class="absolute h-screen w-screen">
 		<CanvasComponent />
 	</div>
 {/if}
-<div class="relative min-h-screen overflow-hidden">
+<div class="pointer-events-none relative z-10 min-h-screen overflow-hidden">
 	<div
 		class="flex min-h-screen w-screen items-start justify-center px-6 pt-24 pb-8 sm:items-center sm:pt-0 sm:pb-0"
 	>
 		<section
-			class="w-full max-w-3xl overflow-hidden rounded-(--radius) p-8 backdrop-blur-sm sm:p-12"
+			class="pointer-events-auto w-full max-w-3xl overflow-hidden rounded-(--radius) p-8 backdrop-blur-sm sm:p-12"
 		>
 			<div class="space-y-6">
 				<h1 class="text-2xl font-semibold tracking-tight sm:text-4xl">Jinay Patel</h1>
@@ -52,13 +64,13 @@
 					<br />
 					If you'd like to reach out then feel free to send me a message on LinkedIn!
 				</p>
-				<div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+				<div class="pointer-events-auto grid grid-cols-2 gap-2 sm:grid-cols-3">
 					<a href="https://github.com/Github11200" target="_blank">
 						<Button
 							variant="card"
 							class="h-full w-full border border-[#080808] hover:bg-[#080808]/3"
 						>
-							<Github size={20} color="#080808" /> Github
+							<GithubLineIcon height="1em" color="#080808" /> Github
 						</Button>
 					</a>
 					<a href="https://www.linkedin.com/in/jinay-patel-6369002b4/" target="_blank">
@@ -66,7 +78,7 @@
 							variant="card"
 							class="h-full w-full border border-[#0072b1] hover:bg-[#0072b1]/3"
 						>
-							<Linkedin size={20} color="#0072B1" /> LinkedIn
+							<LinkedinOutlineIcon height="1em" color="#0072B1" /> LinkedIn
 						</Button>
 					</a>
 					<a
@@ -84,5 +96,8 @@
 				</div>
 			</div>
 		</section>
+		<footer class="absolute bottom-3 left-3">
+			Custom <a>Physics Engine</a> used for the background
+		</footer>
 	</div>
 </div>

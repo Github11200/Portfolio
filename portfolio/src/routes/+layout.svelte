@@ -7,11 +7,14 @@
 	import { dev } from '$app/environment';
 	import { injectAnalytics } from '@vercel/analytics/sveltekit';
 	import 'katex/dist/katex.min.css';
+	import { Toaster } from '$lib/components/ui/sonner/index.js';
 
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
 
 	let { children } = $props();
 </script>
+
+<Toaster position="bottom-center" richColors />
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 <div class="absolute top-0 z-50 w-screen backdrop-blur">

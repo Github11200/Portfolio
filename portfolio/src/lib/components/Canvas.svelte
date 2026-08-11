@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Konva from 'konva';
-	import World from '$lib/physics/world';
-	import { Box, Hexagon } from '$lib/physics/object';
-	import Vector2D from '$lib/physics/vector';
 	import cPlusPlusLogo from '../../../static/cPlusPlusLogo.svg';
 	import cLogo from '../../../static/cLogo.svg';
 	import jsLogo from '../../../static/jsLogo.svg';
 	import pythonLogo from '../../../static/pythonLogo.svg';
 	import gitLogo from '../../../static/gitLogo.svg';
+	import typescriptLogo from '../../../static/typescriptLogo.svg';
+	import svelteLogo from '../../../static/svelteLogo.svg';
+	import { World, Hexagon, Box, Vector2D } from '$lib/physics';
 
 	const objects = [
 		new Hexagon({
-			position: new Vector2D(window.innerWidth / 3, 100),
+			position: new Vector2D(window.innerWidth / 2, 100),
 			velocity: new Vector2D(0, 0),
 			angularVelocity: 0,
 			rotation: Math.PI / 6,
-			mass: 10,
+			mass: 100,
 			restitution: 0.1,
 			isStatic: false,
 			width: 100,
@@ -26,11 +26,11 @@
 			logoSrc: cPlusPlusLogo
 		}),
 		new Hexagon({
-			position: new Vector2D(window.innerWidth / 3, 100),
+			position: new Vector2D(window.innerWidth / 2, 100),
 			velocity: new Vector2D(0, 0),
 			angularVelocity: 0,
 			rotation: Math.PI / 6,
-			mass: 10,
+			mass: 100,
 			restitution: 0.1,
 			isStatic: false,
 			width: 100,
@@ -40,46 +40,74 @@
 			logoSrc: cLogo
 		}),
 		new Box({
-			position: new Vector2D(100, 100),
+			position: new Vector2D(window.innerWidth / 2, 100),
 			velocity: new Vector2D(0, 0),
 			angularVelocity: 0,
 			rotation: 0,
-			mass: 10,
+			mass: 100,
 			restitution: 0.1,
 			isStatic: false,
-			width: 100,
-			height: 100,
+			width: 150,
+			height: 150,
 			staticFriction: 0.9,
-			dynamicFriction: 0.4,
+			dynamicFriction: 0.9,
 			logoSrc: jsLogo
 		}),
 		new Box({
-			position: new Vector2D(100, 100),
+			position: new Vector2D(window.innerWidth / 2, 100),
 			velocity: new Vector2D(0, 0),
 			angularVelocity: 0,
 			rotation: 0,
-			mass: 10,
+			mass: 100,
 			restitution: 0.1,
 			isStatic: false,
-			width: 100,
-			height: 100,
+			width: 150,
+			height: 150,
 			staticFriction: 0.9,
-			dynamicFriction: 0.4,
+			dynamicFriction: 0.9,
 			logoSrc: pythonLogo
 		}),
 		new Box({
-			position: new Vector2D(100, 100),
+			position: new Vector2D(window.innerWidth / 2, 100),
 			velocity: new Vector2D(0, 0),
 			angularVelocity: 0,
 			rotation: 0,
-			mass: 10,
+			mass: 100,
 			restitution: 0.1,
 			isStatic: false,
-			width: 100,
-			height: 100,
+			width: 150,
+			height: 150,
 			staticFriction: 0.9,
-			dynamicFriction: 0.4,
+			dynamicFriction: 0.9,
 			logoSrc: gitLogo
+		}),
+		new Box({
+			position: new Vector2D(window.innerWidth / 2, 100),
+			velocity: new Vector2D(0, 0),
+			angularVelocity: 0,
+			rotation: 0,
+			mass: 100,
+			restitution: 0.1,
+			isStatic: false,
+			width: 150,
+			height: 150,
+			staticFriction: 0.9,
+			dynamicFriction: 0.9,
+			logoSrc: typescriptLogo
+		}),
+		new Box({
+			position: new Vector2D(window.innerWidth / 2, 100),
+			velocity: new Vector2D(0, 0),
+			angularVelocity: 0,
+			rotation: 0,
+			mass: 100,
+			restitution: 0.1,
+			isStatic: false,
+			width: 150,
+			height: 150,
+			staticFriction: 0.9,
+			dynamicFriction: 0.9,
+			logoSrc: svelteLogo
 		})
 	];
 	const availableIndexes = Array.from({ length: objects.length }, (_, index) => index);
@@ -195,12 +223,15 @@
 			}
 		});
 
+		// Add objects when there is a click
 		window.addEventListener('click', (e) => {
 			const index = getIndex();
 			console.log(index);
 			if (index === undefined) {
 			} else {
+				objects[index].position = new Vector2D(e.offsetX, e.offsetY);
 				world.objects.push(objects[index]);
+				// @ts-ignore
 				layer.add(world.objects.at(-1).getKonvaObject());
 			}
 		});
