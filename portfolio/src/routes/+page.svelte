@@ -34,7 +34,7 @@
 		class="flex min-h-screen w-screen items-start justify-center px-6 pt-24 pb-8 sm:items-center sm:pt-0 sm:pb-0"
 	>
 		<section
-			class="pointer-events-auto w-full max-w-3xl overflow-hidden rounded-(--radius) p-8 backdrop-blur-sm sm:p-12"
+			class="pointer-events-auto w-full max-w-3xl overflow-hidden rounded-(--radius) backdrop-blur-sm sm:p-12"
 		>
 			<div class="space-y-6">
 				<h1 class="text-2xl font-semibold tracking-tight sm:text-4xl">Jinay Patel</h1>
@@ -57,9 +57,9 @@
 					that contains algorithms to let robots move to points or follow paths. <br />
 					<br />
 					Feel free to check out some
-					<a href={resolve('/blog')} class="font-bold underline">articles</a>
+					<a href={resolve('/articles')} class="font-bold underline">articles</a>
 					I've written in the past or my other
-					<a href={resolve('/blog')} class="font-bold underline">projects</a>.
+					<a href={resolve('/articles')} class="font-bold underline">projects</a>.
 					<br />
 					<br />
 					If you'd like to reach out then feel free to send me a message on LinkedIn!
@@ -96,8 +96,12 @@
 				</div>
 			</div>
 		</section>
-		<footer class="absolute bottom-3 left-3">
-			Custom <a>Physics Engine</a> used for the background
+		<footer class="pointer-events-auto absolute bottom-3 left-3 text-sm">
+			Custom <a
+				href="https://github.com/Github11200/Portfolio/blob/master/portfolio/src/lib/physics.ts"
+				class="underline"
+				target="_blank">Physics Engine</a
+			> used for the simulation
 		</footer>
 	</div>
 </div>
