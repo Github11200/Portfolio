@@ -57,9 +57,9 @@
 					that contains algorithms to let robots move to points or follow paths. <br />
 					<br />
 					Feel free to check out some
-					<a href={resolve('/blog')} class="font-bold underline">articles</a>
+					<a href={resolve('/articles')} class="font-bold underline">articles</a>
 					I've written in the past or my other
-					<a href={resolve('/blog')} class="font-bold underline">projects</a>.
+					<a href={resolve('/articles')} class="font-bold underline">projects</a>.
 					<br />
 					<br />
 					If you'd like to reach out then feel free to send me a message on LinkedIn!

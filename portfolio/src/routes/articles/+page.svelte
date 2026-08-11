@@ -7,7 +7,7 @@
 		description: post.description,
 		image: post.image,
 		date: post.date,
-		href: `/blog/${post.slug}`
+		href: `/articles/${post.slug}`
 	}));
 	posts.sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)));
 </script>

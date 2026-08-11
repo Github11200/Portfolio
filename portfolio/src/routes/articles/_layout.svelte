@@ -21,7 +21,7 @@
 		<div class="mt-6 flex justify-start">
 			<Button variant="card" class="h-auto p-0">
 				<a
-					href={resolve('/blog')}
+					href={resolve('/articles')}
 					class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium"
 				>
 					← Back to Posts
@@ -49,7 +49,7 @@
 		<div class="mt-12 flex justify-start">
 			<Button variant="card" class="h-auto p-0">
 				<a
-					href={resolve('/blog')}
+					href={resolve('/articles')}
 					class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium"
 				>
 					← Back to Posts

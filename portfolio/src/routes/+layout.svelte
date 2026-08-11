@@ -36,8 +36,8 @@
 					<NavigationMenu.Link class="p-0">
 						<Button variant="card" class="h-auto border-none p-0">
 							<a
-								href={resolve('/blog')}
-								class="block rounded-(--radius) px-4 py-2 text-base sm:px-6 sm:text-lg">Blog</a
+								href={resolve('/articles')}
+								class="block rounded-(--radius) px-4 py-2 text-base sm:px-6 sm:text-lg">Articles</a
 							>
 						</Button>
 					</NavigationMenu.Link>
