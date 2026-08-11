@@ -17,7 +17,7 @@
 <Toaster position="bottom-center" richColors />
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
-<div class="absolute top-0 z-50 w-screen backdrop-blur">
+<div class="pointer-events-auto absolute top-0 z-50 w-screen backdrop-blur">
 	<div class="mx-auto mt-4 flex w-full max-w-6xl items-center px-4 sm:px-6 lg:px-8">
 		<NavigationMenu.Root class="w-full">
 			<NavigationMenu.List class="w-full justify-around gap-4 sm:justify-between sm:gap-8">

@@ -96,8 +96,12 @@
 				</div>
 			</div>
 		</section>
-		<footer class="absolute bottom-3 left-3">
-			Custom <a>Physics Engine</a> used for the background
+		<footer class="pointer-events-auto absolute bottom-3 left-3">
+			Custom <a
+				href="https://github.com/Github11200/Portfolio/blob/master/portfolio/src/lib/physics.ts"
+				class="underline"
+				target="_blank">Physics Engine</a
+			> used for the simulation
 		</footer>
 	</div>
 </div>
