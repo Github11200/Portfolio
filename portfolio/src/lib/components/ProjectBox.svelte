@@ -35,16 +35,16 @@
 			>
 		</div>
 		<div class="mt-4 flex justify-end">
-			<Button variant="card" class="h-auto p-0">
-				<a
-					href={project.href}
-					class="inline-flex items-center gap-2 px-4 py-2"
-					target="_blank"
-					rel="external"
-				>
-					View Project
-					<ArrowUpRight size={16} />
-				</a>
+			<Button
+				variant="outline"
+				href={project.href}
+				target="_blank"
+				rel="external"
+				size="sm"
+				class="gap-2"
+			>
+				View Project
+				<ArrowUpRight size={16} />
 			</Button>
 		</div>
 	</Card.Content>

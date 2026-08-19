@@ -27,7 +27,9 @@ const dirname = path.resolve(fileURLToPath(import.meta.url), "../");
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
-    adapter: adapter({}),
+    adapter: adapter({
+      runtime: 'nodejs22.x'
+    }),
   },
   compilerOptions: {
     runes: true,
