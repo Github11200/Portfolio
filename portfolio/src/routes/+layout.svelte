@@ -111,10 +111,10 @@
 				<Button
 					variant={isActive ? 'default' : 'outline'}
 					href={resolve(link.href as any)}
-					class={`h-auto justify-start gap-3.5 rounded-xl border-2 px-4 py-2.5 transition-all duration-200 hover:scale-[1.02] ${
+					class={`h-auto justify-start gap-3.5 px-4 py-2.5 transition-all duration-200 ${
 						isActive
 							? 'border-foreground/20 bg-foreground text-background hover:bg-foreground/90'
-							: 'border-border bg-card text-card-foreground hover:border-foreground/40 hover:bg-accent hover:text-accent-foreground'
+							: 'border-border bg-card text-card-foreground hover:border-foreground hover:bg-accent hover:text-accent-foreground'
 					}`}
 				>
 					<Badge
