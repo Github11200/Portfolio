@@ -2,8 +2,6 @@
 	import { resolve } from '$app/paths';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { Badge } from '$lib/components/ui/badge/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { ArrowRight } from '@lucide/svelte';
 
 	interface CollageItem {
 		id: string;
@@ -142,29 +140,29 @@
 		}
 	];
 
-	// Duplicate items to ensure smooth continuous infinite looping
 	const loopedItems = [...collageItems, ...collageItems];
 
 	let hoveredItemId = $state<string | null>(null);
-	let activeItem = $derived(
-		hoveredItemId ? collageItems.find((item) => item.id === hoveredItemId) || null : null
-	);
 </script>
 
 <section
-	class="group relative mt-6 select-none overflow-visible py-4"
+	class="group relative overflow-visible py-2 select-none sm:py-3"
 	style="width: 100vw; margin-left: calc(-1 * var(--sidebar-width, 0px));"
 	aria-label="Highlights & Projects Collage Carousel"
 >
 	<!-- Carousel Track Container -->
-	<div class="relative w-full overflow-hidden py-6">
+	<div class="relative w-full overflow-hidden py-8 sm:py-10">
 		<!-- Looping Track -->
-		<div class="carousel-track flex w-max items-center gap-7">
+		<div
+			class="flex w-max animate-collage-marquee items-center gap-8 will-change-transform group-hover:paused motion-reduce:animate-none motion-reduce:overflow-x-auto sm:gap-10"
+		>
 			{#each loopedItems as item, index (`${item.id}-${index}`)}
 				{@const isHovered = hoveredItemId === item.id}
 				<div
-					class="relative transition-transform duration-300 ease-out cursor-pointer focus:outline-none"
-					style="transform: rotate({isHovered ? 0 : item.rotation}deg) scale({isHovered ? 1.05 : 1}); z-index: {isHovered ? 40 : 10};"
+					class="relative cursor-pointer transition-transform duration-300 ease-out focus:outline-none"
+					style="transform: rotate({isHovered ? 0 : item.rotation}deg) scale({isHovered
+						? 1.05
+						: 1}); z-index: {isHovered ? 40 : 10};"
 					onmouseenter={() => (hoveredItemId = item.id)}
 					onmouseleave={() => (hoveredItemId = null)}
 					onfocus={() => (hoveredItemId = item.id)}
@@ -175,17 +173,11 @@
 				>
 					<!-- Polaroid / Collage Card Frame using shadcn Card -->
 					<Card.Root
-						class="relative flex w-64 flex-col rounded-xl border-2 border-border bg-card p-3 shadow-md transition-all duration-300 sm:w-72 hover:shadow-2xl hover:border-foreground/80 gap-0 text-card-foreground"
+						class="relative flex w-80 transform-gpu flex-col gap-0 rounded-2xl border-2 border-border bg-card p-3.5 text-card-foreground transition-all duration-300 backface-hidden hover:border-foreground/80 sm:w-96"
 					>
-						<!-- Washi Tape / Pin Decor on Top -->
-						<div
-							class="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-amber-200/80 border border-amber-300/80 shadow-xs backdrop-blur -rotate-1 rounded-xs pointer-events-none dark:bg-amber-900/40 dark:border-amber-700/50"
-							aria-hidden="true"
-						></div>
-
 						<!-- Image Container -->
 						<div
-							class="relative h-40 w-full overflow-hidden rounded-lg border border-border/60 bg-muted sm:h-44"
+							class="relative h-52 w-full transform-gpu overflow-hidden rounded-xl border border-border/60 bg-muted backface-hidden sm:h-60"
 						>
 							<img
 								src={item.image}
@@ -195,10 +187,10 @@
 							/>
 
 							<!-- Category Tag Overlay Pill on bottom-right of photo -->
-							<div class="absolute right-2 bottom-2">
+							<div class="absolute right-2.5 bottom-2.5">
 								<Badge
 									variant="outline"
-									class={`shadow-xs backdrop-blur-md font-mono text-[10px] px-2 py-0.5 tracking-normal ${item.badgeBg} ${item.badgeText} ${item.badgeBorder}`}
+									class={`px-2.5 py-0.5 font-mono text-[11px] tracking-normal backdrop-blur-md ${item.badgeBg} ${item.badgeText} ${item.badgeBorder}`}
 								>
 									{item.category}
 								</Badge>
@@ -206,95 +198,20 @@
 						</div>
 
 						<!-- Polaroid Bottom Caption Bar -->
-						<div class="mt-2.5 flex items-center justify-between px-1">
-							<span class="truncate font-mono text-xs font-bold text-foreground">
+						<div class="mt-3 flex items-center justify-between px-1">
+							<span class="truncate font-mono text-xs font-bold text-foreground sm:text-sm">
 								{item.caption}
 							</span>
 							<Badge
 								variant="outline"
-								class="font-mono text-[10px] text-muted-foreground border-transparent px-1 py-0"
+								class="border-transparent px-1.5 py-0 font-mono text-[11px] text-muted-foreground"
 							>
 								#{String((index % collageItems.length) + 1).padStart(2, '0')}
 							</Badge>
 						</div>
 					</Card.Root>
-
-					<!-- Hover Context Tooltip Popover using semantic theme variables -->
-					{#if isHovered}
-						<div
-							class="tooltip-popover absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-72 sm:w-80 rounded-xl border-2 border-border bg-popover/95 p-4 text-popover-foreground shadow-2xl backdrop-blur-md z-50 pointer-events-auto animate-in fade-in zoom-in-95 duration-200"
-							role="tooltip"
-						>
-							<!-- Arrow pointer -->
-							<div
-								class="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-8 border-transparent border-t-popover pointer-events-none"
-							></div>
-
-							<div class="flex items-start justify-between gap-2">
-								<h3 class="text-sm font-bold text-foreground leading-tight">
-									{item.title}
-								</h3>
-								<Badge
-									variant="outline"
-									class={`shrink-0 font-mono text-[10px] px-1.5 py-0.5 tracking-normal ${item.badgeBg} ${item.badgeText} ${item.badgeBorder}`}
-								>
-									{item.category}
-								</Badge>
-							</div>
-
-							<p class="mt-2 text-xs leading-relaxed text-muted-foreground">
-								{item.story}
-							</p>
-
-							{#if item.link}
-								<div class="mt-3 pt-2 border-t border-border flex justify-end">
-									<Button
-										variant="ghost"
-										size="xs"
-										href={resolve(item.link as any)}
-										class="gap-1 text-xs text-foreground hover:text-foreground/80 font-medium px-2 h-7"
-									>
-										<span>View related details</span>
-										<ArrowRight class="size-3" />
-									</Button>
-								</div>
-							{/if}
-						</div>
-					{/if}
 				</div>
 			{/each}
 		</div>
 	</div>
 </section>
-
-<style>
-	/* Continuous infinite marquee */
-	.carousel-track {
-		display: flex;
-		width: max-content;
-		animation: collageMarquee 38s linear infinite;
-		will-change: transform;
-	}
-
-	/* Pause entire loop whenever user hovers over the carousel section or any card */
-	section:hover .carousel-track,
-	.carousel-track:hover {
-		animation-play-state: paused !important;
-	}
-
-	@keyframes collageMarquee {
-		0% {
-			transform: translateX(0);
-		}
-		100% {
-			transform: translateX(-50%);
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.carousel-track {
-			animation: none;
-			overflow-x: auto;
-		}
-	}
-</style>

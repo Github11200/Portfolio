@@ -199,3 +199,16 @@
     @apply my-6 ms-4 list-inside list-decimal [&>li]:mt-2;
   }
 }
+
+@theme {
+  --animate-collage-marquee: collage-marquee 38s linear infinite;
+
+  @keyframes collage-marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}

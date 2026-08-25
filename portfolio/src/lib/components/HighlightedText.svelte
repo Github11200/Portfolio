@@ -11,7 +11,7 @@
 		yellow: 'bg-yellow-100'
 	};
 
-	let className = $derived(`text-primary-background p-1 ${bgColors[color] || 'bg-red-200'}`);
+	let className = $derived(`text-primary-background p-1 px-2 ${bgColors[color] || 'bg-red-200'}`);
 </script>
 
 <mark class={className}>{text}</mark>
