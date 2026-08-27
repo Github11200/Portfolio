@@ -1,7 +1,15 @@
 <script lang="ts">
+	import Tooltip from './ui/tooltip/tooltip.svelte';
+	import TooltipContent from './ui/tooltip/tooltip-content.svelte';
+	import TooltipTrigger from './ui/tooltip/tooltip-trigger.svelte';
+
 	type HighlightColor = 'red' | 'blue' | 'green' | 'yellow';
 
-	let { color = 'red', text }: { color?: HighlightColor; text: string } = $props();
+	let {
+		color = 'red',
+		text,
+		imgSrc
+	}: { color?: HighlightColor; text: string; imgSrc: string } = $props();
 
 	// Tailwind can read these full strings during build-time
 	const bgColors: Record<HighlightColor, string> = {
@@ -11,7 +19,16 @@
 		yellow: 'bg-yellow-100'
 	};
 
-	let className = $derived(`text-primary-background p-1 px-2 ${bgColors[color] || 'bg-red-200'}`);
+	let className = $derived(
+		`text-primary-background hover:cursor-text p-1 px-2 ${bgColors[color] || 'bg-red-200'}`
+	);
 </script>
 
-<mark class={className}>{text}</mark>
+<Tooltip>
+	<TooltipTrigger>
+		<mark class={className}>{text}</mark>
+	</TooltipTrigger>
+	<TooltipContent class="p-1">
+		<img src={imgSrc} alt="" class="rounded-[calc(var(--radius)-0.25rem)]" />
+	</TooltipContent>
+</Tooltip>

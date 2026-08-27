@@ -28,7 +28,9 @@
 				← Back to Posts
 			</Button>
 		</div>
-		<Card.Root class="mx-auto mt-4 mb-6 overflow-hidden border border-border bg-card shadow-none">
+		<Card.Root
+			class="mx-auto mt-4 mb-6 overflow-hidden rounded-(--radius) border border-border bg-card shadow-none"
+		>
 			{#if image}
 				<enhanced:img src={image} alt={title} loading="lazy" class="h-96 w-full object-cover" />
 			{/if}

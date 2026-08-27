@@ -173,11 +173,11 @@
 				>
 					<!-- Polaroid / Collage Card Frame using shadcn Card -->
 					<Card.Root
-						class="relative flex w-80 transform-gpu flex-col gap-0 rounded-2xl border-2 border-border bg-card p-3.5 text-card-foreground transition-all duration-300 backface-hidden hover:border-foreground/80 sm:w-96"
+						class="relative flex w-80 transform-gpu flex-col gap-0 rounded-[calc(var(--radius)+0.875rem)] bg-card p-3.5 text-card-foreground transition-all duration-300 backface-hidden hover:border-foreground/80 sm:w-96"
 					>
 						<!-- Image Container -->
 						<div
-							class="relative h-52 w-full transform-gpu overflow-hidden rounded-xl border border-border/60 bg-muted backface-hidden sm:h-60"
+							class="relative h-52 w-full transform-gpu overflow-hidden rounded-(--radius) bg-muted backface-hidden sm:h-60"
 						>
 							<img
 								src={item.image}
@@ -214,4 +214,17 @@
 			{/each}
 		</div>
 	</div>
+
+	<script
+		id="waterlooNetwork"
+		src="https://uwaterloo.network/embed.js"
+		data-webring
+		data-user="your-name"
+	></script>
 </section>
+
+<style>
+	:global(.uwaterloo-webring-wrapper) {
+		justify-content: center;
+	}
+</style>

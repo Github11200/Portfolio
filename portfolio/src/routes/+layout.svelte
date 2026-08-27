@@ -71,7 +71,7 @@
 							target="_blank"
 							rel="noopener noreferrer"
 							class={cn(
-								`size-10 rounded-full border-2 border-border bg-card text-card-foreground transition-all duration-200 hover:scale-110 hover:border-foreground/80 sm:size-11`,
+								`size-10 rounded-full border-border bg-card text-card-foreground transition-all duration-200 hover:scale-110 hover:border-foreground/80 sm:size-11`,
 								`hover:bg-[${color}]`
 							)}
 						>
@@ -92,46 +92,45 @@
 			</Tooltip.Root>
 		{/each}
 	</div>
-</Tooltip.Provider>
-
-<div
-	class="grid min-h-screen w-full grid-cols-[auto_1fr] justify-items-start overflow-x-hidden bg-background text-foreground"
-	style="--sidebar-width: {asideWidth}px;"
->
-	<!-- Sidebar Navigation -->
-	<aside
-		bind:clientWidth={asideWidth}
-		class="sticky top-0 z-20 flex w-auto flex-col justify-start p-4 sm:p-6"
+	<div
+		class="grid min-h-screen w-full grid-cols-[auto_1fr] justify-items-start overflow-x-hidden bg-background text-foreground"
+		style="--sidebar-width: {asideWidth}px;"
 	>
-		<nav class="flex w-fit flex-col gap-2.5">
-			{#each navLinks as link}
-				{@const isActive =
-					page.url.pathname === link.href ||
-					(link.href !== '/' && page.url.pathname.startsWith(link.href))}
-				<Button
-					variant={isActive ? 'default' : 'outline'}
-					href={resolve(link.href as any)}
-					class={`h-auto justify-start gap-3.5 px-4 py-2.5 transition-all duration-200 ${
-						isActive
-							? 'border-foreground/20 bg-foreground text-background hover:bg-foreground/90'
-							: 'border-border bg-card text-card-foreground hover:border-foreground hover:bg-accent hover:text-accent-foreground'
-					}`}
-				>
-					<Badge
+		<!-- Sidebar Navigation -->
+		<aside
+			bind:clientWidth={asideWidth}
+			class="sticky top-0 z-20 flex w-auto flex-col justify-start p-4 sm:p-6"
+		>
+			<nav class="flex w-fit flex-col gap-2.5">
+				{#each navLinks as link}
+					{@const isActive =
+						page.url.pathname === link.href ||
+						(link.href !== '/' && page.url.pathname.startsWith(link.href))}
+					<Button
 						variant={isActive ? 'default' : 'outline'}
-						class={`font-mono text-xs tracking-normal ${
-							isActive ? 'text-background opacity-80' : 'text-muted-foreground opacity-60'
+						href={resolve(link.href as any)}
+						class={`h-auto justify-start gap-3.5 px-4 py-2.5 transition-all duration-200 ${
+							isActive
+								? 'border-foreground/20 bg-foreground text-background hover:bg-foreground/90'
+								: 'border-border bg-card text-card-foreground hover:border-foreground hover:bg-accent hover:text-accent-foreground'
 						}`}
 					>
-						{link.badge}
-					</Badge>
-					<span class="text-sm font-bold tracking-tight sm:text-base">{link.name}</span>
-				</Button>
-			{/each}
-		</nav>
-	</aside>
+						<Badge
+							variant={isActive ? 'default' : 'outline'}
+							class={`font-mono text-xs tracking-normal ${
+								isActive ? 'text-background opacity-80' : 'text-muted-foreground opacity-60'
+							}`}
+						>
+							{link.badge}
+						</Badge>
+						<span class="text-sm font-bold tracking-tight sm:text-base">{link.name}</span>
+					</Button>
+				{/each}
+			</nav>
+		</aside>
 
-	<main class="flex h-full w-full min-w-0 flex-col justify-start">
-		{@render children()}
-	</main>
-</div>
+		<main class="flex h-full w-full min-w-0 flex-col justify-start">
+			{@render children()}
+		</main>
+	</div>
+</Tooltip.Provider>

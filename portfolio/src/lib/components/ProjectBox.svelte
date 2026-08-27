@@ -16,9 +16,7 @@
 	const { project, index = 0 }: Props = $props();
 </script>
 
-<Card.Root
-	class="flex w-full flex-col gap-0 overflow-hidden p-0 shadow-none"
->
+<Card.Root class="flex w-full flex-col gap-0 overflow-hidden p-0 shadow-none">
 	<div class="aspect-video w-full overflow-hidden bg-muted">
 		<enhanced:img
 			src={project.image}

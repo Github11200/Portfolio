@@ -14,7 +14,7 @@
 	const { post }: Props = $props();
 </script>
 
-<Card.Root class="overflow-hidden border-border bg-card/90 py-0 shadow-none">
+<Card.Root class="overflow-hidden bg-card py-0 shadow-none">
 	<div class="group block transition-colors">
 		<div class="flex flex-col md:flex-row">
 			<div
