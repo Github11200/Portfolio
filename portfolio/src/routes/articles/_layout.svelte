@@ -16,19 +16,21 @@
 	/>
 </svelte:head>
 
-<div class="relative min-h-screen overflow-hidden">
+<div class="relative flex-1 flex flex-col overflow-hidden">
 	<section class="relative mx-auto w-full max-w-4xl px-6 py-16 sm:px-8">
 		<div class="mt-6 flex justify-start">
-			<Button variant="card" class="h-auto p-0">
-				<a
-					href={resolve('/articles')}
-					class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium"
-				>
-					← Back to Posts
-				</a>
+			<Button
+				variant="outline"
+				href={resolve('/articles')}
+				size="sm"
+				class="gap-2 text-sm font-medium"
+			>
+				← Back to Posts
 			</Button>
 		</div>
-		<Card.Root class="mx-auto mt-4 mb-6 overflow-hidden border border-border bg-card shadow-none">
+		<Card.Root
+			class="mx-auto mt-4 mb-6 overflow-hidden rounded-(--radius) border border-border bg-card shadow-none"
+		>
 			{#if image}
 				<enhanced:img src={image} alt={title} loading="lazy" class="h-96 w-full object-cover" />
 			{/if}
@@ -47,13 +49,13 @@
 
 		<!-- Back Link -->
 		<div class="mt-12 flex justify-start">
-			<Button variant="card" class="h-auto p-0">
-				<a
-					href={resolve('/articles')}
-					class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium"
-				>
-					← Back to Posts
-				</a>
+			<Button
+				variant="outline"
+				href={resolve('/articles')}
+				size="sm"
+				class="gap-2 text-sm font-medium"
+			>
+				← Back to Posts
 			</Button>
 		</div>
 	</section>

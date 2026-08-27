@@ -6,5 +6,6 @@
     "lexend"
   ],
   "editor.tabSize": 2,
-  "debug.allowBreakpointsEverywhere": true
+  "debug.allowBreakpointsEverywhere": true,
+  "vim.useSystemClipboard": true
 }
