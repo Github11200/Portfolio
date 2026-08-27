@@ -20,12 +20,12 @@
 	};
 
 	let className = $derived(
-		`text-primary-background hover:cursor-text p-1 px-2 ${bgColors[color] || 'bg-red-200'}`
+		`text-primary-background text-wrap whitespace-normal hover:cursor-text p-1 px-2 ${bgColors[color] || 'bg-red-200'}`
 	);
 </script>
 
 <Tooltip>
-	<TooltipTrigger>
+	<TooltipTrigger class="whitespace-normal inline-block">
 		<mark class={className}>{text}</mark>
 	</TooltipTrigger>
 	<TooltipContent class="p-1">

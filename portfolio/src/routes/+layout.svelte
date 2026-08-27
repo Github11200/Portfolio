@@ -12,7 +12,8 @@
 	import { Toaster } from '$lib/components/ui/sonner/index.js';
 	import LinkedinOutlineIcon from '@iconify-svelte/basil/linkedin-outline';
 	import GithubLineIcon from '@iconify-svelte/mingcute/github-line';
-	import { FileUser } from '@lucide/svelte';
+	// Added Menu and X icons for the mobile toggle
+	import { FileUser, Menu, X } from '@lucide/svelte';
 	import { cn } from '$lib/utils';
 
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
@@ -20,6 +21,8 @@
 	let { children } = $props();
 
 	let asideWidth = $state(0);
+	// State for mobile menu
+	let isMobileMenuOpen = $state(false);
 
 	const navLinks = [
 		{ name: 'Home', href: resolve('/'), badge: '// 01' },
@@ -28,6 +31,7 @@
 	];
 
 	const connectLinks = [
+		// ... keep your connectLinks exactly the same ...
 		{
 			href: 'https://github.com/Github11200',
 			ariaLabel: 'GitHub',
@@ -57,7 +61,7 @@
 
 <Tooltip.Provider>
 	<!-- Top Right Connect Links (Circular Icons with Tooltips) -->
-	<div class="fixed top-5 right-5 z-50 flex items-center gap-2.5 sm:top-6 sm:right-8 sm:gap-3">
+	<div class="absolute top-5 right-5 z-50 flex items-center gap-2.5 sm:top-6 sm:right-8 sm:gap-3">
 		{#each connectLinks as connectLink}
 			<Tooltip.Root>
 				<Tooltip.Trigger>
@@ -79,29 +83,53 @@
 
 							<IconComponent
 								height="1.3em"
-								class="t ransition-transform group-hover:scale-110"
+								class="transition-transform group-hover:scale-110"
 								color={connectLink.color}
 							/>
 						</Button>
 					{/snippet}
 				</Tooltip.Trigger>
 
-				<Tooltip.Content side="bottom" class="font-mono text-xs"
-					>{connectLink.ariaLabel}
+				<Tooltip.Content side="bottom" class="font-mono text-xs">
+					{connectLink.ariaLabel}
 				</Tooltip.Content>
 			</Tooltip.Root>
 		{/each}
 	</div>
+
+	<!-- Changed: Use flex-col on mobile, grid on sm+ screens -->
 	<div
-		class="grid min-h-screen w-full grid-cols-[auto_1fr] justify-items-start overflow-x-hidden bg-background text-foreground"
+		class="flex min-h-screen w-full flex-col overflow-x-hidden bg-background text-foreground sm:grid sm:grid-cols-[auto_1fr] sm:grid-rows-[1fr_auto]"
 		style="--sidebar-width: {asideWidth}px;"
 	>
 		<!-- Sidebar Navigation -->
 		<aside
 			bind:clientWidth={asideWidth}
-			class="sticky top-0 z-20 flex w-auto flex-col justify-start p-4 sm:p-6"
+			class="sticky top-0 z-20 flex w-full flex-col justify-start bg-background/95 p-4 backdrop-blur sm:pointer-events-none sm:w-auto sm:bg-transparent sm:p-6 sm:backdrop-blur-none"
 		>
-			<nav class="flex w-fit flex-col gap-2.5">
+			<!-- Hamburger Menu Button (Mobile Only) -->
+			<div class="pointer-events-auto mb-2 flex w-full justify-start sm:hidden">
+				<Button
+					variant="outline"
+					size="icon"
+					class="size-10 border-border bg-card text-card-foreground"
+					onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}
+					aria-label="Toggle Menu"
+				>
+					{#if isMobileMenuOpen}
+						<X class="size-5" />
+					{:else}
+						<Menu class="size-5" />
+					{/if}
+				</Button>
+			</div>
+
+			<!-- Navigation Links Container (Overlay on mobile when open) -->
+			<nav
+				class="{isMobileMenuOpen
+					? 'absolute top-16 left-4 z-50 flex rounded-xl border border-border bg-card p-3 shadow-xl'
+					: 'hidden'} pointer-events-auto w-fit flex-col gap-2.5 sm:static sm:flex sm:rounded-none sm:border-none sm:bg-transparent sm:p-0 sm:shadow-none"
+			>
 				{#each navLinks as link}
 					{@const isActive =
 						page.url.pathname === link.href ||
@@ -129,8 +157,20 @@
 			</nav>
 		</aside>
 
-		<main class="flex h-full w-full min-w-0 flex-col justify-start">
+		<main class="relative z-10 flex min-h-0 w-full min-w-0 flex-1 flex-col">
 			{@render children()}
 		</main>
+
+		<!-- Waterloo Network Widget Container -->
+		<div class="my-6 flex origin-center scale-75 justify-center col-span-full">
+			<script
+				id="waterlooNetwork"
+				src="https://uwaterloo.network/embed.js"
+				data-webring
+				data-user="Jinay Patel"
+				data-align="center"
+			>
+			</script>
+		</div>
 	</div>
 </Tooltip.Provider>

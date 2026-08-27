@@ -24,7 +24,7 @@
 			href: 'https://github.com/Github11200/Posturai'
 		},
 		{
-			name: 'Autonomous Motions Template',
+			name: 'Custom Motion Control Framework',
 			description:
 				'A template written in C++ that allows a robot to do autonomous motions like driving to points or following paths.',
 			image: '/project-images/robot.png',
@@ -40,8 +40,8 @@
 	] as const;
 </script>
 
-<div class="relative min-h-screen overflow-hidden">
-	<section class="relative mx-auto w-full max-w-6xl px-6 pt-28 pb-16 sm:px-8">
+<div class="relative flex-1 flex flex-col">
+	<section class="relative mx-auto w-full max-w-4xl px-6 sm:pt-28 pb-16 sm:px-8">
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 			{#each projects as project, index (index)}
 				<ProjectBox {project} {index} />
