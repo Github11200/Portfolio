@@ -13,7 +13,7 @@
 	import LinkedinOutlineIcon from '@iconify-svelte/basil/linkedin-outline';
 	import GithubLineIcon from '@iconify-svelte/mingcute/github-line';
 	// Added Menu and X icons for the mobile toggle
-	import { FileUser, Menu, X } from '@lucide/svelte';
+	import { FileUser, LibraryBig, Menu, X } from '@lucide/svelte';
 	import { cn } from '$lib/utils';
 
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
@@ -31,7 +31,12 @@
 	];
 
 	const connectLinks = [
-		// ... keep your connectLinks exactly the same ...
+		{
+			href: 'https://hardcover.app/@igbig',
+			ariaLabel: 'Books',
+			icon: LibraryBig,
+			color: '#6366f1'
+		},
 		{
 			href: 'https://github.com/Github11200',
 			ariaLabel: 'GitHub',
@@ -49,7 +54,7 @@
 			ariaLabel: 'Resume',
 			icon: FileUser,
 			color: '#b51208'
-		}
+		},
 	];
 </script>
 
