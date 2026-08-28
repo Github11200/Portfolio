@@ -50,7 +50,7 @@
 			color: '#0072B1'
 		},
 		{
-			href: 'https://drive.google.com/file/d/1umUoKVOtOqldoiI5ccnjN55PszYAxzwC/view?usp=sharing',
+			href: 'https://drive.google.com/file/d/1nYS3qjF_-0Q5r5N_GHFr-nauUQ3iro2m/view?usp=sharing',
 			ariaLabel: 'Resume',
 			icon: FileUser,
 			color: '#b51208'
