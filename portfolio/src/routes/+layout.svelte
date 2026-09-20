@@ -50,11 +50,11 @@
 			color: '#0072B1'
 		},
 		{
-			href: 'https://drive.google.com/file/d/1nYS3qjF_-0Q5r5N_GHFr-nauUQ3iro2m/view?usp=sharing',
+			href: 'https://drive.google.com/file/d/1CT7ZAGSOG635BG8Trk7xspCoZTdowuqN/view?usp=sharing',
 			ariaLabel: 'Resume',
 			icon: FileUser,
 			color: '#b51208'
-		},
+		}
 	];
 </script>
 
@@ -167,7 +167,7 @@
 		</main>
 
 		<!-- Waterloo Network Widget Container -->
-		<div class="my-6 flex origin-center scale-75 justify-center col-span-full">
+		<div class="col-span-full my-6 flex origin-center scale-75 justify-center">
 			<script
 				id="waterlooNetwork"
 				src="https://uwaterloo.network/embed.js"
