@@ -1,0 +1,152 @@
+- generic [ref=f10e2]:
+  - region "Notifications alt+T"
+  - generic [ref=f10e3]:
+    - banner [ref=f10e4]:
+      - generic [ref=f10e5]:
+        - generic [ref=f10e6]:
+          - link "jinay patel" [ref=f10e7] [cursor=pointer]:
+            - /url: ./
+          - navigation [ref=f10e8]:
+            - link "1 home" [ref=f10e9] [cursor=pointer]:
+              - /url: .//
+              - generic [ref=f10e10]: "1"
+              - generic [ref=f10e11]: home
+            - link "2 articles" [ref=f10e12] [cursor=pointer]:
+              - /url: ./articles
+              - generic [ref=f10e13]: "2"
+              - generic [ref=f10e14]: articles
+            - link "3 projects" [ref=f10e15] [cursor=pointer]:
+              - /url: ./projects
+              - generic [ref=f10e16]: "3"
+              - generic [ref=f10e17]: projects
+        - generic [ref=f10e18]:
+          - link [ref=f10e19] [cursor=pointer]:
+            - /url: https://hardcover.app/@igbig
+          - link [ref=f10e23] [cursor=pointer]:
+            - /url: https://github.com/Github11200
+          - link [ref=f10e27] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/jinay-patel-6369002b4/
+          - link [ref=f10e30] [cursor=pointer]:
+            - /url: https://drive.google.com/file/d/1CT7ZAGSOG635BG8Trk7xspCoZTdowuqN/view?usp=sharing
+          - button "Toggle theme" [ref=f10e37] [cursor=pointer]
+    - main [ref=f10e40]:
+      - generic [ref=f10e41]:
+        - generic [ref=f10e42]:
+          - generic [ref=f10e43]:
+            - heading "Jinay Patel" [level=1] [ref=f10e44]
+            - paragraph [ref=f10e45]:
+              - text: Computer Engineering @
+              - button [ref=f10e46]:
+                - mark [ref=f10e47]: UWaterloo
+          - generic [ref=f10e48]:
+            - paragraph [ref=f10e49]:
+              - text: ">Won the"
+              - button [ref=f10e50]:
+                - mark [ref=f10e51]: Vex Robotics World Championship
+              - text: (out of 15,000+ teams)
+            - paragraph [ref=f10e52]:
+              - text: "> Created my own programming language"
+              - button [ref=f10e53]:
+                - mark [ref=f10e54]: verbosity
+            - paragraph [ref=f10e55]:
+              - text: ">Built"
+              - button [ref=f10e56]:
+                - mark [ref=f10e57]: Posturai
+              - text: ", a posture correction app (hackathon winner)"
+            - paragraph [ref=f10e58]:
+              - text: ">Developed a custom"
+              - button [ref=f10e59]:
+                - mark [ref=f10e60]: motion control framework
+              - text: and secured a 100% autonomous win rate
+            - paragraph [ref=f10e61]:
+              - text: ">I use"
+              - button [ref=f10e62]:
+                - mark [ref=f10e63]: Arch Linux
+              - text: ", btw"
+        - generic [ref=f10e67]:
+          - link "Excellence Award @ World Championship Excellence Award @ World Championship" [ref=f10e68] [cursor=pointer]:
+            - /url: https://www.deltasd.bc.ca/news-events/news/seaquam-robotics-wins-prestigious-international-award/
+            - generic [ref=f10e69]:
+              - img "Excellence Award @ World Championship" [ref=f10e71]
+              - generic [ref=f10e72]: Excellence Award @ World Championship
+          - link "Custom Compiler Custom Compiler" [ref=f10e73] [cursor=pointer]:
+            - /url: /articles/creating-verbosity
+            - generic [ref=f10e74]:
+              - img "Custom Compiler" [ref=f10e76]
+              - generic [ref=f10e77]: Custom Compiler
+          - link "Posture Correction Software Posture Correction Software" [ref=f10e78] [cursor=pointer]:
+            - /url: https://posturai.vercel.app/
+            - generic [ref=f10e79]:
+              - img "Posture Correction Software" [ref=f10e81]
+              - generic [ref=f10e82]: Posture Correction Software
+          - link "Tetris in C in the Terminal Tetris in C in the Terminal" [ref=f10e83] [cursor=pointer]:
+            - /url: /articles/creating-citrus
+            - generic [ref=f10e84]:
+              - img "Tetris in C in the Terminal" [ref=f10e86]
+              - generic [ref=f10e87]: Tetris in C in the Terminal
+          - link "Custom Motion Control Framework Custom Motion Control Framework" [ref=f10e88] [cursor=pointer]:
+            - /url: https://github.com/Github11200/Motion-Control-Framework
+            - generic [ref=f10e89]:
+              - img "Custom Motion Control Framework" [ref=f10e91]
+              - generic [ref=f10e92]: Custom Motion Control Framework
+          - link "Raw TCP Sockets Chat App in C++ Raw TCP Sockets Chat App in C++" [ref=f10e93] [cursor=pointer]:
+            - /url: https://github.com/Github11200/Termicord
+            - generic [ref=f10e94]:
+              - img "Raw TCP Sockets Chat App in C++" [ref=f10e96]
+              - generic [ref=f10e97]: Raw TCP Sockets Chat App in C++
+          - link "Range Queries Visualized Article Range Queries Visualized Article" [ref=f10e98] [cursor=pointer]:
+            - /url: /articles/range-queries-part-one
+            - generic [ref=f10e99]:
+              - img "Range Queries Visualized Article" [ref=f10e101]
+              - generic [ref=f10e102]: Range Queries Visualized Article
+          - link "Omarchy Setup Omarchy Setup" [ref=f10e103] [cursor=pointer]:
+            - /url: https://github.com/Github11200/Custom-Omarchy-Config
+            - generic [ref=f10e104]:
+              - img "Omarchy Setup" [ref=f10e106]
+              - generic [ref=f10e107]: Omarchy Setup
+          - link "Excellence Award @ World Championship Excellence Award @ World Championship" [ref=f10e108] [cursor=pointer]:
+            - /url: https://www.deltasd.bc.ca/news-events/news/seaquam-robotics-wins-prestigious-international-award/
+            - generic [ref=f10e109]:
+              - img "Excellence Award @ World Championship" [ref=f10e111]
+              - generic [ref=f10e112]: Excellence Award @ World Championship
+          - link "Custom Compiler Custom Compiler" [ref=f10e113] [cursor=pointer]:
+            - /url: /articles/creating-verbosity
+            - generic [ref=f10e114]:
+              - img "Custom Compiler" [ref=f10e116]
+              - generic [ref=f10e117]: Custom Compiler
+          - link "Posture Correction Software Posture Correction Software" [ref=f10e118] [cursor=pointer]:
+            - /url: https://posturai.vercel.app/
+            - generic [ref=f10e119]:
+              - img "Posture Correction Software" [ref=f10e121]
+              - generic [ref=f10e122]: Posture Correction Software
+          - link "Tetris in C in the Terminal Tetris in C in the Terminal" [ref=f10e123] [cursor=pointer]:
+            - /url: /articles/creating-citrus
+            - generic [ref=f10e124]:
+              - img "Tetris in C in the Terminal" [ref=f10e126]
+              - generic [ref=f10e127]: Tetris in C in the Terminal
+          - link "Custom Motion Control Framework Custom Motion Control Framework" [ref=f10e128] [cursor=pointer]:
+            - /url: https://github.com/Github11200/Motion-Control-Framework
+            - generic [ref=f10e129]:
+              - img "Custom Motion Control Framework" [ref=f10e131]
+              - generic [ref=f10e132]: Custom Motion Control Framework
+          - link "Raw TCP Sockets Chat App in C++ Raw TCP Sockets Chat App in C++" [ref=f10e133] [cursor=pointer]:
+            - /url: https://github.com/Github11200/Termicord
+            - generic [ref=f10e134]:
+              - img "Raw TCP Sockets Chat App in C++" [ref=f10e136]
+              - generic [ref=f10e137]: Raw TCP Sockets Chat App in C++
+          - link "Range Queries Visualized Article Range Queries Visualized Article" [ref=f10e138] [cursor=pointer]:
+            - /url: /articles/range-queries-part-one
+            - generic [ref=f10e139]:
+              - img "Range Queries Visualized Article" [ref=f10e141]
+              - generic [ref=f10e142]: Range Queries Visualized Article
+          - link "Omarchy Setup Omarchy Setup" [ref=f10e143] [cursor=pointer]:
+            - /url: https://github.com/Github11200/Custom-Omarchy-Config
+            - generic [ref=f10e144]:
+              - img "Omarchy Setup" [ref=f10e146]
+              - generic [ref=f10e147]: Omarchy Setup
+    - generic [ref=f10e150]:
+      - button "←" [ref=f10e151] [cursor=pointer]
+      - link [ref=f10e152] [cursor=pointer]:
+        - /url: https://www.uwaterloo.network?ref=Jinay%20Patel
+        - img "UWaterloo Webring" [ref=f10e153]
+      - button "→" [ref=f10e154] [cursor=pointer]

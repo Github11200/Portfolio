@@ -13,7 +13,7 @@
 </script>
 
 <div class="relative flex-1 flex flex-col">
-	<section class="relative mx-auto w-full max-w-6xl px-6 sm:pt-28 pb-16 sm:px-8">
+	<section class="relative mx-auto w-full max-w-6xl px-6 pt-8 pb-16 sm:px-8 sm:pt-12">
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-1">
 			{#each posts as post, i (i)}
 				<BlogPostBox {post} />

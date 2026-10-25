@@ -20,7 +20,7 @@
 	};
 
 	let className = $derived(
-		`text-primary-background text-wrap whitespace-normal hover:cursor-text p-1 px-2 ${bgColors[color] || 'bg-red-200'}`
+		`text-foreground text-wrap whitespace-normal hover:cursor-text p-1 px-2 ${bgColors[color] || 'bg-red-200'}`
 	);
 </script>
 
@@ -28,7 +28,7 @@
 	<TooltipTrigger class="whitespace-normal inline-block">
 		<mark class={className}>{text}</mark>
 	</TooltipTrigger>
-	<TooltipContent class="p-1">
-		<img src={imgSrc} alt="" class="rounded-[calc(var(--radius)-0.25rem)]" />
+	<TooltipContent class="border-0 bg-transparent p-0 shadow-none" arrowClasses="hidden">
+		<img src={imgSrc} alt="" />
 	</TooltipContent>
 </Tooltip>

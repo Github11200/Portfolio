@@ -1,0 +1,79 @@
+- generic [ref=f1e2]:
+  - region "Notifications alt+T"
+  - generic [ref=f1e3]:
+    - banner [ref=f1e4]:
+      - generic [ref=f1e5]:
+        - generic [ref=f1e6]:
+          - link "jinay patel" [ref=f1e7] [cursor=pointer]:
+            - /url: ./
+          - navigation [ref=f1e8]:
+            - link "1 home" [ref=f1e9] [cursor=pointer]:
+              - /url: .//
+              - generic [ref=f1e10]: "1"
+              - generic [ref=f1e11]: home
+            - link "2 articles" [ref=f1e12] [cursor=pointer]:
+              - /url: ./articles
+              - generic [ref=f1e13]: "2"
+              - generic [ref=f1e14]: articles
+            - link "3 projects" [ref=f1e15] [cursor=pointer]:
+              - /url: ./projects
+              - generic [ref=f1e16]: "3"
+              - generic [ref=f1e17]: projects
+        - generic [ref=f1e18]:
+          - link [ref=f1e19] [cursor=pointer]:
+            - /url: https://hardcover.app/@igbig
+          - link [ref=f1e20] [cursor=pointer]:
+            - /url: https://github.com/Github11200
+          - link [ref=f1e21] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/jinay-patel-6369002b4/
+          - link [ref=f1e22] [cursor=pointer]:
+            - /url: https://drive.google.com/file/d/1CT7ZAGSOG635BG8Trk7xspCoZTdowuqN/view?usp=sharing
+          - button "Toggle theme" [ref=f1e24]
+    - main [ref=f1e25]:
+      - generic [ref=f1e28]:
+        - generic [ref=f1e31]:
+          - img "How I Made my Own Programming Language — Verbosity" [ref=f1e33]
+          - generic [ref=f1e34]:
+            - generic [ref=f1e35]:
+              - generic [ref=f1e36]: How I Made my Own Programming Language — Verbosity
+              - paragraph [ref=f1e37]: An explanation of how my compiler compiles my own programming into C++.
+            - link "View Post" [ref=f1e38] [cursor=pointer]:
+              - /url: /articles/creating-verbosity
+        - generic [ref=f1e41]:
+          - img "Creating Citrus 🍋 - Tetris Written in C" [ref=f1e43]
+          - generic [ref=f1e44]:
+            - generic [ref=f1e45]:
+              - generic [ref=f1e46]: Creating Citrus 🍋 - Tetris Written in C
+              - paragraph [ref=f1e47]: My short little journey of creating Tetris in the terminal using C and its standard library.
+            - link "View Post" [ref=f1e48] [cursor=pointer]:
+              - /url: /articles/creating-citrus
+        - generic [ref=f1e51]:
+          - 'img "Range Queries, visualized (Part 3: Segment Trees)" [ref=f1e53]'
+          - generic [ref=f1e54]:
+            - generic [ref=f1e55]:
+              - generic [ref=f1e56]: "Range Queries, visualized (Part 3: Segment Trees)"
+              - paragraph [ref=f1e57]: A quick dive into Segment Trees.
+            - link "View Post" [ref=f1e58] [cursor=pointer]:
+              - /url: /articles/range-queries-part-three
+        - generic [ref=f1e61]:
+          - 'img "Range Queries, visualized (Part 2: Binary Indexed Trees)" [ref=f1e63]'
+          - generic [ref=f1e64]:
+            - generic [ref=f1e65]:
+              - generic [ref=f1e66]: "Range Queries, visualized (Part 2: Binary Indexed Trees)"
+              - paragraph [ref=f1e67]: A look into Binary Indexed Trees.
+            - link "View Post" [ref=f1e68] [cursor=pointer]:
+              - /url: /articles/range-queries-part-two
+        - generic [ref=f1e71]:
+          - 'img "Range Queries, visualized (Part 1: Static Queries)" [ref=f1e73]'
+          - generic [ref=f1e74]:
+            - generic [ref=f1e75]:
+              - generic [ref=f1e76]: "Range Queries, visualized (Part 1: Static Queries)"
+              - paragraph [ref=f1e77]: Quick intro to static range queries.
+            - link "View Post" [ref=f1e78] [cursor=pointer]:
+              - /url: /articles/range-queries-part-one
+    - generic [ref=f1e81]:
+      - button "←" [ref=f1e82] [cursor=pointer]
+      - link [ref=f1e83] [cursor=pointer]:
+        - /url: https://www.uwaterloo.network?ref=Jinay%20Patel
+        - img "UWaterloo Webring" [ref=f1e84]
+      - button "→" [ref=f1e85] [cursor=pointer]

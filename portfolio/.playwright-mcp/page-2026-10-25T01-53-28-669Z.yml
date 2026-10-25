@@ -1,0 +1,236 @@
+- generic [ref=f20e2]:
+  - region "Notifications alt+T"
+  - generic [ref=f20e3]:
+    - banner [ref=f20e4]:
+      - generic [ref=f20e5]:
+        - navigation [ref=f20e7]:
+          - link "home" [ref=f20e8] [cursor=pointer]:
+            - /url: .././
+          - link "articles" [ref=f20e10] [cursor=pointer]:
+            - /url: .././articles
+          - link "projects" [ref=f20e12] [cursor=pointer]:
+            - /url: .././projects
+        - generic [ref=f20e14]:
+          - link [ref=f20e15] [cursor=pointer]:
+            - /url: https://hardcover.app/@igbig
+          - link [ref=f20e19] [cursor=pointer]:
+            - /url: https://github.com/Github11200
+          - link [ref=f20e23] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/jinay-patel-6369002b4/
+          - link [ref=f20e26] [cursor=pointer]:
+            - /url: https://drive.google.com/file/d/1CT7ZAGSOG635BG8Trk7xspCoZTdowuqN/view?usp=sharing
+    - main [ref=f20e32]:
+      - generic [ref=f20e34]:
+        - link "← Back to Posts" [ref=f20e36] [cursor=pointer]:
+          - /url: ../articles
+        - generic [ref=f20e37]:
+          - img "How I Made my Own Programming Language — Verbosity" [ref=f20e38]
+          - generic [ref=f20e39]: How I Made my Own Programming Language — Verbosity
+          - paragraph [ref=f20e42]: 2026-04-2
+        - generic [ref=f20e43]:
+          - paragraph [ref=f20e44]: An explanation of how my compiler compiles my own programming into C++.
+          - paragraph [ref=f20e45]:
+            - text: If you’d like to follow along with the code then you can access it
+            - link "here" [ref=f20e46] [cursor=pointer]:
+              - /url: https://github.com/Github11200/Verbosity
+            - text: .
+          - heading "The Grammar" [level=2] [ref=f20e47]
+          - paragraph [ref=f20e48]: My initial goal was to create a programming language that contained no characters like <, >, ”, (, and other punctuation marks. This meant all these characters had to be replaced with words (making the language verbose and hence the name verbosity).
+          - paragraph [ref=f20e49]: "To start, I created a basic informal grammar for the language shown below:"
+          - code [ref=f20e51]:
+            - generic [ref=f20e52]: =========================
+            - generic [ref=f20e53]: Variables
+            - generic [ref=f20e54]: =========================
+            - generic [ref=f20e55]: let [name] of type [type] be [expression]
+            - generic [ref=f20e56]: =========================
+            - generic [ref=f20e57]: Functions
+            - generic [ref=f20e58]: =========================
+            - generic [ref=f20e59]: define doSomething with [parameter name] of type [type] gives back [type] as
+            - generic [ref=f20e60]: give [expression] back
+            - generic [ref=f20e61]: end
+            - generic [ref=f20e62]: call doSomething stop
+            - generic [ref=f20e63]: =========================
+            - generic [ref=f20e64]: Conditionals
+            - generic [ref=f20e65]: =========================
+            - generic [ref=f20e66]: if [inequality expression] then
+            - generic [ref=f20e67]: "[code]"
+            - generic [ref=f20e68]: otherwise if [inequality expression] then
+            - generic [ref=f20e69]: "[code]"
+            - generic [ref=f20e70]: otherwise
+            - generic [ref=f20e71]: "[code]"
+            - generic [ref=f20e72]: end
+            - generic [ref=f20e73]: =========================
+            - generic [ref=f20e74]: Loops
+            - generic [ref=f20e75]: =========================
+            - generic [ref=f20e76]: for [identifier name] [inequality expression] repeat
+            - generic [ref=f20e77]: end
+          - paragraph [ref=f20e78]: With this basic grammar in place, I knew what I wanted the language to look like and I could move onto coding the actual compiler.
+          - heading "The Lexer" [level=2] [ref=f20e79]
+          - paragraph [ref=f20e80]: To do anything useful with the input code I need to first understand what each word in the input file means.
+          - paragraph [ref=f20e81]: To do this, I first split up all the tokens based on certain delimiters like spaces and other keywords which signify the end of a statement or the start of a new code block.
+          - paragraph [ref=f20e82]:
+            - text: With the input file split up into chunks, I could now go through and assign a
+            - code [ref=f20e83]: TokenType
+            - text: to each string. Since I wanted to keep both the
+            - code [ref=f20e84]: TokenType
+            - text: (which is an Enum with all the different types of elements) and string I created the following
+            - code [ref=f20e85]: Token
+            - text: "class:"
+          - code [ref=f20e87]:
+            - generic [ref=f20e88]: "class Token {"
+            - generic [ref=f20e89]: "public:"
+            - generic [ref=f20e90]: TokenType tokenType;
+            - generic [ref=f20e91]: std::string tokenString;
+            - generic [ref=f20e92]: "Token(const TokenType tokenType, std::string tokenString) : tokenType(tokenType), tokenString(std::move(tokenString)) {}"
+            - generic [ref=f20e93]: "};"
+          - paragraph [ref=f20e94]: "With this place, I simply looped through all string that was split up and assigned a token type to everything. For instance, if I see the word “let” then I would use the following code to assign a type to it:"
+          - code [ref=f20e96]:
+            - generic [ref=f20e97]: token.tokenType = TokenType::LET;
+          - paragraph [ref=f20e98]: Doing this all the different strings then allows the program to easily parse what everything means in the file rather than just seeing if certain strings equal something else which can be very error prone.
+          - heading "Constructing the Abstract Syntax Tree (AST)" [level=2] [ref=f20e99]
+          - paragraph [ref=f20e100]: "Now, the program knows that certain tokens exist everywhere, but it still can’t make sense of them. For instance, take the following arithmetic expression:"
+          - paragraph [ref=f20e102]: "So far the program knows what each part of this expression is:"
+          - paragraph [ref=f20e104]: However, it doesn’t know how to make sense of these tokens as there’s no structure to them. They’re just a list of strings and enums.
+          - paragraph [ref=f20e105]: "To give these tokens structure, we can create an Abstract Syntax Tree (AST). For an expression like 2 + 3, it could look like the image below:"
+          - paragraph [ref=f20e107]:
+            - text: A great website that shows the ASTs that existing programming languages create is
+            - link "https://astexplorer.net/" [ref=f20e108] [cursor=pointer]:
+              - /url: https://astexplorer.net/
+            - text: .
+          - paragraph [ref=f20e109]:
+            - text: To create this tree, I started by creating a function called
+            - code [ref=f20e110]: constructAST
+            - text: which would be called recursively every time I had to process another code block. Inside this function, I essentially check for the start of variable statements, function statements, if statements, etc.
+          - paragraph [ref=f20e111]:
+            - text: This is done by simply checking what the current token is. For instance, if the token type is
+            - code [ref=f20e112]: LET
+            - text: then it means it is the start of a variable statement which was defined in the grammar previously.
+          - paragraph [ref=f20e113]:
+            - text: Let’s say the function finds a function statement as shown below by seeing that there’s a
+            - code [ref=f20e114]: DEFINE
+            - text: "keyword:"
+          - code [ref=f20e116]:
+            - generic [ref=f20e117]: define doSomething gives back integer as
+            - generic [ref=f20e118]: let x of type integer be 5 stop
+            - generic [ref=f20e119]: give x back
+            - generic [ref=f20e120]: end
+          - paragraph [ref=f20e121]:
+            - text: The first thing it will do is extract the statement using a function called
+            - code [ref=f20e122]: incrementToKeyword
+            - text: . The reason it’s given this name is because I have the function increment to the
+            - code [ref=f20e123]: as
+            - text: "keyword as that is the end of the statement and also the start of the actual code block inside the function. This means the code above gets split up as shown below:"
+          - paragraph [ref=f20e125]:
+            - text: The yellow box represents the statement, and the green box represents the code block. Now, to process the code block, all I have to do is recursively call
+            - code [ref=f20e126]: constructAST
+            - text: and it’ll keep applying the same process and will return nodes for variables, if statements, etc.
+          - paragraph [ref=f20e127]: This process of extracting the statement, and then processing the code block is essentially repeated for all the different types of statements that could exist like return statements, print statements, variable statements, etc.
+          - paragraph [ref=f20e128]:
+            - text: Now, the last major part of constructing the AST was dealing with numerical expressions like
+            - code [ref=f20e129]: 5 + 6 / 3
+            - text: . The way I did this was by using a technique called Pratt Parsing from this amazing
+            - link "article" [ref=f20e130] [cursor=pointer]:
+              - /url: https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html
+            - text: ". I also added support for inequalities by simply splitting the expression wherever the inequality sign was and evaluating both sides as shown in the code below:"
+          - code [ref=f20e132]:
+            - generic [ref=f20e133]: optional<int> inequalityIndex = isInequality(statement);
+            - generic [ref=f20e134]: "if (inequalityIndex.has_value()) {"
+            - generic [ref=f20e135]: vector<Token> leftArray, rightArray;
+            - generic [ref=f20e136]: // Split the two sides of the inequality into their own arrays
+            - generic [ref=f20e137]: for (int j = 0; j < inequalityIndex.value(); ++j)
+            - generic [ref=f20e138]: leftArray.push_back(statement[j]);
+            - generic [ref=f20e139]: for (int j = inequalityIndex.value() + 1; j < statement.size(); ++j)
+            - generic [ref=f20e140]: rightArray.push_back(statement[j]);
+            - generic [ref=f20e141]: // Parse both sides
+            - generic [ref=f20e142]: int iCopy = i;
+            - generic [ref=f20e143]: variant<TYPES> left = evaluateExpression(leftArray, iCopy, 0);
+            - generic [ref=f20e144]: iCopy = i;
+            - generic [ref=f20e145]: variant<TYPES> right = evaluateExpression(rightArray, iCopy, 0);
+            - generic [ref=f20e146]: return BinaryExpression(statement[inequalityIndex.value()].tokenType, left, right);
+            - generic [ref=f20e147]: "}"
+          - paragraph [ref=f20e148]:
+            - text: Once the
+            - code [ref=f20e149]: constructAST
+            - text: function is done running it should create a tree like the one below for the following statement,
+            - code [ref=f20e150]: let a of type integer be 5 plus 10 divide 2 stop
+            - text: ":"
+          - code [ref=f20e152]:
+            - generic [ref=f20e153]: Variable Statement
+            - generic [ref=f20e154]: "|"
+            - generic [ref=f20e155]: "|__ Identifier - \"a\""
+            - generic [ref=f20e156]: "|"
+            - generic [ref=f20e157]: "|__ Variable type - Integer"
+            - generic [ref=f20e158]: "|"
+            - generic [ref=f20e159]: "|__ Value - Binary Expression"
+            - generic [ref=f20e160]: "|"
+            - generic [ref=f20e161]: "|__ Operator - Plus"
+            - generic [ref=f20e162]: "|"
+            - generic [ref=f20e163]: "|__ Left - Integer literal"
+            - generic [ref=f20e164]: "|"
+            - generic [ref=f20e165]: "|___ Value - 5"
+            - generic [ref=f20e166]: "|"
+            - generic [ref=f20e167]: "|__ Right - Binary Expression"
+            - generic [ref=f20e168]: "|"
+            - generic [ref=f20e169]: "|__ Operator - Divide"
+            - generic [ref=f20e170]: "|"
+            - generic [ref=f20e171]: "|__ Left - Integer Literal"
+            - generic [ref=f20e172]: "|"
+            - generic [ref=f20e173]: "|__ Value - 10"
+            - generic [ref=f20e174]: "|"
+            - generic [ref=f20e175]: "|__ Right - Integer Literal"
+            - generic [ref=f20e176]: "|"
+            - generic [ref=f20e177]: "|__ Value - 2"
+          - paragraph [ref=f20e178]: You can see how this tree represents how the code is structure in a fairly recursive format as there’s binary expressions inside binary expressions.
+          - heading "Code Generation" [level=2] [ref=f20e179]
+          - paragraph [ref=f20e180]:
+            - text: Once the
+            - code [ref=f20e181]: constructAST
+            - text: function is done running it returns a pointer to the
+            - code [ref=f20e182]: Root
+            - text: "node shown below:"
+          - code [ref=f20e184]:
+            - generic [ref=f20e185]: "struct Root final : ASTNode {"
+            - generic [ref=f20e186]: std::vector<std::shared_ptr<ASTNode>> nodes;
+            - generic [ref=f20e187]: std::string generateCode() override;
+            - generic [ref=f20e188]: "};"
+          - paragraph [ref=f20e189]:
+            - text: All this node has is an array of other nodes, so all we have to do is simply loop through all of them and call
+            - code [ref=f20e190]: generateCode
+            - text: . It doesn’t matter whether some specific node is a variable, function, if statement, etc, they are all derived from the abstract class
+            - code [ref=f20e191]: ASTNode
+            - text: and thus have a method of
+            - code [ref=f20e192]: generateCode
+            - text: (OOP is so cool 😀).
+          - paragraph [ref=f20e193]: "The core of the code for the code generation is shown below:"
+          - code [ref=f20e195]:
+            - generic [ref=f20e196]: "for (Root *pointer = rootNode.get(); const auto &node : pointer->nodes) {"
+            - generic [ref=f20e197]: if (FunctionStatement *functionStatement = dynamic_cast<FunctionStatement *>(node.get()))
+            - generic [ref=f20e198]: functionCode += node->generateCode();
+            - generic [ref=f20e199]: else
+            - generic [ref=f20e200]: currentCode += node->generateCode();
+            - generic [ref=f20e201]: "}"
+          - paragraph [ref=f20e202]:
+            - text: The reason I check for a function statement separately is because it has to be appended to a separate string since all the functions the user has been defined can’t put inside the
+            - code [ref=f20e203]: main
+            - text: function in a C++ program.
+          - paragraph [ref=f20e204]:
+            - text: Once the code is generated all that’s left is to write to a
+            - code [ref=f20e205]: compiled.cpp
+            - text: file and boom the program is compiled!
+          - heading "Conclusion" [level=2] [ref=f20e206]
+          - paragraph [ref=f20e207]: Just like that, I can now compile my own programming language!
+          - paragraph [ref=f20e208]:
+            - text: Now one thing to note is that I didn’t create methods like
+            - code [ref=f20e209]: peek
+            - text: or
+            - code [ref=f20e210]: consume
+            - text: to process tokens while constructing the AST. Typically, these are used to just look ahead by one index, or take the value of the next token and increment the index. However, I chose to just use raw indexes with arrays due to how I was processing the individual statements, but this isn’t really the standard way of doing it.
+          - paragraph [ref=f20e211]: Other than that, if you have any questions, feedback, or other thoughts then please feel free to contact me!
+        - link "← Back to Posts" [ref=f20e213] [cursor=pointer]:
+          - /url: ../articles
+    - generic [ref=f20e216]:
+      - button "←" [ref=f20e217] [cursor=pointer]
+      - link [ref=f20e218] [cursor=pointer]:
+        - /url: https://www.uwaterloo.network?ref=Jinay%20Patel
+        - img "UWaterloo Webring" [ref=f20e219]
+      - button "→" [ref=f20e220] [cursor=pointer]

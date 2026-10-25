@@ -1,0 +1,16 @@
+- generic [active] [ref=f6e1]:
+  - generic [ref=f6e2]:
+    - generic [ref=f6e3]: "500"
+    - heading "Internal Error" [level=1] [ref=f6e5]
+  - generic [ref=f6e8]:
+    - generic [ref=f6e9]: "[plugin:vite-plugin-svelte:compile] src/routes/+layout.svelte:123:10 `{@const}` must be the immediate child of `{#snippet}`, `{#if}`, `{:else if}`, `{:else}`, `{#each}`, `{:then}`, `{:catch}`, `<svelte:fragment>`, `<svelte:boundary>` or `<Component>` https://svelte.dev/e/const_tag_invalid_placement"
+    - generic [ref=f6e10]: +layout.svelte:123:10
+    - generic [ref=f6e11]: "121 | class=\"flex items-center border-l border-background/20 px-3 text-background/60 transition-colors hover:text-background sm:px-4\" 122 | > 123 | {@const IconComponent = connectLink.icon} ^ 124 | <IconComponent height=\"1.1em\" /> 125 | </a>"
+    - generic [ref=f6e12]:
+      - text: Click outside, press Esc key, or fix the code to dismiss.You can also disable this overlay by setting
+      - code [ref=f6e13]: server.hmr.overlay
+      - text: to
+      - code [ref=f6e14]: "false"
+      - text: in
+      - code [ref=f6e15]: vite.config.ts
+      - text: .

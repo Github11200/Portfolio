@@ -17,7 +17,7 @@
 </svelte:head>
 
 <div class="relative flex-1 flex flex-col overflow-hidden">
-	<section class="relative mx-auto w-full max-w-4xl px-6 py-16 sm:px-8">
+	<section class="relative mx-auto w-full max-w-4xl px-6 py-10 sm:px-8">
 		<div class="mt-6 flex justify-start">
 			<Button
 				variant="outline"

@@ -41,7 +41,7 @@
 </script>
 
 <div class="relative flex-1 flex flex-col">
-	<section class="relative mx-auto w-full max-w-4xl px-6 sm:pt-28 pb-16 sm:px-8">
+	<section class="relative mx-auto w-full max-w-4xl px-6 pt-8 pb-16 sm:px-8 sm:pt-12">
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 			{#each projects as project, index (index)}
 				<ProjectBox {project} {index} />
