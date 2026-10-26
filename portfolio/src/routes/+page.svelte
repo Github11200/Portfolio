@@ -9,7 +9,7 @@
 			<h1 class="text-xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-0.5 sm:mb-2">
 				Jinay Patel
 			</h1>
-			<p class="mt-0 text-[10px] sm:text-sm md:text-base text-muted-foreground whitespace-nowrap">
+			<p class="mt-0 text-[9px] sm:text-sm md:text-base text-muted-foreground whitespace-nowrap">
 				Computer Engineering @ <HighlightedText
 					imgSrc="/waterloo.png"
 					text="UWaterloo"
@@ -18,7 +18,7 @@
 			</p>
 		</div>
 
-		<div class="mt-2.5 sm:mt-6 flex flex-col gap-0.5 sm:gap-2.5 text-[10px] sm:text-base text-foreground leading-snug sm:leading-normal">
+		<div class="mt-2.5 sm:mt-6 flex flex-col gap-0.5 sm:gap-2.5 text-[9px] sm:text-base text-foreground leading-snug sm:leading-normal">
 			<p class="mt-0">
 				<span class="mr-1 font-mono text-muted-foreground select-none">&gt;</span>Won the <HighlightedText
 					text="Vex Robotics World Championship"
