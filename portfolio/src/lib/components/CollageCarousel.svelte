@@ -73,7 +73,7 @@
 					tabindex="0"
 					href={item.link}
 				>
-					<div class="flex h-full w-[75vw] flex-col border-b border-border bg-background sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem]">
+					<div class="flex h-full flex-col border-b border-border bg-background w-[70vw] sm:w-[50vh] md:w-[52vh] lg:w-[54vh] xl:w-[55vh]">
 						<div class="aspect-[4/3] w-full overflow-hidden bg-muted">
 							<img
 								src={item.image}
@@ -82,8 +82,8 @@
 								class="h-full w-full object-cover"
 							/>
 						</div>
-						<div class="border-t border-border border-r border-r-border px-3 py-2">
-							<span class="truncate text-xs font-medium text-muted-foreground">
+						<div class="border-t border-border border-r border-r-border px-2.5 py-1.5 sm:px-3 sm:py-2">
+							<span class="truncate text-[11px] sm:text-xs font-medium text-muted-foreground">
 								{item.caption}
 							</span>
 						</div>
