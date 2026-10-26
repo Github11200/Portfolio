@@ -59,7 +59,7 @@
 		</div>
 	</div>
 
-	<div class="grow-[3]"></div>
+	<div class="grow-[3] min-h-4 sm:min-h-6"></div>
 
 	<div class="w-full overflow-visible">
 		<CollageCarousel />
