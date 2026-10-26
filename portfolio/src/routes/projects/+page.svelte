@@ -48,12 +48,20 @@
 			description:
 				'A game of Tetris that runs in the terminal and is written in C using just the standard library.',
 			image: '/project-images/citrus.png',
+			imageClass: 'object-bottom',
 			href: 'https://github.com/Github11200/Citrus'
+		},
+		{
+			name: 'Lynx',
+			description:
+				'A plugin for Obsidian to automatically organize your notes using local LLMs. 250+ users on the Obsidian plugin marketplace.',
+			image: '/project-images/Lynx.jpg',
+			href: 'https://github.com/Github11200/Lynx'
 		}
 	] as const;
 </script>
 
-<div class="relative flex-1 flex flex-col w-full">
+<div class="relative flex w-full flex-1 flex-col">
 	<section class="relative w-full px-4 pt-6 pb-12 sm:px-8 sm:pt-12 sm:pb-16 lg:px-14">
 		<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			{#each projects as project, index (index)}

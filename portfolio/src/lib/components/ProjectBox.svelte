@@ -11,6 +11,7 @@
 			description: string;
 			image: string;
 			href: string;
+			imageClass?: string;
 		};
 		index?: number;
 	}
@@ -49,7 +50,7 @@
 		<enhanced:img
 			src={project.image}
 			alt={project.name}
-			class="h-full w-full object-cover"
+			class="h-full w-full object-cover {project.imageClass ?? ''}"
 			loading={index < 2 ? 'eager' : 'lazy'}
 		/>
 	</div>
