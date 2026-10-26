@@ -11,6 +11,8 @@
 	import LinkedinOutlineIcon from '@iconify-svelte/basil/linkedin-outline';
 	import GithubLineIcon from '@iconify-svelte/mingcute/github-line';
 	import { FileUser, LibraryBig, Menu, X } from '@lucide/svelte';
+	import { onMount } from 'svelte';
+	import { animate, stagger } from 'animejs';
 	import { cn } from '$lib/utils';
 
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
@@ -22,7 +24,7 @@
 
 	const navLinks = [
 		{ name: 'home', href: resolve('/') },
-		{ name: 'articles', href: resolve('/articles') },
+		{ name: 'writing', href: resolve('/writing') },
 		{ name: 'projects', href: resolve('/projects') }
 	];
 
@@ -52,6 +54,25 @@
 			hoverColor: '#FF0000'
 		}
 	];
+
+	onMount(() => {
+		// Subtle staggered reveal for header elements
+		animate('.nav-link-item', {
+			opacity: [0, 1],
+			translateY: [-6, 0],
+			delay: stagger(40, { start: 100 }),
+			duration: 500,
+			ease: 'outQuad'
+		});
+
+		animate('.connect-link-item', {
+			opacity: [0, 1],
+			translateY: [-6, 0],
+			delay: stagger(35, { start: 200 }),
+			duration: 500,
+			ease: 'outQuad'
+		});
+	});
 </script>
 
 <svelte:head>
@@ -61,6 +82,7 @@
 <Toaster position="top-center" richColors />
 
 <Tooltip.Provider>
+	<div class="grain-overlay" aria-hidden="true"></div>
 	<div class="flex min-h-screen w-full flex-col overflow-x-hidden bg-background text-foreground">
 		<!-- Top Navigation Bar -->
 		<header class="sticky top-0 z-50 w-full border-b border-border bg-background">
@@ -74,9 +96,9 @@
 								page.url.pathname === link.href ||
 								(link.href !== '/' && page.url.pathname.startsWith(link.href))}
 							<a
-								href={resolve(link.href)}
+								href={link.href}
 								class={cn(
-									'flex items-center border-r border-border px-5 text-base transition-colors',
+									'nav-link-item flex items-center border-r border-border px-5 text-base transition-colors',
 									isActive
 										? 'bg-primary text-primary-foreground'
 										: 'text-muted-foreground hover:text-foreground'
@@ -112,7 +134,7 @@
 										href={connectLink.href}
 										target="_blank"
 										rel="noopener noreferrer"
-										class="flex items-center justify-center border-l border-border px-3 text-muted-foreground transition-colors sm:px-4"
+										class="connect-link-item flex items-center justify-center border-l border-border px-3 text-muted-foreground transition-colors sm:px-4"
 										style="color: {hoveredIcon === connectLink.ariaLabel
 											? connectLink.hoverColor
 											: ''}; background-color: {hoveredIcon === connectLink.ariaLabel
@@ -141,7 +163,7 @@
 							page.url.pathname === link.href ||
 							(link.href !== '/' && page.url.pathname.startsWith(link.href))}
 						<a
-							href={resolve(link.href)}
+							href={link.href}
 							onclick={() => (isMobileMenuOpen = false)}
 							class={cn(
 								'flex items-center gap-3 border-b border-border px-5 py-3 text-base transition-colors',
@@ -162,7 +184,7 @@
 		</main>
 
 		<!-- Waterloo Network Widget -->
-		<div class="my-6 flex origin-center scale-65 justify-center">
+		<div class="my-3 sm:my-6 flex origin-center scale-65 justify-center">
 			<script
 				id="waterlooNetwork"
 				src="https://uwaterloo.network/embed.js"

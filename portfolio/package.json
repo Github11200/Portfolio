@@ -15,6 +15,7 @@
 		"deploy": "npx gh-pages -d build"
 	},
 	"dependencies": {
+		"animejs": "^4.5.0",
 		"@bitmachina/highlighter": "1.0.0-alpha.5",
 		"@iconify-svelte/basil": "^1.0.2",
 		"@iconify-svelte/mdi": "^1.0.2",

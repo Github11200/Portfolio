@@ -20,7 +20,7 @@
 	};
 
 	let className = $derived(
-		`text-foreground text-wrap whitespace-normal hover:cursor-text p-1 px-2 ${bgColors[color] || 'bg-red-200'}`
+		`text-foreground text-wrap whitespace-normal hover:cursor-text py-0.5 px-1.5 sm:p-1 sm:px-2 ${bgColors[color] || 'bg-red-200'}`
 	);
 </script>
 

@@ -39,7 +39,7 @@ const config = {
     mdsvex({
       extensions: [".md"],
       layout: {
-        mds: path.join(dirname, "./src/routes/articles/_layout.svelte"),
+        mds: path.join(dirname, "./src/routes/writing/_layout.svelte"),
       },
       highlight: {
         highlighter: async (code, lang = "text") => {

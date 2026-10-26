@@ -19,7 +19,7 @@
 			id: 'verbosity',
 			caption: 'Custom Compiler',
 			image: '/project-images/verbosity.png',
-			link: '/articles/creating-verbosity'
+			link: '/writing/creating-verbosity'
 		},
 		{
 			id: 'posturai',
@@ -31,7 +31,7 @@
 			id: 'citrus',
 			caption: 'Tetris in C in the Terminal',
 			image: '/project-images/citrus.png',
-			link: '/articles/creating-citrus'
+			link: '/writing/creating-citrus'
 		},
 		{
 			id: 'robotics',
@@ -49,7 +49,7 @@
 			id: 'range-queries',
 			caption: 'Range Queries Visualized Article',
 			image: '/range-queries-part-three/rqp3.jpg',
-			link: '/articles/range-queries-part-one'
+			link: '/writing/range-queries-part-one'
 		},
 		{
 			id: 'arch-linux',
@@ -69,7 +69,7 @@
 		>
 			{#each loopedItems as item, index (`${item.id}-${index}`)}
 				<a
-					class="relative block flex-shrink-0 focus:outline-none"
+					class="group/item relative block flex-shrink-0 focus:outline-none"
 					tabindex="0"
 					href={item.link}
 				>
@@ -82,8 +82,8 @@
 								class="h-full w-full object-cover"
 							/>
 						</div>
-						<div class="border-t border-border border-r border-r-border px-2.5 py-1.5 sm:px-3 sm:py-2">
-							<span class="truncate text-[11px] sm:text-xs font-medium text-muted-foreground">
+						<div class="border-t border-border border-r border-r-border px-2.5 py-1.5 sm:px-3 sm:py-2 transition-colors duration-200 group-hover/item:bg-muted/70 group-focus-visible/item:bg-muted/70">
+							<span class="truncate text-[11px] sm:text-xs font-medium text-muted-foreground group-hover/item:text-foreground transition-colors duration-200">
 								{item.caption}
 							</span>
 						</div>

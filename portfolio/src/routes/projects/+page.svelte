@@ -1,5 +1,18 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { animate, stagger } from 'animejs';
 	import ProjectBox from '$lib/components/ProjectBox.svelte';
+
+	onMount(() => {
+		animate('.project-card-wrapper', {
+			opacity: [0, 1],
+			translateY: [16, 0],
+			scale: [0.98, 1],
+			delay: stagger(70, { start: 50 }),
+			duration: 550,
+			ease: 'outCubic'
+		});
+	});
 
 	const projects = [
 		{
@@ -40,11 +53,13 @@
 	] as const;
 </script>
 
-<div class="relative flex-1 flex flex-col">
-	<section class="relative mx-auto w-full max-w-4xl px-6 pt-8 pb-16 sm:px-8 sm:pt-12">
-		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+<div class="relative flex-1 flex flex-col w-full">
+	<section class="relative w-full px-4 pt-6 pb-12 sm:px-8 sm:pt-12 sm:pb-16 lg:px-14">
+		<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			{#each projects as project, index (index)}
-				<ProjectBox {project} {index} />
+				<div class="project-card-wrapper flex">
+					<ProjectBox {project} {index} />
+				</div>
 			{/each}
 		</div>
 	</section>
