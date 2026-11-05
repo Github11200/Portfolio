@@ -41,22 +41,22 @@
 	bind:this={boxEl}
 	onmouseenter={handleMouseEnter}
 	onmouseleave={handleMouseLeave}
-	class="w-full will-change-transform"
+	class="h-full w-full will-change-transform"
 >
-	<Card.Root class="relative overflow-hidden bg-card py-0 shadow-none">
-	<div class="group block transition-colors">
-		<div class="flex flex-col md:flex-row">
+	<Card.Root class="relative h-full overflow-hidden bg-card py-0 shadow-none">
+	<div class="group h-full transition-colors">
+		<div class="flex h-full flex-col md:flex-row">
 			<div
-				class="w-full shrink-0 border-b border-border bg-muted md:w-1/2 md:border-r md:border-b-0 lg:w-72"
+				class="relative h-52 w-full shrink-0 border-b border-border bg-muted md:h-auto md:min-h-52 md:w-1/2 md:border-r md:border-b-0 lg:w-72"
 			>
 				<enhanced:img
 					src={post.image}
 					alt={post.title}
 					loading="lazy"
-					class="h-auto w-full object-contain"
+					class="absolute inset-0 h-full w-full object-fill"
 				/>
 			</div>
-			<div class="flex min-w-0 flex-1 flex-col justify-center gap-2 px-4 py-2 lg:py-3">
+			<div class="flex min-w-0 flex-1 flex-col gap-4 p-4">
 				<div class="min-w-0 w-full">
 					<Card.Title class="text-base lg:text-lg tracking-tight leading-snug">{post.title}</Card.Title>
 					<Card.Description class="mt-2 max-w-2xl text-xs leading-normal">
@@ -66,7 +66,7 @@
 
 				<PostLink
 					href={post.href}
-					class="self-end text-xs"
+					class="mt-auto self-end text-xs"
 				/>
 			</div>
 		</div>

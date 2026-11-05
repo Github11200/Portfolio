@@ -15,7 +15,7 @@
 
 <div class="relative flex-1 flex flex-col w-full">
 	<section class="relative w-full px-4 pt-6 pb-12 sm:px-8 sm:pt-12 sm:pb-16 lg:px-14">
-		<div class="flex flex-col gap-6 max-w-4xl">
+		<div class="grid auto-rows-fr gap-6 max-w-4xl">
 			{#each posts as post, i (i)}
 				<div class="writing-card-wrapper flex flex-col" style:--entrance-index={i}>
 					<BlogPostBox {post} />
