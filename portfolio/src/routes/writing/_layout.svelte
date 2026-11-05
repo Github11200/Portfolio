@@ -1,37 +1,10 @@
 <script>
-	import { onMount } from 'svelte';
-	import { animate } from 'animejs';
 	import { resolve } from '$app/paths';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import '@mistweaverco/mdsvex-shiki/styles.css';
 
 	let { title, date, image, Link } = $props();
-
-	onMount(() => {
-		animate('.article-back-button', {
-			opacity: [0, 1],
-			translateX: [-6, 0],
-			duration: 400,
-			ease: 'outQuad'
-		});
-
-		animate('.article-header-card', {
-			opacity: [0, 1],
-			translateY: [12, 0],
-			duration: 500,
-			delay: 100,
-			ease: 'outCubic'
-		});
-
-		animate('.blog-content', {
-			opacity: [0, 1],
-			translateY: [10, 0],
-			duration: 600,
-			delay: 200,
-			ease: 'outCubic'
-		});
-	});
 </script>
 
 <svelte:head>

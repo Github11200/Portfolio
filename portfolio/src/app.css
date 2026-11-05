@@ -198,3 +198,92 @@
   pointer-events: none;
   z-index: 9999;
 }
+
+/* Start reveals on first paint, before hydration, so content never flashes then hides.
+   With reduced motion, the normal visible styles apply immediately. */
+@media (prefers-reduced-motion: no-preference) {
+	.nav-link-item,
+	.connect-link-item,
+	.hero-intro,
+	.hero-bullet,
+	.hero-carousel,
+	.project-card-wrapper,
+	.writing-card-wrapper,
+	.article-back-button,
+	.article-header-card,
+	.blog-content {
+		animation: entrance-reveal var(--entrance-duration, 550ms) cubic-bezier(0.33, 1, 0.68, 1)
+			var(--entrance-delay, 0ms) both;
+	}
+
+	.nav-link-item,
+	.connect-link-item {
+		--entrance-y: -6px;
+		--entrance-duration: 500ms;
+		animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	.nav-link-item {
+		--entrance-delay: calc(100ms + var(--entrance-index, 0) * 40ms);
+	}
+
+	.connect-link-item {
+		--entrance-delay: calc(200ms + var(--entrance-index, 0) * 35ms);
+	}
+
+	.hero-intro {
+		--entrance-y: 8px;
+	}
+
+	.hero-bullet {
+		--entrance-x: -8px;
+		--entrance-duration: 500ms;
+		--entrance-delay: calc(120ms + var(--entrance-index, 0) * 60ms);
+	}
+
+	.hero-carousel {
+		--entrance-y: 12px;
+		--entrance-duration: 650ms;
+		--entrance-delay: 300ms;
+	}
+
+	.project-card-wrapper {
+		--entrance-y: 16px;
+		--entrance-scale: 0.98;
+		--entrance-delay: calc(50ms + var(--entrance-index, 0) * 70ms);
+	}
+
+	.writing-card-wrapper {
+		--entrance-y: 16px;
+		--entrance-delay: calc(50ms + var(--entrance-index, 0) * 80ms);
+	}
+
+	.article-back-button {
+		--entrance-x: -6px;
+		--entrance-duration: 400ms;
+		animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	.article-header-card {
+		--entrance-y: 12px;
+		--entrance-duration: 500ms;
+		--entrance-delay: 100ms;
+	}
+
+	.blog-content {
+		--entrance-y: 10px;
+		--entrance-duration: 600ms;
+		--entrance-delay: 200ms;
+	}
+}
+
+@keyframes entrance-reveal {
+	from {
+		opacity: 0;
+		transform: translate(var(--entrance-x, 0), var(--entrance-y, 0)) scale(var(--entrance-scale, 1));
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}

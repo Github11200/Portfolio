@@ -11,8 +11,6 @@
 	import LinkedinOutlineIcon from '@iconify-svelte/basil/linkedin-outline';
 	import GithubLineIcon from '@iconify-svelte/mingcute/github-line';
 	import { FileUser, LibraryBig, Menu, X } from '@lucide/svelte';
-	import { onMount } from 'svelte';
-	import { animate, stagger } from 'animejs';
 	import { cn } from '$lib/utils';
 
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
@@ -48,31 +46,12 @@
 			hoverColor: '#0A66C2'
 		},
 		{
-			href: 'https://drive.google.com/file/d/1CT7ZAGSOG635BG8Trk7xspCoZTdowuqN/view?usp=sharing',
+			href: 'https://github.com/Github11200/resume/releases/latest/download/Jinay_Patel_Resume.pdf',
 			ariaLabel: 'Resume',
 			icon: FileUser,
 			hoverColor: '#FF0000'
 		}
 	];
-
-	onMount(() => {
-		// Subtle staggered reveal for header elements
-		animate('.nav-link-item', {
-			opacity: [0, 1],
-			translateY: [-6, 0],
-			delay: stagger(40, { start: 100 }),
-			duration: 500,
-			ease: 'outQuad'
-		});
-
-		animate('.connect-link-item', {
-			opacity: [0, 1],
-			translateY: [-6, 0],
-			delay: stagger(35, { start: 200 }),
-			duration: 500,
-			ease: 'outQuad'
-		});
-	});
 </script>
 
 <svelte:head>
@@ -91,12 +70,13 @@
 				<div class="flex items-stretch">
 					<!-- Desktop Nav -->
 					<nav class="hidden items-stretch sm:flex">
-						{#each navLinks as link}
+						{#each navLinks as link, index}
 							{@const isActive =
 								page.url.pathname === link.href ||
 								(link.href !== '/' && page.url.pathname.startsWith(link.href))}
 							<a
 								href={link.href}
+								style:--entrance-index={index}
 								class={cn(
 									'nav-link-item flex items-center border-r border-border px-5 text-base transition-colors',
 									isActive
@@ -125,7 +105,7 @@
 
 				<!-- Right: Connect Links -->
 				<div class="flex items-stretch">
-					{#each connectLinks as connectLink}
+					{#each connectLinks as connectLink, index}
 						<Tooltip.Root>
 							<Tooltip.Trigger>
 								{#snippet child({ props })}
@@ -135,7 +115,7 @@
 										target="_blank"
 										rel="noopener noreferrer"
 										class="connect-link-item flex items-center justify-center border-l border-border px-3 text-muted-foreground transition-colors sm:px-4"
-										style="color: {hoveredIcon === connectLink.ariaLabel
+										style="--entrance-index: {index}; color: {hoveredIcon === connectLink.ariaLabel
 											? connectLink.hoverColor
 											: ''}; background-color: {hoveredIcon === connectLink.ariaLabel
 											? connectLink.hoverColor + '15'

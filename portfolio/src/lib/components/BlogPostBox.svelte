@@ -47,26 +47,26 @@
 	<div class="group block transition-colors">
 		<div class="flex flex-col md:flex-row">
 			<div
-				class="h-52 w-full shrink-0 border-b border-border bg-muted md:w-72 md:border-r md:border-b-0"
+				class="w-full shrink-0 border-b border-border bg-muted md:w-1/2 md:border-r md:border-b-0 lg:w-72"
 			>
 				<enhanced:img
 					src={post.image}
 					alt={post.title}
 					loading="lazy"
-					class="h-full w-full object-cover"
+					class="h-auto w-full object-contain"
 				/>
 			</div>
-			<div class="flex min-w-0 flex-1 items-start justify-between gap-4 px-4 py-4 sm:gap-6 sm:px-8 sm:py-8">
-				<div class="min-w-0 flex-1 pb-12 sm:pb-14 md:pb-0">
-					<Card.Title class="text-lg sm:text-2xl tracking-tight leading-snug">{post.title}</Card.Title>
-					<Card.Description class="mt-2 sm:mt-3 max-w-2xl text-xs sm:text-sm leading-relaxed">
+			<div class="flex min-w-0 flex-1 flex-col justify-center gap-2 px-4 py-2 lg:py-3">
+				<div class="min-w-0 w-full">
+					<Card.Title class="text-base lg:text-lg tracking-tight leading-snug">{post.title}</Card.Title>
+					<Card.Description class="mt-2 max-w-2xl text-xs leading-normal">
 						{post.description}
 					</Card.Description>
 				</div>
 
 				<PostLink
 					href={post.href}
-					class="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 md:static md:right-auto md:bottom-auto text-xs sm:text-sm"
+					class="self-end text-xs"
 				/>
 			</div>
 		</div>
