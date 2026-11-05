@@ -7,6 +7,14 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+	{
+		slug: "autonomous-motions",
+		title: "Developing a Custom Framework for Autonomous Motions",
+		description:
+			"How I built our robotics team's autonomous motion framework with interpolated PID tuning, motion profiles, RAMSETE, and real-time data visualization.",
+		date: "2026-11-05",
+		image: "/autonomous-motions/robot.png",
+	},
  	{
 		slug: "creating-verbosity",
 		title: "How I Made my Own Programming Language — Verbosity",

@@ -53,7 +53,7 @@
 					src={post.image}
 					alt={post.title}
 					loading="lazy"
-					class="absolute inset-0 h-full w-full object-fill"
+					class="absolute inset-0 h-full w-full object-cover object-center"
 				/>
 			</div>
 			<div class="flex min-w-0 flex-1 flex-col gap-4 p-4">

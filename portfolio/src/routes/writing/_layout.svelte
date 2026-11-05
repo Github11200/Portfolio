@@ -4,7 +4,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import '@mistweaverco/mdsvex-shiki/styles.css';
 
-	let { title, date, image, Link } = $props();
+	let { title, date, image, imageAlt, Link } = $props();
 </script>
 
 <svelte:head>
@@ -30,16 +30,16 @@
 		</div>
 		<div class="article-header-card">
 			<Card.Root
-				class="mx-auto mt-4 mb-6 overflow-hidden rounded-(--radius) border border-border bg-card shadow-none"
+				class="mx-auto mt-4 mb-6 gap-0 overflow-hidden rounded-(--radius) border border-border bg-card py-0 shadow-none"
 			>
 			{#if image}
-				<enhanced:img src={image} alt={title} loading="lazy" class="h-48 sm:h-96 w-full object-cover" />
+				<enhanced:img src={image} alt={imageAlt ?? title} loading="lazy" class="h-48 sm:h-96 w-full object-cover" />
 			{/if}
 			<Card.Header class="border-b border-border px-4 py-3 sm:px-8 sm:py-4">
 				<Card.Title class="text-xl sm:text-2xl">{title}</Card.Title>
 			</Card.Header>
-			<Card.Content class="px-4 py-3 sm:px-8 sm:py-4">
-				<p class="text-xs sm:text-md mt-0 text-muted-foreground">{date}</p>
+			<Card.Content class="px-4 py-2 sm:px-8 sm:py-2">
+				<p class="m-0 text-xs sm:text-sm text-muted-foreground">{date}</p>
 			</Card.Content>
 		</Card.Root>
 		</div>
