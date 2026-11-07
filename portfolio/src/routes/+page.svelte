@@ -18,7 +18,7 @@
 			</p>
 		</div>
 
-		<div class="mt-2.5 flex flex-col gap-1.5 text-foreground max-sm:*:leading-snug sm:mt-6 sm:gap-2.5 sm:short:mt-3 sm:short:gap-1">
+		<div class="mt-3 flex flex-col gap-3 text-foreground max-sm:short:mt-2.5 max-sm:short:gap-1.5 max-sm:short:*:leading-6 sm:mt-6 sm:gap-2.5 sm:short:mt-3 sm:short:gap-1">
 			<p class="hero-bullet mt-0" style:--entrance-index={0}>
 				<span class="mr-1 font-mono text-muted-foreground select-none">&gt;</span>Won the <HighlightedText
 					text="Vex Robotics World Championship"

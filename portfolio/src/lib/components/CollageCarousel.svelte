@@ -99,7 +99,7 @@
 		--caption-h: 1.75rem;
 		/* Preferred image height (4:3 cards), capped so the card fits the height
 		   left over in the parent size container (see .carousel-slot on the home page). */
-		--img-h: min(52.5vw, calc(100cqh - var(--caption-h) - 1px));
+		--img-h: min(60vw, calc(100cqh - var(--caption-h) - 1px));
 		width: calc(var(--img-h) * 4 / 3);
 	}
 	@media (min-width: 640px) {
