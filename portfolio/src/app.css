@@ -4,6 +4,8 @@
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
+/* Short viewports (small laptops with browser chrome, landscape phones): tighten vertical spacing. */
+@custom-variant short (@media (max-height: 700px));
 
 :root {
   --radius: 0rem;

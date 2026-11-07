@@ -12,6 +12,7 @@
 	import GithubLineIcon from '@iconify-svelte/mingcute/github-line';
 	import { FileUser, LibraryBig, Menu, X } from '@lucide/svelte';
 	import { cn } from '$lib/utils';
+	import WaterlooWebring from '$lib/components/WaterlooWebring.svelte';
 
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
 
@@ -62,7 +63,7 @@
 
 <Tooltip.Provider>
 	<div class="grain-overlay" aria-hidden="true"></div>
-	<div class="flex min-h-screen w-full flex-col overflow-x-hidden bg-background text-foreground">
+	<div class="flex min-h-dvh w-full flex-col overflow-x-hidden bg-background text-foreground">
 		<!-- Top Navigation Bar -->
 		<header class="sticky top-0 z-50 w-full border-b border-border bg-background">
 			<div class="flex h-11 items-stretch justify-between">
@@ -164,15 +165,8 @@
 		</main>
 
 		<!-- Waterloo Network Widget -->
-		<div class="my-3 sm:my-6 flex origin-center scale-65 justify-center">
-			<script
-				id="waterlooNetwork"
-				src="https://uwaterloo.network/embed.js"
-				data-webring
-				data-user="Jinay Patel"
-				data-align="center"
-			>
-			</script>
-		</div>
+		<footer class="shrink-0 py-2 sm:py-4 short:py-1">
+			<WaterlooWebring />
+		</footer>
 	</div>
 </Tooltip.Provider>

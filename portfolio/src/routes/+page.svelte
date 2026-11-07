@@ -3,10 +3,10 @@
 	import HighlightedText from '$lib/components/HighlightedText.svelte';
 </script>
 
-<div class="flex flex-1 w-full flex-col overflow-visible">
-	<div class="flex flex-col px-4 pt-3 sm:px-10 sm:pt-12 lg:px-14">
+<div class="flex min-h-0 w-full flex-1 flex-col overflow-visible">
+	<div class="flex flex-col px-4 pt-3 sm:px-10 sm:pt-12 sm:short:pt-5 lg:px-14">
 		<div class="hero-intro flex flex-col justify-center">
-			<h1 class="text-xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-0.5 sm:mb-2">
+			<h1 class="text-xl sm:text-4xl md:text-5xl md:short:text-4xl font-bold tracking-tight text-foreground mb-0.5 sm:mb-2">
 				Jinay Patel
 			</h1>
 			<p class="mt-0 text-[9px] sm:text-sm md:text-base text-muted-foreground whitespace-nowrap">
@@ -18,7 +18,7 @@
 			</p>
 		</div>
 
-		<div class="mt-2.5 sm:mt-6 flex flex-col gap-0.5 sm:gap-2.5 text-[9px] sm:text-base text-foreground leading-snug sm:leading-normal">
+		<div class="mt-2.5 flex flex-col gap-1.5 text-foreground max-sm:*:leading-snug sm:mt-6 sm:gap-2.5 sm:short:mt-3 sm:short:gap-1">
 			<p class="hero-bullet mt-0" style:--entrance-index={0}>
 				<span class="mr-1 font-mono text-muted-foreground select-none">&gt;</span>Won the <HighlightedText
 					text="Vex Robotics World Championship"
@@ -59,11 +59,22 @@
 		</div>
 	</div>
 
-	<div class="grow-[3] min-h-4 sm:min-h-6"></div>
-
-	<div class="hero-carousel w-full overflow-visible">
-		<CollageCarousel />
+	<!-- The carousel only gets whatever height is left after the hero text, so the
+	     home page always fits in one screen; the cards scale down to fit that space. -->
+	<div class="relative mt-4 min-h-36 w-full flex-1 sm:mt-6 short:mt-3">
+		<div class="carousel-slot absolute inset-0 flex flex-col">
+			<div class="grow-[3]"></div>
+			<div class="hero-carousel w-full overflow-visible">
+				<CollageCarousel />
+			</div>
+			<div class="grow-[2]"></div>
+		</div>
 	</div>
-
-	<div class="grow-[2]"></div>
 </div>
+
+<style>
+	.carousel-slot {
+		/* Size container: its height comes from the space left in the page, never from the cards. */
+		container-type: size;
+	}
+</style>

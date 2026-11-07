@@ -73,7 +73,7 @@
 					tabindex="0"
 					href={item.link}
 				>
-					<div class="flex h-full flex-col border-b border-border bg-background w-[70vw] sm:w-[50vh] md:w-[52vh] lg:w-[54vh] xl:w-[55vh]">
+					<div class="collage-card flex h-full flex-col border-b border-border bg-background">
 						<div class="aspect-[4/3] w-full overflow-hidden bg-muted">
 							<img
 								src={item.image}
@@ -82,8 +82,8 @@
 								class="h-full w-full object-cover"
 							/>
 						</div>
-						<div class="border-t border-border border-r border-r-border px-2.5 py-1.5 sm:px-3 sm:py-2 transition-colors duration-200 group-hover/item:bg-muted/70 group-focus-visible/item:bg-muted/70">
-							<span class="truncate text-[11px] sm:text-xs font-medium text-muted-foreground group-hover/item:text-foreground transition-colors duration-200">
+						<div class="flex h-(--caption-h) items-center border-t border-border border-r border-r-border px-2.5 sm:px-3 transition-colors duration-200 group-hover/item:bg-muted/70 group-focus-visible/item:bg-muted/70">
+							<span class="min-w-0 truncate text-[11px] sm:text-xs font-medium text-muted-foreground group-hover/item:text-foreground transition-colors duration-200">
 								{item.caption}
 							</span>
 						</div>
@@ -93,3 +93,34 @@
 		</div>
 	</div>
 </section>
+
+<style>
+	.collage-card {
+		--caption-h: 1.75rem;
+		/* Preferred image height (4:3 cards), capped so the card fits the height
+		   left over in the parent size container (see .carousel-slot on the home page). */
+		--img-h: min(52.5vw, calc(100cqh - var(--caption-h) - 1px));
+		width: calc(var(--img-h) * 4 / 3);
+	}
+	@media (min-width: 640px) {
+		.collage-card {
+			--caption-h: 2.25rem;
+			--img-h: min(37.5vh, calc(100cqh - var(--caption-h) - 1px));
+		}
+	}
+	@media (min-width: 768px) {
+		.collage-card {
+			--img-h: min(39vh, calc(100cqh - var(--caption-h) - 1px));
+		}
+	}
+	@media (min-width: 1024px) {
+		.collage-card {
+			--img-h: min(40.5vh, calc(100cqh - var(--caption-h) - 1px));
+		}
+	}
+	@media (min-width: 1280px) {
+		.collage-card {
+			--img-h: min(41.25vh, calc(100cqh - var(--caption-h) - 1px));
+		}
+	}
+</style>
