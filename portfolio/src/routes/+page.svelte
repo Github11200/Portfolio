@@ -50,11 +50,11 @@
 				/> and secured a 100% autonomous win rate
 			</p>
 			<p class="hero-bullet mt-0" style:--entrance-index={4}>
-				<span class="mr-1 font-mono text-muted-foreground select-none">&gt;</span>I use <HighlightedText
-					text="Arch Linux"
-					imgSrc="/arch-setup.png"
+				<span class="mr-1 font-mono text-muted-foreground select-none">></span>Working on perception for self-driving cars @ <HighlightedText
+					text="WATonomous"
+					imgSrc="/watonomous.png"
 					color="blue"
-				/>, btw
+				/>
 			</p>
 		</div>
 	</div>
